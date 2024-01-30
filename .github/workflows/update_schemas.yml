@@ -7,8 +7,8 @@ on:
 jobs:
   update_schemas:
     runs-on: ubuntu-latest
-    permissions:
-      contents: write
+    # permissions:
+    #   contents: write
     env:
       OUTPUT_DIR: './schemas'
     steps:
