@@ -1,0 +1,935 @@
+{
+   "$defs": {
+      "AcquisitionTile": {
+         "additionalProperties": false,
+         "description": "Description of acquisition tile",
+         "properties": {
+            "coordinate_transformations": {
+               "items": {
+                  "anyOf": [
+                     {
+                        "$ref": "#/$defs/Scale3dTransform"
+                     },
+                     {
+                        "$ref": "#/$defs/Translation3dTransform"
+                     },
+                     {
+                        "$ref": "#/$defs/Rotation3dTransform"
+                     },
+                     {
+                        "$ref": "#/$defs/Affine3dTransform"
+                     }
+                  ]
+               },
+               "title": "Tile coordinate transformations",
+               "type": "array"
+            },
+            "file_name": {
+               "anyOf": [
+                  {
+                     "type": "string"
+                  },
+                  {
+                     "type": "null"
+                  }
+               ],
+               "default": null,
+               "title": "File name"
+            },
+            "channel": {
+               "$ref": "#/$defs/Channel"
+            },
+            "notes": {
+               "anyOf": [
+                  {
+                     "type": "string"
+                  },
+                  {
+                     "type": "null"
+                  }
+               ],
+               "default": null,
+               "title": "Notes"
+            },
+            "imaging_angle": {
+               "default": 0,
+               "title": "Imaging angle",
+               "type": "integer"
+            },
+            "imaging_angle_unit": {
+               "allOf": [
+                  {
+                     "$ref": "#/$defs/AngleUnit"
+                  }
+               ],
+               "default": "degrees",
+               "title": "Imaging angle unit"
+            }
+         },
+         "required": [
+            "coordinate_transformations",
+            "channel"
+         ],
+         "title": "AcquisitionTile",
+         "type": "object"
+      },
+      "Affine3dTransform": {
+         "additionalProperties": false,
+         "description": "Values to be vector-added to a 3D position. Often needed to specify a Tile's origin.",
+         "properties": {
+            "type": {
+               "const": "affine",
+               "default": "affine",
+               "title": "Type"
+            },
+            "affine_transform": {
+               "items": {
+                  "anyOf": [
+                     {
+                        "type": "number"
+                     },
+                     {
+                        "type": "string"
+                     }
+                  ]
+               },
+               "maxItems": 12,
+               "minItems": 12,
+               "title": "Affine transform matrix values (top 3x4 matrix)",
+               "type": "array"
+            }
+         },
+         "required": [
+            "affine_transform"
+         ],
+         "title": "Affine3dTransform",
+         "type": "object"
+      },
+      "AngleUnit": {
+         "description": "Enumeration of Angle Measurements",
+         "enum": [
+            "radians",
+            "degrees"
+         ],
+         "title": "AngleUnit",
+         "type": "string"
+      },
+      "Axis": {
+         "additionalProperties": false,
+         "description": "Description of an image axis",
+         "properties": {
+            "name": {
+               "allOf": [
+                  {
+                     "$ref": "#/$defs/AxisName"
+                  }
+               ],
+               "title": "Name"
+            },
+            "dimension": {
+               "description": "Reference axis number for stitching",
+               "title": "Dimension",
+               "type": "integer"
+            },
+            "direction": {
+               "allOf": [
+                  {
+                     "$ref": "#/$defs/Direction"
+                  }
+               ],
+               "description": "Tissue direction as the value of axis increases. If Other describe in notes."
+            },
+            "unit": {
+               "allOf": [
+                  {
+                     "$ref": "#/$defs/SizeUnit"
+                  }
+               ],
+               "default": "micrometer",
+               "title": "Axis physical units"
+            }
+         },
+         "required": [
+            "name",
+            "dimension",
+            "direction"
+         ],
+         "title": "Axis",
+         "type": "object"
+      },
+      "AxisName": {
+         "description": "Image axis name",
+         "enum": [
+            "X",
+            "Y",
+            "Z"
+         ],
+         "title": "AxisName",
+         "type": "string"
+      },
+      "BaseName": {
+         "additionalProperties": false,
+         "description": "A simple model associating a name with an abbreviation",
+         "properties": {
+            "name": {
+               "title": "Name",
+               "type": "string"
+            },
+            "abbreviation": {
+               "anyOf": [
+                  {
+                     "type": "string"
+                  },
+                  {
+                     "type": "null"
+                  }
+               ],
+               "default": null,
+               "title": "Abbreviation"
+            }
+         },
+         "required": [
+            "name"
+         ],
+         "title": "BaseName",
+         "type": "object"
+      },
+      "Calibration": {
+         "additionalProperties": false,
+         "description": "Generic calibration class",
+         "properties": {
+            "calibration_date": {
+               "format": "date-time",
+               "title": "Date and time of calibration",
+               "type": "string"
+            },
+            "device_name": {
+               "description": "Must match a device name in rig/instrument",
+               "title": "Device name",
+               "type": "string"
+            },
+            "description": {
+               "description": "Brief description of what is being calibrated",
+               "title": "Description",
+               "type": "string"
+            },
+            "input": {
+               "default": {},
+               "description": "Calibration input",
+               "title": "inputs",
+               "type": "object"
+            },
+            "output": {
+               "default": {},
+               "description": "Calibration output",
+               "title": "outputs",
+               "type": "object"
+            },
+            "notes": {
+               "anyOf": [
+                  {
+                     "type": "string"
+                  },
+                  {
+                     "type": "null"
+                  }
+               ],
+               "default": null,
+               "title": "Notes"
+            }
+         },
+         "required": [
+            "calibration_date",
+            "device_name",
+            "description"
+         ],
+         "title": "Calibration",
+         "type": "object"
+      },
+      "Channel": {
+         "additionalProperties": false,
+         "description": "Description of a channel",
+         "properties": {
+            "channel_name": {
+               "title": "Channel",
+               "type": "string"
+            },
+            "light_source_name": {
+               "description": "Must match device name",
+               "title": "Light source name",
+               "type": "string"
+            },
+            "filter_names": {
+               "description": "Must match device names",
+               "items": {
+                  "type": "string"
+               },
+               "title": "Filter names",
+               "type": "array"
+            },
+            "detector_name": {
+               "description": "Must match device name",
+               "title": "Detector name",
+               "type": "string"
+            },
+            "additional_device_names": {
+               "default": [],
+               "items": {
+                  "type": "string"
+               },
+               "title": "Additional device names",
+               "type": "array"
+            },
+            "excitation_wavelength": {
+               "maximum": 1000,
+               "minimum": 300,
+               "title": "Wavelength",
+               "type": "integer"
+            },
+            "excitation_wavelength_unit": {
+               "allOf": [
+                  {
+                     "$ref": "#/$defs/SizeUnit"
+                  }
+               ],
+               "default": "nanometer",
+               "title": "Laser wavelength unit"
+            },
+            "excitation_power": {
+               "maximum": 2000.0,
+               "title": "Laser power",
+               "type": "number"
+            },
+            "excitation_power_unit": {
+               "allOf": [
+                  {
+                     "$ref": "#/$defs/PowerUnit"
+                  }
+               ],
+               "default": "milliwatt",
+               "title": "Laser power unit"
+            },
+            "filter_wheel_index": {
+               "title": "Filter wheel index",
+               "type": "integer"
+            },
+            "dilation": {
+               "anyOf": [
+                  {
+                     "type": "integer"
+                  },
+                  {
+                     "type": "null"
+                  }
+               ],
+               "default": null,
+               "title": "Dilation (pixels)"
+            },
+            "dilation_unit": {
+               "allOf": [
+                  {
+                     "$ref": "#/$defs/SizeUnit"
+                  }
+               ],
+               "default": "pixel",
+               "title": "Dilation unit"
+            },
+            "description": {
+               "anyOf": [
+                  {
+                     "type": "string"
+                  },
+                  {
+                     "type": "null"
+                  }
+               ],
+               "default": null,
+               "title": "Description"
+            }
+         },
+         "required": [
+            "channel_name",
+            "light_source_name",
+            "filter_names",
+            "detector_name",
+            "excitation_wavelength",
+            "excitation_power",
+            "filter_wheel_index"
+         ],
+         "title": "Channel",
+         "type": "object"
+      },
+      "Direction": {
+         "description": "Anatomical direction name",
+         "enum": [
+            "Left_to_right",
+            "Right_to_left",
+            "Anterior_to_posterior",
+            "Posterior_to_anterior",
+            "Inferior_to_superior",
+            "Superior_to_inferior",
+            "Other"
+         ],
+         "title": "Direction",
+         "type": "string"
+      },
+      "Immersion": {
+         "additionalProperties": false,
+         "description": "Description of immersion medium",
+         "properties": {
+            "medium": {
+               "allOf": [
+                  {
+                     "$ref": "#/$defs/ImmersionMedium"
+                  }
+               ],
+               "title": "Immersion medium"
+            },
+            "refractive_index": {
+               "anyOf": [
+                  {
+                     "type": "number"
+                  },
+                  {
+                     "type": "string"
+                  }
+               ],
+               "title": "Index of refraction"
+            }
+         },
+         "required": [
+            "medium",
+            "refractive_index"
+         ],
+         "title": "Immersion",
+         "type": "object"
+      },
+      "ImmersionMedium": {
+         "description": "Immersion medium name",
+         "enum": [
+            "air",
+            "multi",
+            "oil",
+            "PBS",
+            "water",
+            "other"
+         ],
+         "title": "ImmersionMedium",
+         "type": "string"
+      },
+      "Maintenance": {
+         "additionalProperties": false,
+         "description": "Generic maintenance class",
+         "properties": {
+            "maintenance_date": {
+               "format": "date-time",
+               "title": "Date and time of maintenance",
+               "type": "string"
+            },
+            "device_name": {
+               "description": "Must match a device name in rig/instrument",
+               "title": "Device name",
+               "type": "string"
+            },
+            "description": {
+               "description": "Description on maintenance procedure",
+               "title": "Description",
+               "type": "string"
+            },
+            "protocol_id": {
+               "anyOf": [
+                  {
+                     "type": "string"
+                  },
+                  {
+                     "type": "null"
+                  }
+               ],
+               "default": null,
+               "title": "Protocol ID"
+            },
+            "reagents": {
+               "default": [],
+               "items": {
+                  "$ref": "#/$defs/Reagent"
+               },
+               "title": "Reagents",
+               "type": "array"
+            },
+            "notes": {
+               "anyOf": [
+                  {
+                     "type": "string"
+                  },
+                  {
+                     "type": "null"
+                  }
+               ],
+               "default": null,
+               "title": "Notes"
+            }
+         },
+         "required": [
+            "maintenance_date",
+            "device_name",
+            "description"
+         ],
+         "title": "Maintenance",
+         "type": "object"
+      },
+      "PIDName": {
+         "additionalProperties": false,
+         "description": "Model for associate a name with a persistent identifier (PID),\nthe registry for that PID, and abbreviation for that registry",
+         "properties": {
+            "name": {
+               "title": "Name",
+               "type": "string"
+            },
+            "abbreviation": {
+               "anyOf": [
+                  {
+                     "type": "string"
+                  },
+                  {
+                     "type": "null"
+                  }
+               ],
+               "default": null,
+               "title": "Abbreviation"
+            },
+            "registry": {
+               "anyOf": [
+                  {
+                     "$ref": "#/$defs/BaseName"
+                  },
+                  {
+                     "type": "null"
+                  }
+               ],
+               "default": null,
+               "title": "Registry"
+            },
+            "registry_identifier": {
+               "anyOf": [
+                  {
+                     "type": "string"
+                  },
+                  {
+                     "type": "null"
+                  }
+               ],
+               "default": null,
+               "title": "Registry identifier"
+            }
+         },
+         "required": [
+            "name"
+         ],
+         "title": "PIDName",
+         "type": "object"
+      },
+      "PowerUnit": {
+         "description": "Unit for power, set or measured",
+         "enum": [
+            "microwatt",
+            "milliwatt",
+            "percent"
+         ],
+         "title": "PowerUnit",
+         "type": "string"
+      },
+      "ProcessingSteps": {
+         "additionalProperties": false,
+         "description": "Description of downstream processing steps",
+         "properties": {
+            "channel_name": {
+               "title": "Channel name",
+               "type": "string"
+            },
+            "process_name": {
+               "items": {
+                  "enum": [
+                     "Image importing",
+                     "Image background subtraction",
+                     "Image cell segmentation",
+                     "Image destriping",
+                     "Image flat-field correction",
+                     "Image thresholding",
+                     "Image tile alignment",
+                     "Image tile fusing",
+                     "Image tile projection",
+                     "File format conversion"
+                  ],
+                  "type": "string"
+               },
+               "title": "Process Name",
+               "type": "array"
+            }
+         },
+         "required": [
+            "channel_name",
+            "process_name"
+         ],
+         "title": "ProcessingSteps",
+         "type": "object"
+      },
+      "Reagent": {
+         "additionalProperties": false,
+         "description": "Description of reagent used in procedure",
+         "properties": {
+            "name": {
+               "title": "Name",
+               "type": "string"
+            },
+            "source": {
+               "title": "Source",
+               "type": "string"
+            },
+            "rrid": {
+               "anyOf": [
+                  {
+                     "$ref": "#/$defs/PIDName"
+                  },
+                  {
+                     "type": "null"
+                  }
+               ],
+               "default": null,
+               "title": "Research Resource ID"
+            },
+            "lot_number": {
+               "title": "Lot number",
+               "type": "string"
+            },
+            "expiration_date": {
+               "anyOf": [
+                  {
+                     "format": "date",
+                     "type": "string"
+                  },
+                  {
+                     "type": "null"
+                  }
+               ],
+               "default": null,
+               "title": "Lot expiration date"
+            }
+         },
+         "required": [
+            "name",
+            "source",
+            "lot_number"
+         ],
+         "title": "Reagent",
+         "type": "object"
+      },
+      "Rotation3dTransform": {
+         "additionalProperties": false,
+         "description": "Values to be vector-added to a 3D position. Often needed to specify a Tile's origin.",
+         "properties": {
+            "type": {
+               "const": "rotation",
+               "default": "rotation",
+               "title": "Type"
+            },
+            "rotation": {
+               "items": {
+                  "anyOf": [
+                     {
+                        "type": "number"
+                     },
+                     {
+                        "type": "string"
+                     }
+                  ]
+               },
+               "maxItems": 9,
+               "minItems": 9,
+               "title": "3D rotation matrix values (3x3) ",
+               "type": "array"
+            }
+         },
+         "required": [
+            "rotation"
+         ],
+         "title": "Rotation3dTransform",
+         "type": "object"
+      },
+      "Scale3dTransform": {
+         "additionalProperties": false,
+         "description": "Values to be vector-multiplied with a 3D position, equivalent to the diagonals of a 3x3 transform matrix.\nRepresents voxel spacing if used as the first applied coordinate transform.",
+         "properties": {
+            "type": {
+               "const": "scale",
+               "default": "scale",
+               "title": "Type"
+            },
+            "scale": {
+               "items": {
+                  "anyOf": [
+                     {
+                        "type": "number"
+                     },
+                     {
+                        "type": "string"
+                     }
+                  ]
+               },
+               "maxItems": 3,
+               "minItems": 3,
+               "title": "3D scale parameters",
+               "type": "array"
+            }
+         },
+         "required": [
+            "scale"
+         ],
+         "title": "Scale3dTransform",
+         "type": "object"
+      },
+      "SizeUnit": {
+         "description": "Enumeration of Length Measurements",
+         "enum": [
+            "meter",
+            "centimeter",
+            "millimeter",
+            "micrometer",
+            "nanometer",
+            "inch",
+            "pixel"
+         ],
+         "title": "SizeUnit",
+         "type": "string"
+      },
+      "Translation3dTransform": {
+         "additionalProperties": false,
+         "description": "Values to be vector-added to a 3D position. Often needed to specify a Tile's origin.",
+         "properties": {
+            "type": {
+               "const": "translation",
+               "default": "translation",
+               "title": "Type"
+            },
+            "translation": {
+               "items": {
+                  "anyOf": [
+                     {
+                        "type": "number"
+                     },
+                     {
+                        "type": "string"
+                     }
+                  ]
+               },
+               "maxItems": 3,
+               "minItems": 3,
+               "title": "3D translation parameters",
+               "type": "array"
+            }
+         },
+         "required": [
+            "translation"
+         ],
+         "title": "Translation3dTransform",
+         "type": "object"
+      }
+   },
+   "additionalProperties": false,
+   "description": "Description of an imaging acquisition session",
+   "properties": {
+      "describedBy": {
+         "const": "https://raw.githubusercontent.com/AllenNeuralDynamics/aind-data-schema/main/src/aind_data_schema/core/acquisition.py",
+         "default": "https://raw.githubusercontent.com/AllenNeuralDynamics/aind-data-schema/main/src/aind_data_schema/core/acquisition.py",
+         "title": "Describedby",
+         "type": "string"
+      },
+      "schema_version": {
+         "const": "0.6.4",
+         "default": "0.6.4",
+         "title": "Schema Version"
+      },
+      "protocol_id": {
+         "default": [],
+         "description": "DOI for protocols.io",
+         "items": {
+            "type": "string"
+         },
+         "title": "Protocol ID",
+         "type": "array"
+      },
+      "experimenter_full_name": {
+         "description": "First and last name of the experimenter(s).",
+         "items": {
+            "type": "string"
+         },
+         "title": "Experimenter(s) full name",
+         "type": "array"
+      },
+      "specimen_id": {
+         "title": "Specimen ID",
+         "type": "string"
+      },
+      "subject_id": {
+         "anyOf": [
+            {
+               "type": "string"
+            },
+            {
+               "type": "null"
+            }
+         ],
+         "default": null,
+         "title": "Subject ID"
+      },
+      "instrument_id": {
+         "title": "Instrument ID",
+         "type": "string"
+      },
+      "calibrations": {
+         "default": [],
+         "description": "List of calibration measurements taken prior to acquisition.",
+         "items": {
+            "$ref": "#/$defs/Calibration"
+         },
+         "title": "Calibrations",
+         "type": "array"
+      },
+      "maintenance": {
+         "default": [],
+         "description": "List of maintenance on rig prior to acquisition.",
+         "items": {
+            "$ref": "#/$defs/Maintenance"
+         },
+         "title": "Maintenance",
+         "type": "array"
+      },
+      "session_start_time": {
+         "format": "date-time",
+         "title": "Session start time",
+         "type": "string"
+      },
+      "session_end_time": {
+         "format": "date-time",
+         "title": "Session end time",
+         "type": "string"
+      },
+      "session_type": {
+         "anyOf": [
+            {
+               "type": "string"
+            },
+            {
+               "type": "null"
+            }
+         ],
+         "default": null,
+         "title": "Session type"
+      },
+      "tiles": {
+         "items": {
+            "$ref": "#/$defs/AcquisitionTile"
+         },
+         "title": "Acquisition tiles",
+         "type": "array"
+      },
+      "axes": {
+         "items": {
+            "$ref": "#/$defs/Axis"
+         },
+         "title": "Acquisition axes",
+         "type": "array"
+      },
+      "chamber_immersion": {
+         "allOf": [
+            {
+               "$ref": "#/$defs/Immersion"
+            }
+         ],
+         "title": "Acquisition chamber immersion data"
+      },
+      "sample_immersion": {
+         "anyOf": [
+            {
+               "$ref": "#/$defs/Immersion"
+            },
+            {
+               "type": "null"
+            }
+         ],
+         "default": null,
+         "title": "Acquisition sample immersion data"
+      },
+      "active_objectives": {
+         "anyOf": [
+            {
+               "items": {
+                  "type": "string"
+               },
+               "type": "array"
+            },
+            {
+               "type": "null"
+            }
+         ],
+         "default": null,
+         "title": "List of objectives used in this acquisition."
+      },
+      "local_storage_directory": {
+         "anyOf": [
+            {
+               "type": "string"
+            },
+            {
+               "type": "null"
+            }
+         ],
+         "default": null,
+         "title": "Local storage directory"
+      },
+      "external_storage_directory": {
+         "anyOf": [
+            {
+               "type": "string"
+            },
+            {
+               "type": "null"
+            }
+         ],
+         "default": null,
+         "title": "External storage directory"
+      },
+      "processing_steps": {
+         "default": [],
+         "description": "List of downstream processing steps planned for each channel",
+         "items": {
+            "$ref": "#/$defs/ProcessingSteps"
+         },
+         "title": "Processing steps",
+         "type": "array"
+      },
+      "notes": {
+         "anyOf": [
+            {
+               "type": "string"
+            },
+            {
+               "type": "null"
+            }
+         ],
+         "default": null,
+         "title": "Notes"
+      }
+   },
+   "required": [
+      "experimenter_full_name",
+      "specimen_id",
+      "instrument_id",
+      "session_start_time",
+      "session_end_time",
+      "tiles",
+      "axes",
+      "chamber_immersion"
+   ],
+   "title": "Acquisition",
+   "type": "object"
+}
