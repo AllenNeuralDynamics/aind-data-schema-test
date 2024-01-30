@@ -2,8 +2,8 @@
 
 import datetime
 
-from aind_data_schema.data_description import Modality
-from aind_data_schema.session import Detector, FiberPhotometryAssembly, Laser, Session, Stream
+from aind_data_schema.core.session import DetectorConfig, FiberConnectionConfig, LaserConfig, Session, Stream
+from aind_data_schema.models.modalities import Modality
 
 t = datetime.datetime(2022, 7, 12, 7, 00, 00)
 
@@ -21,14 +21,14 @@ s = Session(
             stream_end_time=t,
             stream_modalities=[Modality.FIB],
             light_sources=[
-                Laser(
+                LaserConfig(
                     name="Laser A",
                     wavelength=405,
                     wavelength_unit="nanometer",
                     excitation_power=10,
                     excitation_power_unit="milliwatt",
                 ),
-                Laser(
+                LaserConfig(
                     name="Laser B",
                     wavelength=473,
                     wavelength_unit="nanometer",
@@ -36,21 +36,23 @@ s = Session(
                     excitation_power_unit="milliwatt",
                 ),
             ],
-            detectors=[Detector(name="Hamamatsu Camera", exposure_time=10, trigger_type="Internal")],
-            fiber_photometry_assemblies=[
-                FiberPhotometryAssembly(
+            detectors=[DetectorConfig(name="Hamamatsu Camera", exposure_time=10, trigger_type="Internal")],
+            fiber_connections=[
+                FiberConnectionConfig(
                     patch_cord_name="Patch Cord A",
                     patch_cord_output_power=40,
                     output_power_unit="microwatt",
                     fiber_name="Fiber A",
                 ),
-                FiberPhotometryAssembly(
+                FiberConnectionConfig(
                     patch_cord_name="Patch Cord B",
                     patch_cord_output_power=43,
                     output_power_unit="microwatt",
                     fiber_name="Fiber B",
                 ),
             ],
+            mouse_platform_name="Disc",
+            active_mouse_platform=False,
             notes="Internal trigger. GRAB-DA2m shows signal. Unclear about GRAB-rAC",
         )
     ],

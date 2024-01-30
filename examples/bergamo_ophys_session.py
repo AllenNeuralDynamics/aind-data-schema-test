@@ -2,12 +2,11 @@
 
 import datetime
 
-from aind_data_schema.data_description import Modality
-from aind_data_schema.session import Detector, FieldOfView, Laser, Session, Stream
-from aind_data_schema.stimulus import PhotoStimulation, PhotoStimulationGroup, StimulusEpoch
+from aind_data_schema.core.session import DetectorConfig, FieldOfView, LaserConfig, Session, Stream
+from aind_data_schema.models.modalities import Modality
+from aind_data_schema.models.stimulus import PhotoStimulation, PhotoStimulationGroup, StimulusEpoch
 
 t = datetime.datetime(2022, 7, 12, 7, 00, 00)
-t2 = datetime.time(7, 00, 00)
 
 s = Session(
     experimenter_full_name=["John Doe"],
@@ -23,7 +22,7 @@ s = Session(
             stream_end_time=t,
             stream_modalities=[Modality.POPHYS, Modality.BEHAVIOR_VIDEOS],
             light_sources=[
-                Laser(
+                LaserConfig(
                     name="Laser A",
                     wavelength=405,
                     wavelength_unit="nanometer",
@@ -32,13 +31,15 @@ s = Session(
                 ),
             ],
             detectors=[
-                Detector(
+                DetectorConfig(
                     name="PMT A",
                     exposure_time=0.1,
                     trigger_type="Internal",
                 ),
             ],
             camera_names=["Face Camera"],
+            mouse_platform_name="Mouse tube",
+            active_mouse_platform=False,
             ophys_fovs=[
                 FieldOfView(
                     index=0,
@@ -83,8 +84,8 @@ s = Session(
                 ],
                 inter_trial_interval=10,
             ),
-            stimulus_start_time=t2,
-            stimulus_end_time=t2,
+            stimulus_start_time=t,
+            stimulus_end_time=t,
         )
     ],
 )

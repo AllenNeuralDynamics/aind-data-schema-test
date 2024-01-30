@@ -2,13 +2,21 @@
 
 from datetime import datetime
 
-from aind_data_schema.coordinates import Coordinates3d
-from aind_data_schema.data_description import Modality
-from aind_data_schema.session import DomeModule, EphysModule, EphysProbe, Laser, ManipulatorModule, Session, Stream
+from aind_data_schema.core.session import (
+    DomeModule,
+    EphysModule,
+    EphysProbeConfig,
+    LaserConfig,
+    ManipulatorModule,
+    Session,
+    Stream,
+)
+from aind_data_schema.models.coordinates import Coordinates3d
+from aind_data_schema.models.modalities import Modality
 
-red_laser = Laser(name="Red Laser", wavelength=700, excitation_power=100)
+red_laser = LaserConfig(name="Red Laser", wavelength=700, excitation_power=100)
 
-blue_laser = Laser(name="Blue Laser", wavelength=350, excitation_power=50)
+blue_laser = LaserConfig(name="Blue Laser", wavelength=350, excitation_power=50)
 
 laser_module = ManipulatorModule(
     assembly_name="Laser_assemblyA",
@@ -25,8 +33,8 @@ ephys_module = EphysModule(
     primary_targeted_structure="VISp",
     manipulator_coordinates=Coordinates3d(x=1000, y=1000, z=1000),
     ephys_probes=[
-        EphysProbe(name="Probe A"),
-        EphysProbe(name="Probe B"),
+        EphysProbeConfig(name="Probe A"),
+        EphysProbeConfig(name="Probe B"),
     ],
 )
 
@@ -34,10 +42,19 @@ stream = Stream(
     stream_start_time=datetime(2023, 1, 10, 8, 43, 00),
     stream_end_time=datetime(2023, 1, 10, 9, 43, 00),
     stream_modalities=[Modality.ECEPHYS, Modality.BEHAVIOR_VIDEOS],
+    stick_microscopes=[
+        DomeModule(
+            assembly_name="Stick_assembly",
+            arc_angle=24,
+            module_angle=10,
+        )
+    ],
     ephys_modules=[ephys_module],
     manipulator_modules=[laser_module],
     daq_names=["Harp Behavior", "Basestation Slot 3"],
     camera_names=["Face Camera", "Body Camera"],
+    mouse_platform_name="Running Wheel",
+    active_mouse_platform=False,
 )
 
 session = Session(
@@ -51,13 +68,6 @@ session = Session(
     animal_weight_prior=21.2,
     animal_weight_post=21.3,
     data_streams=[stream],
-    stick_microscopes=[
-        DomeModule(
-            assembly_name="Stick_assembly",
-            arc_angle=24,
-            module_angle=10,
-        ),
-    ],
 )
 
 session.write_standard_file(prefix="ephys")

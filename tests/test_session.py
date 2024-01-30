@@ -5,9 +5,16 @@ import unittest
 
 import pydantic
 
-from aind_data_schema.coordinates import CcfCoords, Coordinates3d
-from aind_data_schema.data_description import Modality
-from aind_data_schema.session import EphysModule, EphysProbe, RewardDelivery, Session, Stream
+from aind_data_schema.core.session import (
+    DomeModule,
+    EphysModule,
+    EphysProbeConfig,
+    RewardDeliveryConfig,
+    Session,
+    Stream,
+)
+from aind_data_schema.models.coordinates import CcfCoords, Coordinates3d
+from aind_data_schema.models.modalities import Modality
 
 
 class ExampleTest(unittest.TestCase):
@@ -31,9 +38,16 @@ class ExampleTest(unittest.TestCase):
                     stream_start_time=datetime.datetime.now(),
                     stream_end_time=datetime.datetime.now(),
                     stream_modalities=[Modality.ECEPHYS],
+                    stick_microscopes=[
+                        DomeModule(
+                            assembly_name="Stick_assembly",
+                            arc_angle=24,
+                            module_angle=10,
+                        )
+                    ],
                     ephys_modules=[
                         EphysModule(
-                            ephys_probes=[EphysProbe(name="Probe A")],
+                            ephys_probes=[EphysProbeConfig(name="Probe A")],
                             assembly_name="Ephys_assemblyA",
                             arc_angle=0,
                             module_angle=10,
@@ -42,6 +56,8 @@ class ExampleTest(unittest.TestCase):
                             manipulator_coordinates=Coordinates3d(x="1", y="1", z="1"),
                         ),
                     ],
+                    mouse_platform_name="Running wheel",
+                    active_mouse_platform=False,
                 )
             ],
         )
@@ -49,10 +65,37 @@ class ExampleTest(unittest.TestCase):
         assert sess is not None
 
         with self.assertRaises(pydantic.ValidationError):
-            RewardDelivery()
+            RewardDeliveryConfig()
 
         with self.assertRaises(pydantic.ValidationError):
-            RewardDelivery(reward_solution="Other")
+            RewardDeliveryConfig(reward_solution="Other")
+
+    def test_validators(self):
+        """Test the session file validators"""
+
+        with self.assertRaises(pydantic.ValidationError) as e:
+            Stream(
+                stream_start_time=datetime.datetime.now(),
+                stream_end_time=datetime.datetime.now(),
+                stream_modalities=[
+                    Modality.ECEPHYS,
+                    Modality.SLAP,
+                    Modality.FIB,
+                    Modality.BEHAVIOR_VIDEOS,
+                    Modality.POPHYS,
+                    Modality.TRAINED_BEHAVIOR,
+                ],
+            )
+
+        self.assertTrue("ephys_modules field must be utilized for Ecephys modality" in repr(e.exception))
+        self.assertTrue("light_sources field must be utilized for FIB modality" in repr(e.exception))
+        self.assertTrue(
+            "ophys_fovs field OR stack_parameters field must be utilized for Pophys modality" in repr(e.exception)
+        )
+        self.assertTrue("camera_names field must be utilized for Behavior Videos modality" in repr(e.exception))
+        self.assertTrue(
+            "stimulus_device_names field must be utilized for Trained Behavior modality" in repr(e.exception)
+        )
 
 
 if __name__ == "__main__":

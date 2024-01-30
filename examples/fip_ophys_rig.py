@@ -1,9 +1,9 @@
 """ example FIP ophys rig """
 import datetime
 
-import aind_data_schema.device as d
-import aind_data_schema.rig as r
-from aind_data_schema.data_description import Modality
+import aind_data_schema.core.rig as r
+import aind_data_schema.models.devices as d
+from aind_data_schema.models.modalities import Modality
 
 r = r.Rig(
     rig_id="428_FIP1_2",
@@ -15,23 +15,26 @@ r = r.Rig(
             camera_target=d.CameraTarget.FACE_SIDE,
             camera=d.Camera(
                 name="ELP Camera USB 1080P Infrared Webcam 1",
+                detector_type="Camera",
                 serial_number="TBD",
-                manufacturer=d.Manufacturer.AILIPU,
+                manufacturer=d.Organization.AILIPU,
                 model="ELP-USBFHD05MT-KL170IR",
                 notes="The light intensity sensor was removed; IR illumination is constantly on",
                 data_interface="USB",
                 computer_name="W10DTJK7N0M3",
                 max_frame_rate=120,
-                pixel_width=640,
-                pixel_height=480,
+                sensor_width=640,
+                sensor_height=480,
                 chroma="Color",
+                cooling="Air",
+                bin_mode="Additive",
                 recording_software=d.Software(name="Bonsai", version="2.5"),
             ),
             lens=d.Lens(
                 name="Xenocam 1",
                 model="XC0922LENS",
                 serial_number="unknown",
-                manufacturer=d.Manufacturer.OTHER,
+                manufacturer=d.Organization.OTHER,
                 max_aperture="f/1.4",
                 notes='Focal Length 9-22mm 1/3" IR F1.4',
             ),
@@ -41,23 +44,26 @@ r = r.Rig(
             camera_target=d.CameraTarget.FACE_BOTTOM,
             camera=d.Camera(
                 name="ELP Camera USB 1080P Infrared Webcam 2",
+                detector_type="Camera",
                 serial_number="TBD",
-                manufacturer=d.Manufacturer.AILIPU,
+                manufacturer=d.Organization.AILIPU,
                 model="ELP-USBFHD05MT-KL170IR",
                 notes="The light intensity sensor was removed; IR illumination is constantly on",
                 data_interface="USB",
                 computer_name="W10DTJK7N0M3",
                 max_frame_rate=120,
-                pixel_width=640,
-                pixel_height=480,
+                sensor_width=640,
+                sensor_height=480,
                 chroma="Color",
+                cooling="Air",
+                bin_mode="Additive",
                 recording_software=d.Software(name="Bonsai", version="2.5"),
             ),
             lens=d.Lens(
                 name="Xenocam 2",
                 model="XC0922LENS",
                 serial_number="unknown",
-                manufacturer=d.Manufacturer.OTHER,
+                manufacturer=d.Organization.OTHER,
                 max_aperture="f/1.4",
                 notes='Focal Length 9-22mm 1/3" IR F1.4',
             ),
@@ -66,7 +72,7 @@ r = r.Rig(
     patch_cords=[
         d.Patch(
             name="Bundle Branching Fiber-optic Patch Cord",
-            manufacturer=d.Manufacturer.DORIC,
+            manufacturer=d.Organization.DORIC,
             model="BBP(4)_200/220/900-0.37_Custom_FCM-4xMF1.25",
             core_diameter=200,
             numerical_aperture=0.37,
@@ -75,36 +81,36 @@ r = r.Rig(
     light_sources=[
         d.LightEmittingDiode(
             name="470nm LED",
-            manufacturer=d.Manufacturer.THORLABS,
+            manufacturer=d.Organization.THORLABS,
             model="M470F3",
             wavelength=470,
         ),
         d.LightEmittingDiode(
             name="415nm LED",
-            manufacturer=d.Manufacturer.THORLABS,
+            manufacturer=d.Organization.THORLABS,
             model="M415F3",
             wavelength=415,
         ),
         d.LightEmittingDiode(
             name="565nm LED",
-            manufacturer=d.Manufacturer.THORLABS,
+            manufacturer=d.Organization.THORLABS,
             model="M565F3",
-            wavelength=415,
+            wavelength=565,
         ),
     ],
     detectors=[
         d.Detector(
             name="FLIR CMOS for Green Channel",
             serial_number="21396991",
-            manufacturer=d.Manufacturer.FLIR,
+            manufacturer=d.Organization.FLIR,
             model="BFS-U3-20S40M",
             detector_type="Camera",
             data_interface="USB",
-            cooling="air",
+            cooling="Air",
             immersion="air",
             bin_width=4,
             bin_height=4,
-            bin_mode="additive",
+            bin_mode="Additive",
             crop_width=200,
             crop_height=200,
             gain=2,
@@ -114,15 +120,15 @@ r = r.Rig(
         d.Detector(
             name="FLIR CMOS for Red Channel",
             serial_number="21396991",
-            manufacturer=d.Manufacturer.FLIR,
+            manufacturer=d.Organization.FLIR,
             model="BFS-U3-20S40M",
             detector_type="Camera",
             data_interface="USB",
-            cooling="air",
+            cooling="Air",
             immersion="air",
             bin_width=4,
             bin_height=4,
-            bin_mode="additive",
+            bin_mode="Additive",
             crop_width=200,
             crop_height=200,
             gain=2,
@@ -134,7 +140,7 @@ r = r.Rig(
         d.Objective(
             name="Nikon 10x Objective",
             serial_number="128022336",
-            manufacturer=d.Manufacturer.NIKON,
+            manufacturer=d.Organization.NIKON,
             model="CFI Plan Apochromat Lambda D 10x",
             numerical_aperture=0.45,
             magnification=10,
@@ -144,7 +150,7 @@ r = r.Rig(
     filters=[
         d.Filter(
             name="Green emission bandpass filter",
-            manufacturer=d.Manufacturer.SEMROCK,
+            manufacturer=d.Organization.SEMROCK,
             model="FF01-520/35-25",
             filter_type="Band pass",
             center_wavelength=520,
@@ -152,7 +158,7 @@ r = r.Rig(
         ),
         d.Filter(
             name="Red emission bandpass filter",
-            manufacturer=d.Manufacturer.SEMROCK,
+            manufacturer=d.Organization.SEMROCK,
             model="FF01-600/37-25",
             filter_type="Band pass",
             center_wavelength=600,
@@ -161,7 +167,7 @@ r = r.Rig(
         d.Filter(
             name="Emission Dichroic",
             model="FF562-Di03-25x36",
-            manufacturer=d.Manufacturer.SEMROCK,
+            manufacturer=d.Organization.SEMROCK,
             filter_type="Dichroic",
             height=25,
             width=36,
@@ -170,7 +176,7 @@ r = r.Rig(
         d.Filter(
             name="dual-edge standard epi-fluorescence dichroic beamsplitter",
             model="FF493/574-Di01-25x36",
-            manufacturer=d.Manufacturer.SEMROCK,
+            manufacturer=d.Organization.SEMROCK,
             notes="493/574 nm BrightLine dual-edge standard epi-fluorescence dichroic beamsplitter",
             filter_type="Multiband",
             width=36,
@@ -178,7 +184,7 @@ r = r.Rig(
         ),
         d.Filter(
             name="Excitation filter 410nm",
-            manufacturer=d.Manufacturer.THORLABS,
+            manufacturer=d.Organization.THORLABS,
             model="FB410-10",
             filter_type="Band pass",
             diameter=25,
@@ -186,7 +192,7 @@ r = r.Rig(
         ),
         d.Filter(
             name="Excitation filter 470nm",
-            manufacturer=d.Manufacturer.THORLABS,
+            manufacturer=d.Organization.THORLABS,
             model="FB470-10",
             filter_type="Band pass",
             center_wavelength=470,
@@ -194,7 +200,7 @@ r = r.Rig(
         ),
         d.Filter(
             name="Excitation filter 560nm",
-            manufacturer=d.Manufacturer.THORLABS,
+            manufacturer=d.Organization.THORLABS,
             model="FB560-10",
             filter_type="Band pass",
             diameter=25,
@@ -202,7 +208,7 @@ r = r.Rig(
         ),
         d.Filter(
             name="450nm, 25.2 x 35.6mm, Dichroic Longpass Filter",
-            manufacturer=d.Manufacturer.EDMUND_OPTICS,
+            manufacturer=d.Organization.EDMUND_OPTICS,
             model="#69-898",
             filter_type="Dichroic",
             cut_off_wavelength=450,
@@ -211,7 +217,7 @@ r = r.Rig(
         ),
         d.Filter(
             name="500nm, 25.2 x 35.6mm, Dichroic Longpass Filter",
-            manufacturer=d.Manufacturer.EDMUND_OPTICS,
+            manufacturer=d.Organization.EDMUND_OPTICS,
             model="#69-899",
             filter_type="Dichroic",
             width=35.6,
@@ -220,7 +226,7 @@ r = r.Rig(
     ],
     lenses=[
         d.Lens(
-            manufacturer=d.Manufacturer.THORLABS,
+            manufacturer=d.Organization.THORLABS,
             model="AC254-080-A-ML",
             name="Image focusing lens",
             focal_length=80,
@@ -228,45 +234,41 @@ r = r.Rig(
         )
     ],
     daqs=[
-        d.DAQDevice(
-            name="USB DAQ",
-            manufacturer=d.Manufacturer.NATIONAL_INSTRUMENTS,
-            model="USB-6212",
-            notes="To record behavior events and licks via AnalogInput node in Bonsai",
-            data_interface="USB",
-            computer_name="W10DTJK7N0M3",
+        d.HarpDevice(
+            name="Harp Behavior",
+            harp_device_type=d.HarpDeviceType.BEHAVIOR,
+            core_version="2.1",
+            computer_name="behavior_computer",
+            is_clock_generator=False,
             channels=[
-                d.DAQChannel(
-                    event_based_sampling=False,
-                    channel_name="AI0",
-                    device_name="Bpod DO",
-                    channel_type="Analog Input",
-                    port=0,
-                    channel_index=0,
-                    sample_rate=1000,
-                ),
-                d.DAQChannel(
-                    event_based_sampling=False,
-                    channel_name="AI1",
-                    device_name="Janelia lick-o-meter circuit board, Left",
-                    channel_type="Analog Input",
-                    port=1,
-                    channel_index=1,
-                    sample_rate=1000,
-                ),
-                d.DAQChannel(
-                    event_based_sampling=False,
-                    channel_name="AI2",
-                    device_name="Janelia lick-o-meter circuit board, Right",
-                    channel_type="Analog Input",
-                    port=2,
-                    channel_index=2,
-                    sample_rate=1000,
-                ),
+                d.DAQChannel(channel_name="DO0", device_name="Solenoid Left", channel_type="Digital Output"),
+                d.DAQChannel(channel_name="DO1", device_name="Solenoid Right", channel_type="Digital Output"),
+                d.DAQChannel(channel_name="DI0", device_name="Lick-o-meter Left", channel_type="Digital Input"),
+                d.DAQChannel(channel_name="DI1", device_name="Lick-o-meter Right", channel_type="Digital Input"),
+                d.DAQChannel(channel_name="DI3", device_name="Photometry Clock", channel_type="Digital Input"),
             ],
         )
     ],
-    mouse_platform=d.Disc(radius=8.5),
+    mouse_platform=d.Disc(name="mouse_disc", radius=8.5),
+    stimulus_devices=[
+        d.RewardDelivery(
+            reward_spouts=[
+                d.RewardSpout(
+                    name="Lick-o-meter Left",
+                    side=d.SpoutSide.LEFT,
+                    spout_diameter=1.2,
+                    solenoid_valve=d.Device(device_type="Solenoid", name="Solenoid Left"),
+                ),
+                d.RewardSpout(
+                    name="Lick-o-meter Right",
+                    side=d.SpoutSide.RIGHT,
+                    spout_diameter=1.2,
+                    solenoid_valve=d.Device(device_type="Solenoid", name="Solenoid Right"),
+                ),
+            ]
+        )
+    ],
+    additional_devices=[d.Device(device_type="Photometry Clock", name="Photometry Clock")],
     calibrations=[
         d.Calibration(
             calibration_date=datetime.datetime(2023, 10, 2, 3, 15, 22),

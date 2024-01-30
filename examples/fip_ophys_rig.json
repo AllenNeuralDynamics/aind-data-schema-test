@@ -1,37 +1,93 @@
 {
-   "describedBy": "https://raw.githubusercontent.com/AllenNeuralDynamics/aind-data-schema/main/src/aind_data_schema/rig.py",
-   "schema_version": "0.1.2",
+   "describedBy": "https://raw.githubusercontent.com/AllenNeuralDynamics/aind-data-schema/main/src/aind_data_schema/core/rig.py",
+   "schema_version": "0.2.7",
    "rig_id": "428_FIP1_2",
    "modification_date": "2023-10-03",
-   "modalities": [
-      {
-         "name": "Fiber photometry",
-         "abbreviation": "fib"
-      }
-   ],
    "mouse_platform": {
       "device_type": "Disc",
-      "name": null,
+      "name": "mouse_disc",
       "serial_number": null,
       "manufacturer": null,
       "model": null,
+      "path_to_cad": null,
+      "port_index": null,
+      "additional_settings": {},
       "notes": null,
       "surface_material": null,
       "date_surface_replaced": null,
-      "radius": 8.5,
+      "radius": "8.5",
       "radius_unit": "centimeter",
       "output": null,
       "encoder": null,
       "decoder": null,
       "encoder_firmware": null
    },
-   "stimulus_devices": null,
+   "stimulus_devices": [
+      {
+         "device_type": "Reward delivery",
+         "stage_type": null,
+         "reward_spouts": [
+            {
+               "device_type": "Reward spout",
+               "name": "Lick-o-meter Left",
+               "serial_number": null,
+               "manufacturer": null,
+               "model": null,
+               "path_to_cad": null,
+               "port_index": null,
+               "additional_settings": {},
+               "notes": null,
+               "side": "Left",
+               "spout_diameter": "1.2",
+               "spout_diameter_unit": "millimeter",
+               "spout_position": null,
+               "solenoid_valve": {
+                  "device_type": "Solenoid",
+                  "name": "Solenoid Left",
+                  "serial_number": null,
+                  "manufacturer": null,
+                  "model": null,
+                  "path_to_cad": null,
+                  "port_index": null,
+                  "additional_settings": {},
+                  "notes": null
+               }
+            },
+            {
+               "device_type": "Reward spout",
+               "name": "Lick-o-meter Right",
+               "serial_number": null,
+               "manufacturer": null,
+               "model": null,
+               "path_to_cad": null,
+               "port_index": null,
+               "additional_settings": {},
+               "notes": null,
+               "side": "Right",
+               "spout_diameter": "1.2",
+               "spout_diameter_unit": "millimeter",
+               "spout_position": null,
+               "solenoid_valve": {
+                  "device_type": "Solenoid",
+                  "name": "Solenoid Right",
+                  "serial_number": null,
+                  "manufacturer": null,
+                  "model": null,
+                  "path_to_cad": null,
+                  "port_index": null,
+                  "additional_settings": {},
+                  "notes": null
+               }
+            }
+         ]
+      }
+   ],
    "cameras": [
       {
          "camera_assembly_name": "BehaviorVideography_FaceSide",
          "camera_target": "Face side",
          "camera": {
-            "device_type": "Camera",
+            "device_type": "Detector",
             "name": "ELP Camera USB 1080P Infrared Webcam 1",
             "serial_number": "TBD",
             "manufacturer": {
@@ -41,21 +97,37 @@
                "registry_identifier": null
             },
             "model": "ELP-USBFHD05MT-KL170IR",
+            "path_to_cad": null,
+            "port_index": null,
+            "additional_settings": {},
             "notes": "The light intensity sensor was removed; IR illumination is constantly on",
+            "detector_type": "Camera",
             "data_interface": "USB",
+            "cooling": "Air",
             "computer_name": "W10DTJK7N0M3",
-            "max_frame_rate": 120,
+            "max_frame_rate": "120",
             "frame_rate_unit": "hertz",
-            "pixel_width": 640,
-            "pixel_height": 480,
-            "size_unit": "pixel",
+            "immersion": null,
             "chroma": "Color",
+            "sensor_width": 640,
+            "sensor_height": 480,
+            "size_unit": "pixel",
             "sensor_format": null,
-            "format_unit": null,
+            "sensor_format_unit": null,
+            "bit_depth": null,
+            "bin_mode": "Additive",
+            "bin_width": null,
+            "bin_height": null,
+            "bin_unit": "pixel",
+            "gain": null,
+            "crop_width": null,
+            "crop_height": null,
+            "crop_unit": "pixel",
             "recording_software": {
                "name": "Bonsai",
                "version": "2.5",
-               "parameters": null
+               "url": null,
+               "parameters": {}
             },
             "driver": null,
             "driver_version": null
@@ -71,6 +143,9 @@
                "registry_identifier": null
             },
             "model": "XC0922LENS",
+            "path_to_cad": null,
+            "port_index": null,
+            "additional_settings": {},
             "notes": "Focal Length 9-22mm 1/3\" IR F1.4",
             "focal_length": null,
             "focal_length_unit": "millimeter",
@@ -87,7 +162,7 @@
          "camera_assembly_name": "BehaviorVideography_FaceBottom",
          "camera_target": "Face bottom",
          "camera": {
-            "device_type": "Camera",
+            "device_type": "Detector",
             "name": "ELP Camera USB 1080P Infrared Webcam 2",
             "serial_number": "TBD",
             "manufacturer": {
@@ -97,21 +172,37 @@
                "registry_identifier": null
             },
             "model": "ELP-USBFHD05MT-KL170IR",
+            "path_to_cad": null,
+            "port_index": null,
+            "additional_settings": {},
             "notes": "The light intensity sensor was removed; IR illumination is constantly on",
+            "detector_type": "Camera",
             "data_interface": "USB",
+            "cooling": "Air",
             "computer_name": "W10DTJK7N0M3",
-            "max_frame_rate": 120,
+            "max_frame_rate": "120",
             "frame_rate_unit": "hertz",
-            "pixel_width": 640,
-            "pixel_height": 480,
-            "size_unit": "pixel",
+            "immersion": null,
             "chroma": "Color",
+            "sensor_width": 640,
+            "sensor_height": 480,
+            "size_unit": "pixel",
             "sensor_format": null,
-            "format_unit": null,
+            "sensor_format_unit": null,
+            "bit_depth": null,
+            "bin_mode": "Additive",
+            "bin_width": null,
+            "bin_height": null,
+            "bin_unit": "pixel",
+            "gain": null,
+            "crop_width": null,
+            "crop_height": null,
+            "crop_unit": "pixel",
             "recording_software": {
                "name": "Bonsai",
                "version": "2.5",
-               "parameters": null
+               "url": null,
+               "parameters": {}
             },
             "driver": null,
             "driver_version": null
@@ -127,6 +218,9 @@
                "registry_identifier": null
             },
             "model": "XC0922LENS",
+            "path_to_cad": null,
+            "port_index": null,
+            "additional_settings": {},
             "notes": "Focal Length 9-22mm 1/3\" IR F1.4",
             "focal_length": null,
             "focal_length_unit": "millimeter",
@@ -140,61 +234,11 @@
          "position": null
       }
    ],
-   "daqs": [
-      {
-         "device_type": "DAQDevice",
-         "name": "USB DAQ",
-         "serial_number": null,
-         "manufacturer": {
-            "name": "National Instruments",
-            "abbreviation": null,
-            "registry": {
-               "name": "Research Organization Registry",
-               "abbreviation": "ROR"
-            },
-            "registry_identifier": "026exqw73"
-         },
-         "model": "USB-6212",
-         "notes": "To record behavior events and licks via AnalogInput node in Bonsai",
-         "data_interface": "USB",
-         "computer_name": "W10DTJK7N0M3",
-         "channels": [
-            {
-               "channel_name": "AI0",
-               "device_name": "Bpod DO",
-               "channel_type": "Analog Input",
-               "port": 0,
-               "channel_index": 0,
-               "sample_rate": 1000,
-               "sample_rate_unit": "hertz",
-               "event_based_sampling": false
-            },
-            {
-               "channel_name": "AI1",
-               "device_name": "Janelia lick-o-meter circuit board, Left",
-               "channel_type": "Analog Input",
-               "port": 1,
-               "channel_index": 1,
-               "sample_rate": 1000,
-               "sample_rate_unit": "hertz",
-               "event_based_sampling": false
-            },
-            {
-               "channel_name": "AI2",
-               "device_name": "Janelia lick-o-meter circuit board, Right",
-               "channel_type": "Analog Input",
-               "port": 2,
-               "channel_index": 2,
-               "sample_rate": 1000,
-               "sample_rate_unit": "hertz",
-               "event_based_sampling": false
-            }
-         ]
-      }
-   ],
-   "ephys_assemblies": null,
-   "stick_microscopes": null,
-   "laser_assemblies": null,
+   "enclosure": null,
+   "ephys_assemblies": [],
+   "fiber_assemblies": [],
+   "stick_microscopes": [],
+   "laser_assemblies": [],
    "patch_cords": [
       {
          "device_type": "Patch",
@@ -210,15 +254,18 @@
             "registry_identifier": "059n53q30"
          },
          "model": "BBP(4)_200/220/900-0.37_Custom_FCM-4xMF1.25",
+         "path_to_cad": null,
+         "port_index": null,
+         "additional_settings": {},
          "notes": null,
-         "core_diameter": 200,
-         "numerical_aperture": 0.37,
+         "core_diameter": "200",
+         "numerical_aperture": "0.37",
          "photobleaching_date": null
       }
    ],
    "light_sources": [
       {
-         "device_type": "LightEmittingDiode",
+         "device_type": "Light emitting diode",
          "name": "470nm LED",
          "serial_number": null,
          "manufacturer": {
@@ -231,12 +278,15 @@
             "registry_identifier": "04gsnvb07"
          },
          "model": "M470F3",
+         "path_to_cad": null,
+         "port_index": null,
+         "additional_settings": {},
          "notes": null,
          "wavelength": 470,
          "wavelength_unit": "nanometer"
       },
       {
-         "device_type": "LightEmittingDiode",
+         "device_type": "Light emitting diode",
          "name": "415nm LED",
          "serial_number": null,
          "manufacturer": {
@@ -249,12 +299,15 @@
             "registry_identifier": "04gsnvb07"
          },
          "model": "M415F3",
+         "path_to_cad": null,
+         "port_index": null,
+         "additional_settings": {},
          "notes": null,
          "wavelength": 415,
          "wavelength_unit": "nanometer"
       },
       {
-         "device_type": "LightEmittingDiode",
+         "device_type": "Light emitting diode",
          "name": "565nm LED",
          "serial_number": null,
          "manufacturer": {
@@ -267,8 +320,11 @@
             "registry_identifier": "04gsnvb07"
          },
          "model": "M565F3",
+         "path_to_cad": null,
+         "port_index": null,
+         "additional_settings": {},
          "notes": null,
-         "wavelength": 415,
+         "wavelength": 565,
          "wavelength_unit": "nanometer"
       }
    ],
@@ -287,24 +343,35 @@
             "registry_identifier": "01j1gwp17"
          },
          "model": "BFS-U3-20S40M",
+         "path_to_cad": null,
+         "port_index": null,
+         "additional_settings": {},
          "notes": null,
          "detector_type": "Camera",
          "data_interface": "USB",
-         "cooling": "air",
+         "cooling": "Air",
+         "computer_name": null,
+         "max_frame_rate": null,
+         "frame_rate_unit": "hertz",
          "immersion": "air",
          "chroma": "Monochrome",
          "sensor_width": null,
          "sensor_height": null,
          "size_unit": "pixel",
+         "sensor_format": null,
+         "sensor_format_unit": null,
          "bit_depth": 16,
-         "bin_mode": "additive",
+         "bin_mode": "Additive",
          "bin_width": 4,
          "bin_height": 4,
          "bin_unit": "pixel",
-         "gain": 2,
+         "gain": "2",
          "crop_width": 200,
          "crop_height": 200,
-         "crop_unit": "pixel"
+         "crop_unit": "pixel",
+         "recording_software": null,
+         "driver": null,
+         "driver_version": null
       },
       {
          "device_type": "Detector",
@@ -320,24 +387,35 @@
             "registry_identifier": "01j1gwp17"
          },
          "model": "BFS-U3-20S40M",
+         "path_to_cad": null,
+         "port_index": null,
+         "additional_settings": {},
          "notes": null,
          "detector_type": "Camera",
          "data_interface": "USB",
-         "cooling": "air",
+         "cooling": "Air",
+         "computer_name": null,
+         "max_frame_rate": null,
+         "frame_rate_unit": "hertz",
          "immersion": "air",
          "chroma": "Monochrome",
          "sensor_width": null,
          "sensor_height": null,
          "size_unit": "pixel",
+         "sensor_format": null,
+         "sensor_format_unit": null,
          "bit_depth": 16,
-         "bin_mode": "additive",
+         "bin_mode": "Additive",
          "bin_width": 4,
          "bin_height": 4,
          "bin_unit": "pixel",
-         "gain": 2,
+         "gain": "2",
          "crop_width": 200,
          "crop_height": 200,
-         "crop_unit": "pixel"
+         "crop_unit": "pixel",
+         "recording_software": null,
+         "driver": null,
+         "driver_version": null
       }
    ],
    "objectives": [
@@ -355,10 +433,14 @@
             "registry_identifier": "0280y9h11"
          },
          "model": "CFI Plan Apochromat Lambda D 10x",
+         "path_to_cad": null,
+         "port_index": null,
+         "additional_settings": {},
          "notes": null,
-         "numerical_aperture": 0.45,
-         "magnification": 10,
-         "immersion": "air"
+         "numerical_aperture": "0.45",
+         "magnification": "10",
+         "immersion": "air",
+         "objective_type": null
       }
    ],
    "filters": [
@@ -373,9 +455,12 @@
             "registry_identifier": null
          },
          "model": "FF01-520/35-25",
+         "path_to_cad": null,
+         "port_index": null,
+         "additional_settings": {},
          "notes": null,
          "filter_type": "Band pass",
-         "diameter": 25,
+         "diameter": "25",
          "width": null,
          "height": null,
          "size_unit": "millimeter",
@@ -399,9 +484,12 @@
             "registry_identifier": null
          },
          "model": "FF01-600/37-25",
+         "path_to_cad": null,
+         "port_index": null,
+         "additional_settings": {},
          "notes": null,
          "filter_type": "Band pass",
-         "diameter": 25,
+         "diameter": "25",
          "width": null,
          "height": null,
          "size_unit": "millimeter",
@@ -425,11 +513,14 @@
             "registry_identifier": null
          },
          "model": "FF562-Di03-25x36",
+         "path_to_cad": null,
+         "port_index": null,
+         "additional_settings": {},
          "notes": null,
          "filter_type": "Dichroic",
          "diameter": null,
-         "width": 36,
-         "height": 25,
+         "width": "36",
+         "height": "25",
          "size_unit": "millimeter",
          "thickness": null,
          "thickness_unit": "millimeter",
@@ -451,11 +542,14 @@
             "registry_identifier": null
          },
          "model": "FF493/574-Di01-25x36",
+         "path_to_cad": null,
+         "port_index": null,
+         "additional_settings": {},
          "notes": "493/574 nm BrightLine dual-edge standard epi-fluorescence dichroic beamsplitter",
          "filter_type": "Multiband",
          "diameter": null,
-         "width": 36,
-         "height": 24,
+         "width": "36",
+         "height": "24",
          "size_unit": "millimeter",
          "thickness": null,
          "thickness_unit": "millimeter",
@@ -480,9 +574,12 @@
             "registry_identifier": "04gsnvb07"
          },
          "model": "FB410-10",
+         "path_to_cad": null,
+         "port_index": null,
+         "additional_settings": {},
          "notes": null,
          "filter_type": "Band pass",
-         "diameter": 25,
+         "diameter": "25",
          "width": null,
          "height": null,
          "size_unit": "millimeter",
@@ -509,9 +606,12 @@
             "registry_identifier": "04gsnvb07"
          },
          "model": "FB470-10",
+         "path_to_cad": null,
+         "port_index": null,
+         "additional_settings": {},
          "notes": null,
          "filter_type": "Band pass",
-         "diameter": 25,
+         "diameter": "25",
          "width": null,
          "height": null,
          "size_unit": "millimeter",
@@ -538,9 +638,12 @@
             "registry_identifier": "04gsnvb07"
          },
          "model": "FB560-10",
+         "path_to_cad": null,
+         "port_index": null,
+         "additional_settings": {},
          "notes": null,
          "filter_type": "Band pass",
-         "diameter": 25,
+         "diameter": "25",
          "width": null,
          "height": null,
          "size_unit": "millimeter",
@@ -567,11 +670,14 @@
             "registry_identifier": "01j1gwp17"
          },
          "model": "#69-898",
+         "path_to_cad": null,
+         "port_index": null,
+         "additional_settings": {},
          "notes": null,
          "filter_type": "Dichroic",
          "diameter": null,
-         "width": 35.6,
-         "height": 25.2,
+         "width": "35.6",
+         "height": "25.2",
          "size_unit": "millimeter",
          "thickness": null,
          "thickness_unit": "millimeter",
@@ -596,11 +702,14 @@
             "registry_identifier": "01j1gwp17"
          },
          "model": "#69-899",
+         "path_to_cad": null,
+         "port_index": null,
+         "additional_settings": {},
          "notes": null,
          "filter_type": "Dichroic",
          "diameter": null,
-         "width": 35.6,
-         "height": 23.2,
+         "width": "35.6",
+         "height": "23.2",
          "size_unit": "millimeter",
          "thickness": null,
          "thickness_unit": "millimeter",
@@ -627,8 +736,11 @@
             "registry_identifier": "04gsnvb07"
          },
          "model": "AC254-080-A-ML",
+         "path_to_cad": null,
+         "port_index": null,
+         "additional_settings": {},
          "notes": null,
-         "focal_length": 80,
+         "focal_length": "80",
          "focal_length_unit": "millimeter",
          "size": 1,
          "lens_size_unit": "inch",
@@ -637,7 +749,106 @@
          "max_aperture": null
       }
    ],
-   "additional_devices": null,
+   "digital_micromirror_devices": [],
+   "polygonal_scanners": [],
+   "pockels_cells": [],
+   "additional_devices": [
+      {
+         "device_type": "Photometry Clock",
+         "name": "Photometry Clock",
+         "serial_number": null,
+         "manufacturer": null,
+         "model": null,
+         "path_to_cad": null,
+         "port_index": null,
+         "additional_settings": {},
+         "notes": null
+      }
+   ],
+   "daqs": [
+      {
+         "device_type": "Harp device",
+         "name": "Harp Behavior",
+         "serial_number": null,
+         "manufacturer": {
+            "name": "Open Ephys Production Site",
+            "abbreviation": "OEPS",
+            "registry": {
+               "name": "Research Organization Registry",
+               "abbreviation": "ROR"
+            },
+            "registry_identifier": "007rkz355"
+         },
+         "model": null,
+         "path_to_cad": null,
+         "port_index": null,
+         "additional_settings": {},
+         "notes": null,
+         "data_interface": "USB",
+         "computer_name": "behavior_computer",
+         "channels": [
+            {
+               "channel_name": "DO0",
+               "device_name": "Solenoid Left",
+               "channel_type": "Digital Output",
+               "port": null,
+               "channel_index": null,
+               "sample_rate": null,
+               "sample_rate_unit": "hertz",
+               "event_based_sampling": null
+            },
+            {
+               "channel_name": "DO1",
+               "device_name": "Solenoid Right",
+               "channel_type": "Digital Output",
+               "port": null,
+               "channel_index": null,
+               "sample_rate": null,
+               "sample_rate_unit": "hertz",
+               "event_based_sampling": null
+            },
+            {
+               "channel_name": "DI0",
+               "device_name": "Lick-o-meter Left",
+               "channel_type": "Digital Input",
+               "port": null,
+               "channel_index": null,
+               "sample_rate": null,
+               "sample_rate_unit": "hertz",
+               "event_based_sampling": null
+            },
+            {
+               "channel_name": "DI1",
+               "device_name": "Lick-o-meter Right",
+               "channel_type": "Digital Input",
+               "port": null,
+               "channel_index": null,
+               "sample_rate": null,
+               "sample_rate_unit": "hertz",
+               "event_based_sampling": null
+            },
+            {
+               "channel_name": "DI3",
+               "device_name": "Photometry Clock",
+               "channel_type": "Digital Input",
+               "port": null,
+               "channel_index": null,
+               "sample_rate": null,
+               "sample_rate_unit": "hertz",
+               "event_based_sampling": null
+            }
+         ],
+         "firmware_version": null,
+         "hardware_version": null,
+         "harp_device_type": {
+            "name": "Behavior",
+            "whoami": 1216
+         },
+         "core_version": "2.1",
+         "tag_version": null,
+         "is_clock_generator": false
+      }
+   ],
    "calibrations": [
       {
          "calibration_date": "2023-10-02T03:15:22",
@@ -661,5 +872,11 @@
       }
    ],
    "ccf_coordinate_transform": null,
+   "modalities": [
+      {
+         "name": "Fiber photometry",
+         "abbreviation": "fib"
+      }
+   ],
    "notes": null
 }

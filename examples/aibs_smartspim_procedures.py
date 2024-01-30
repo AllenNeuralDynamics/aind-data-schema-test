@@ -1,8 +1,8 @@
 """ example for specimen procedures """
 
-import datetime
+from datetime import date
 
-from aind_data_schema import procedures
+from aind_data_schema.core import procedures
 
 experimenter = "John Smith"
 # subject and specimen id can be the same?
@@ -31,23 +31,27 @@ agarose = procedures.Reagent(name="Agarose", lot_number="1234", source="Other ve
 
 # Procedures
 
-perfusion = procedures.Perfusion(
-    output_specimen_ids=[
-        specimen_id,
-    ],
+perfusion = procedures.Surgery(
+    start_date=date(2022, 11, 17),
     experimenter_full_name="LAS",
-    start_date=datetime.date(2022, 11, 17),
-    end_date=datetime.date(2022, 11, 17),
-    protocol_id="unknown",
+    iacuc_protocol="xxxx",
+    procedures=[
+        procedures.Perfusion(
+            protocol_id="doi_of_protocol",
+            output_specimen_ids=[
+                specimen_id,
+            ],
+        )
+    ],
 )
 
 # perfused brain goes into SHIELD OFF solution
 shield_off_procedure = procedures.SpecimenProcedure(
     specimen_id=specimen_id,
-    procedure_name="test_name",
+    procedure_name="SHIELD OFF",
     procedure_type="Fixation",
-    start_date=datetime.date(2023, 1, 13),
-    end_date=datetime.date(2023, 1, 17),
+    start_date=date(2023, 1, 13),
+    end_date=date(2023, 1, 17),
     experimenter_full_name=experimenter,
     protocol_id="unknown",
     reagents=[shield_buffer, shield_epoxy],
@@ -56,10 +60,10 @@ shield_off_procedure = procedures.SpecimenProcedure(
 # specimen gets transferred to SHIELD ON and baked
 shield_on_procedure = procedures.SpecimenProcedure(
     specimen_id=specimen_id,
-    procedure_name="test_name",
+    procedure_name="SHIELD ON",
     procedure_type="Fixation",
-    start_date=datetime.date(2023, 1, 17),
-    end_date=datetime.date(2023, 1, 18),
+    start_date=date(2023, 1, 17),
+    end_date=date(2023, 1, 18),
     experimenter_full_name=experimenter,
     protocol_id="unknown",
     reagents=[
@@ -71,10 +75,9 @@ shield_on_procedure = procedures.SpecimenProcedure(
 # specimen gets transferred to delipidation buffer
 delipidation_prep_procedure = procedures.SpecimenProcedure(
     specimen_id=specimen_id,
-    procedure_name="test_name",
     procedure_type="Soak",
-    start_date=datetime.date(2023, 1, 18),
-    end_date=datetime.date(2023, 1, 19),
+    start_date=date(2023, 1, 18),
+    end_date=date(2023, 1, 19),
     experimenter_full_name=experimenter,
     protocol_id="unknown",
     reagents=[
@@ -85,10 +88,10 @@ delipidation_prep_procedure = procedures.SpecimenProcedure(
 # specimen goes into active delipidation box
 active_delipidation_procedure = procedures.SpecimenProcedure(
     specimen_id=specimen_id,
-    procedure_name="Active Delipidation",
     procedure_type="Delipidation",
-    start_date=datetime.date(2023, 1, 19),
-    end_date=datetime.date(2023, 1, 20),
+    procedure_name="Active Delipidation",
+    start_date=date(2023, 1, 19),
+    end_date=date(2023, 1, 20),
     experimenter_full_name=experimenter,
     protocol_id="unknown",
     reagents=[delipidation_buffer, conductivity_buffer],
@@ -97,10 +100,10 @@ active_delipidation_procedure = procedures.SpecimenProcedure(
 # First index matching is to 50% EasyIndex
 index1 = procedures.SpecimenProcedure(
     specimen_id=specimen_id,
-    procedure_name="test_name",
     procedure_type="Soak",
-    start_date=datetime.date(2023, 1, 30),
-    end_date=datetime.date(2023, 1, 31),
+    procedure_name="EasyIndex 50%",
+    start_date=date(2023, 1, 30),
+    end_date=date(2023, 1, 31),
     experimenter_full_name=experimenter,
     protocol_id="unknown",
     reagents=[
@@ -112,10 +115,10 @@ index1 = procedures.SpecimenProcedure(
 # Now to 100% EasyIndex
 index2 = procedures.SpecimenProcedure(
     specimen_id=specimen_id,
-    procedure_name="test_name",
     procedure_type="Soak",
-    start_date=datetime.date(2023, 1, 31),
-    end_date=datetime.date(2023, 2, 2),
+    procedure_name="EasyIndex 100%",
+    start_date=date(2023, 1, 31),
+    end_date=date(2023, 2, 2),
     experimenter_full_name=experimenter,
     protocol_id="unknown",
     reagents=[
@@ -126,10 +129,9 @@ index2 = procedures.SpecimenProcedure(
 # Specimen embedded into 2% agarose, prepared with EasyIndex
 embedding = procedures.SpecimenProcedure(
     specimen_id=specimen_id,
-    procedure_name="test_name",
     procedure_type="Embedding",
-    start_date=datetime.date(2023, 1, 31),
-    end_date=datetime.date(2023, 2, 2),
+    start_date=date(2023, 1, 31),
+    end_date=date(2023, 2, 2),
     experimenter_full_name=experimenter,
     protocol_id="unknown",
     reagents=[
@@ -140,6 +142,9 @@ embedding = procedures.SpecimenProcedure(
 
 all_procedures = procedures.Procedures(
     subject_id=specimen_id,
+    subject_procedures=[
+        perfusion,
+    ],
     specimen_procedures=[
         shield_off_procedure,
         shield_on_procedure,

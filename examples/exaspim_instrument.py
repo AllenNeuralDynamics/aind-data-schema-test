@@ -1,80 +1,85 @@
 """ example ExaSPIM instrument """
 import datetime
 
-from aind_data_schema.device import DAQChannel, DAQDevice, Detector, Filter, Laser
-from aind_data_schema.imaging import instrument
-from aind_data_schema.manufacturers import Manufacturer
+from aind_data_schema.core import instrument
+from aind_data_schema.models.devices import DAQChannel, DAQDevice, Detector, Filter, Laser
+from aind_data_schema.models.organizations import Organization
 
 inst = instrument.Instrument(
     instrument_id="exaSPIM1-1",
     instrument_type="exaSPIM",
     modification_date=datetime.date(2023, 10, 4),
-    manufacturer=Manufacturer.CUSTOM,
+    manufacturer=Organization.CUSTOM,
     objectives=[
         instrument.Objective(
+            name="Custom Objective",
             numerical_aperture=0.305,
             magnification=5,
             immersion="air",
-            manufacturer=Manufacturer.OTHER,
+            manufacturer=Organization.OTHER,
             model="JM_DIAMOND 5.0X/1.3",
-            serial_number="Unknown",
             notes="manufacturer collaboration between Schneider-Kreuznach and Vieworks",
         ),
     ],
     detectors=[
         Detector(
+            name="Camera 1",
             detector_type="Camera",
             data_interface="Coax",
-            cooling="air",
-            manufacturer=Manufacturer.VIEWORKS,
+            cooling="Air",
+            manufacturer=Organization.VIEWORKS,
             model="VNP-604MX",
             serial_number="MB151BAY001",
         ),
     ],
     light_sources=[
         Laser(
+            name="LAS-08307",
             coupling="Single-mode fiber",
             wavelength=405,
             maximum_power=200,
             serial_number="LAS-08307",
-            manufacturer=Manufacturer.OXXIUS,
+            manufacturer=Organization.OXXIUS,
             notes="Housed in commercial laser combiner",
         ),
         Laser(
+            name="LAS-08308",
             coupling="Single-mode fiber",
             wavelength=488,
             maximum_power=200,
             serial_number="LAS-08308",
-            manufacturer=Manufacturer.OXXIUS,
+            manufacturer=Organization.OXXIUS,
             notes="Housed in commercial laser combiner",
         ),
         Laser(
+            name="539251",
             coupling="Single-mode fiber",
             wavelength=561,
             maximum_power=200,
             serial_number="539251",
-            manufacturer=Manufacturer.OXXIUS,
+            manufacturer=Organization.OXXIUS,
             notes="Housed in commercial laser combiner",
         ),
         Laser(
+            name="LAS-08309",
             coupling="Single-mode fiber",
             wavelength=638,
             maximum_power=200,
             serial_number="LAS-08309",
-            manufacturer=Manufacturer.OXXIUS,
+            manufacturer=Organization.OXXIUS,
             notes="Housed in commercial laser combiner",
         ),
     ],
     fluorescence_filters=[
         Filter(
+            name="Multiband filter",
             filter_type="Multiband",
-            manufacturer=Manufacturer.CHROMA,
+            manufacturer=Organization.CHROMA,
             diameter=44.05,
             thickness=1,
             model="ZET405/488/561/640mv2",
             notes="Custom made filter",
             filter_wheel_index=0,
-            serial_number="Unknown-0",
         )
     ],
     daqs=[
@@ -82,9 +87,8 @@ inst = instrument.Instrument(
             model="PCIe-6738",
             data_interface="USB",
             computer_name="Dev2",
-            manufacturer=Manufacturer.NATIONAL_INSTRUMENTS,
+            manufacturer=Organization.NATIONAL_INSTRUMENTS,
             name="Dev2",
-            serial_number="Unknown",
             channels=[
                 DAQChannel(
                     channel_name="3",
@@ -127,58 +131,61 @@ inst = instrument.Instrument(
     ],
     scanning_stages=[
         instrument.ScanningStage(
+            name="stage-x",
             stage_axis_direction="Detection axis",
             stage_axis_name="X",
             travel=1000,
             model="MS-8000",
-            manufacturer=Manufacturer.ASI,
-            serial_number="Unknown",
+            manufacturer=Organization.ASI,
         ),
         instrument.ScanningStage(
+            name="stage-y",
             stage_axis_direction="Perpendicular axis",
             stage_axis_name="Y",
             travel=1000,
             model="MS-8000",
-            manufacturer=Manufacturer.ASI,
-            serial_number="Unknown",
+            manufacturer=Organization.ASI,
         ),
         instrument.ScanningStage(
+            name="stage-z",
             stage_axis_direction="Illumination axis",
             stage_axis_name="Z",
             travel=100,
             model="LS-100",
-            manufacturer=Manufacturer.ASI,
-            serial_number="Unknown",
+            manufacturer=Organization.ASI,
         ),
     ],
     additional_devices=[
         instrument.AdditionalImagingDevice(
             type="Tunable lens",
-            manufacturer=Manufacturer.OPTOTUNE,
+            name="TL-1",
+            manufacturer=Organization.OPTOTUNE,
             model="EL-16-40-TC-VIS-20D-C",
             serial_number="01",
         ),
         instrument.AdditionalImagingDevice(
+            name="RM-1",
             type="Rotation mount",
-            manufacturer=Manufacturer.THORLABS,
+            manufacturer=Organization.THORLABS,
             model="K10CR1",
             serial_number="01",
         ),
         instrument.AdditionalImagingDevice(
+            name="LC-1",
             type="Laser combiner",
-            manufacturer=Manufacturer.OXXIUS,
+            manufacturer=Organization.OXXIUS,
             model="L6Cc",
             serial_number="L6CC-00513",
         ),
     ],
     optical_tables=[
         instrument.OpticalTable(
+            name="Table",
             length=36,
             width=48,
             vibration_control=True,
             model="VIS3648-PG2-325A",
-            manufacturer=Manufacturer.MKS_NEWPORT,
-            serial_number="Unknown",
+            manufacturer=Organization.MKS_NEWPORT,
         )
     ],
     com_ports=[
