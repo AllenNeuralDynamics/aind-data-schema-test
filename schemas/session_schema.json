@@ -3214,7 +3214,7 @@
       }
    },
    "additionalProperties": false,
-   "description": "Description of a physiology and/or behavior session",
+   "description": "Description of a physiology and/or behavior session [test version bump]",
    "properties": {
       "describedBy": {
          "const": "https://raw.githubusercontent.com/AllenNeuralDynamics/aind-data-schema/main/src/aind_data_schema/core/session.py",
