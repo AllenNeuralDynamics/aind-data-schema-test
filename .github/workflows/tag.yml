@@ -47,7 +47,8 @@ jobs:
         with:
           python-version: 3.8
       - name: Create schemas
-        run: | 
+        run: |
+          rm -rf $OUTPUT_DIR
           python -m pip install -e .
           python -m aind_data_schema.utils.json_writer --output $OUTPUT_DIR
       - name: Commit changes
