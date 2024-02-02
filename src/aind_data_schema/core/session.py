@@ -335,7 +335,7 @@ class Stream(AindModel):
 
 
 class Session(AindCoreModel):
-    """Description of a physiology and/or behavior session"""
+    """Description of a physiology and/or behavior session [test version bump]"""
 
     _DESCRIBED_BY_URL = AindCoreModel._DESCRIBED_BY_BASE_URL.default + "aind_data_schema/core/session.py"
     describedBy: str = Field(_DESCRIBED_BY_URL, json_schema_extra={"const": _DESCRIBED_BY_URL})
