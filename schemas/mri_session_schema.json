@@ -207,6 +207,47 @@
          "title": "Allied",
          "type": "object"
       },
+      "AmsOsram": {
+         "additionalProperties": false,
+         "description": "ams OSRAM",
+         "properties": {
+            "name": {
+               "const": "ams OSRAM",
+               "default": "ams OSRAM",
+               "title": "Name"
+            },
+            "abbreviation": {
+               "const": null,
+               "default": null,
+               "title": "Abbreviation"
+            },
+            "registry": {
+               "default": {
+                  "name": "Research Organization Registry",
+                  "abbreviation": "ROR"
+               },
+               "discriminator": {
+                  "mapping": {
+                     "Research Organization Registry": "#/$defs/ResearchOrganizationRegistry"
+                  },
+                  "propertyName": "name"
+               },
+               "oneOf": [
+                  {
+                     "$ref": "#/$defs/ResearchOrganizationRegistry"
+                  }
+               ],
+               "title": "Registry"
+            },
+            "registry_identifier": {
+               "const": "045d0h266",
+               "default": "045d0h266",
+               "title": "Registry Identifier"
+            }
+         },
+         "title": "AmsOsram",
+         "type": "object"
+      },
       "Anaesthetic": {
          "additionalProperties": false,
          "description": "Description of an anaesthetic",
@@ -752,6 +793,34 @@
          ],
          "title": "Direction",
          "type": "string"
+      },
+      "Dodotronic": {
+         "additionalProperties": false,
+         "description": "Dodotronic",
+         "properties": {
+            "name": {
+               "const": "Dodotronic",
+               "default": "Dodotronic",
+               "title": "Name"
+            },
+            "abbreviation": {
+               "const": null,
+               "default": null,
+               "title": "Abbreviation"
+            },
+            "registry": {
+               "const": null,
+               "default": null,
+               "title": "Registry"
+            },
+            "registry_identifier": {
+               "const": null,
+               "default": null,
+               "title": "Registry Identifier"
+            }
+         },
+         "title": "Dodotronic",
+         "type": "object"
       },
       "Doric": {
          "additionalProperties": false,
@@ -2174,6 +2243,7 @@
                            "Computar": "#/$defs/Computar",
                            "Conoptics": "#/$defs/Conoptics",
                            "Custom": "#/$defs/Custom",
+                           "Dodotronic": "#/$defs/Dodotronic",
                            "Doric": "#/$defs/Doric",
                            "Ealing": "#/$defs/Ealing",
                            "Edmund Optics": "#/$defs/EdmundOptics",
@@ -2221,7 +2291,8 @@
                            "Thorlabs": "#/$defs/Thorlabs",
                            "Tymphany": "#/$defs/Tymphany",
                            "Vieworks": "#/$defs/Vieworks",
-                           "Vortran": "#/$defs/Vortran"
+                           "Vortran": "#/$defs/Vortran",
+                           "ams OSRAM": "#/$defs/AmsOsram"
                         },
                         "propertyName": "name"
                      },
@@ -2243,6 +2314,9 @@
                         },
                         {
                            "$ref": "#/$defs/Allied"
+                        },
+                        {
+                           "$ref": "#/$defs/AmsOsram"
                         },
                         {
                            "$ref": "#/$defs/AppliedScientificInstrumentation"
@@ -2279,6 +2353,9 @@
                         },
                         {
                            "$ref": "#/$defs/Custom"
+                        },
+                        {
+                           "$ref": "#/$defs/Dodotronic"
                         },
                         {
                            "$ref": "#/$defs/Doric"
@@ -3005,8 +3082,8 @@
          "type": "string"
       },
       "schema_version": {
-         "const": "0.2.6",
-         "default": "0.2.6",
+         "const": "0.2.7",
+         "default": "0.2.7",
          "title": "Schema Version"
       },
       "subject_id": {

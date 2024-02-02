@@ -77,6 +77,41 @@
          "title": "BaseName",
          "type": "object"
       },
+      "BreedingInfo": {
+         "additionalProperties": false,
+         "description": "Description of breeding info for subject",
+         "properties": {
+            "breeding_group": {
+               "title": "Breeding Group",
+               "type": "string"
+            },
+            "maternal_id": {
+               "title": "Maternal specimen ID",
+               "type": "string"
+            },
+            "maternal_genotype": {
+               "title": "Maternal genotype",
+               "type": "string"
+            },
+            "paternal_id": {
+               "title": "Paternal specimen ID",
+               "type": "string"
+            },
+            "paternal_genotype": {
+               "title": "Paternal genotype",
+               "type": "string"
+            }
+         },
+         "required": [
+            "breeding_group",
+            "maternal_id",
+            "maternal_genotype",
+            "paternal_id",
+            "paternal_genotype"
+         ],
+         "title": "BreedingInfo",
+         "type": "object"
+      },
       "CallithrixJacchus": {
          "additionalProperties": false,
          "description": "Callithrix Jacchus",
@@ -734,9 +769,35 @@
          "type": "string"
       },
       "schema_version": {
-         "const": "0.5.4",
-         "default": "0.5.4",
+         "const": "0.5.5",
+         "default": "0.5.5",
          "title": "Schema Version"
+      },
+      "subject_id": {
+         "description": "Unique identifier for the subject. If this is not a Allen LAS ID, indicate this in the Notes.",
+         "title": "Subject ID",
+         "type": "string"
+      },
+      "sex": {
+         "$ref": "#/$defs/Sex"
+      },
+      "date_of_birth": {
+         "format": "date",
+         "title": "Date of birth",
+         "type": "string"
+      },
+      "genotype": {
+         "anyOf": [
+            {
+               "type": "string"
+            },
+            {
+               "type": "null"
+            }
+         ],
+         "default": null,
+         "description": "Genotype of the animal providing both alleles",
+         "title": "Genotype"
       },
       "species": {
          "discriminator": {
@@ -768,32 +829,6 @@
          ],
          "title": "Species"
       },
-      "subject_id": {
-         "description": "Unique identifier for the subject. If this is not a Allen LAS ID, indicate this in the Notes.",
-         "title": "Subject ID",
-         "type": "string"
-      },
-      "sex": {
-         "$ref": "#/$defs/Sex"
-      },
-      "date_of_birth": {
-         "format": "date",
-         "title": "Date of birth",
-         "type": "string"
-      },
-      "genotype": {
-         "anyOf": [
-            {
-               "type": "string"
-            },
-            {
-               "type": "null"
-            }
-         ],
-         "default": null,
-         "description": "Genotype of the animal providing both alleles",
-         "title": "Genotype"
-      },
       "alleles": {
          "default": [],
          "description": "Allele names and persistent IDs",
@@ -815,47 +850,51 @@
          "default": null,
          "title": "Background strain"
       },
-      "source": {
+      "breeding_info": {
          "anyOf": [
             {
-               "discriminator": {
-                  "mapping": {
-                     "Allen Institute": "#/$defs/AllenInstitute",
-                     "Columbia University": "#/$defs/ColumbiaUniversity",
-                     "Huazhong University of Science and Technology": "#/$defs/HuazhongUniversityOfScienceAndTechnology",
-                     "Jackson Laboratory": "#/$defs/JacksonLaboratory",
-                     "New York University": "#/$defs/NewYorkUniversity",
-                     "Other": "#/$defs/Other"
-                  },
-                  "propertyName": "name"
-               },
-               "oneOf": [
-                  {
-                     "$ref": "#/$defs/AllenInstitute"
-                  },
-                  {
-                     "$ref": "#/$defs/ColumbiaUniversity"
-                  },
-                  {
-                     "$ref": "#/$defs/HuazhongUniversityOfScienceAndTechnology"
-                  },
-                  {
-                     "$ref": "#/$defs/JacksonLaboratory"
-                  },
-                  {
-                     "$ref": "#/$defs/NewYorkUniversity"
-                  },
-                  {
-                     "$ref": "#/$defs/Other"
-                  }
-               ]
+               "$ref": "#/$defs/BreedingInfo"
             },
             {
                "type": "null"
             }
          ],
          "default": null,
-         "description": "If the subject was not bred in house, where was it acquired from.",
+         "title": "Breeding Info"
+      },
+      "source": {
+         "description": "Where the subject was acquired from. If bred in-house, use Allen Institute.",
+         "discriminator": {
+            "mapping": {
+               "Allen Institute": "#/$defs/AllenInstitute",
+               "Columbia University": "#/$defs/ColumbiaUniversity",
+               "Huazhong University of Science and Technology": "#/$defs/HuazhongUniversityOfScienceAndTechnology",
+               "Jackson Laboratory": "#/$defs/JacksonLaboratory",
+               "New York University": "#/$defs/NewYorkUniversity",
+               "Other": "#/$defs/Other"
+            },
+            "propertyName": "name"
+         },
+         "oneOf": [
+            {
+               "$ref": "#/$defs/AllenInstitute"
+            },
+            {
+               "$ref": "#/$defs/ColumbiaUniversity"
+            },
+            {
+               "$ref": "#/$defs/HuazhongUniversityOfScienceAndTechnology"
+            },
+            {
+               "$ref": "#/$defs/JacksonLaboratory"
+            },
+            {
+               "$ref": "#/$defs/NewYorkUniversity"
+            },
+            {
+               "$ref": "#/$defs/Other"
+            }
+         ],
          "title": "Source"
       },
       "rrid": {
@@ -883,66 +922,6 @@
          "default": null,
          "description": "Any restrictions on use or publishing based on subject source",
          "title": "Restrictions"
-      },
-      "breeding_group": {
-         "anyOf": [
-            {
-               "type": "string"
-            },
-            {
-               "type": "null"
-            }
-         ],
-         "default": null,
-         "title": "Breeding Group"
-      },
-      "maternal_id": {
-         "anyOf": [
-            {
-               "type": "string"
-            },
-            {
-               "type": "null"
-            }
-         ],
-         "default": null,
-         "title": "Maternal specimen ID"
-      },
-      "maternal_genotype": {
-         "anyOf": [
-            {
-               "type": "string"
-            },
-            {
-               "type": "null"
-            }
-         ],
-         "default": null,
-         "title": "Maternal genotype"
-      },
-      "paternal_id": {
-         "anyOf": [
-            {
-               "type": "string"
-            },
-            {
-               "type": "null"
-            }
-         ],
-         "default": null,
-         "title": "Paternal specimen ID"
-      },
-      "paternal_genotype": {
-         "anyOf": [
-            {
-               "type": "string"
-            },
-            {
-               "type": "null"
-            }
-         ],
-         "default": null,
-         "title": "Paternal genotype"
       },
       "wellness_reports": {
          "default": [],
@@ -978,10 +957,11 @@
       }
    },
    "required": [
-      "species",
       "subject_id",
       "sex",
-      "date_of_birth"
+      "date_of_birth",
+      "species",
+      "source"
    ],
    "title": "Subject",
    "type": "object"

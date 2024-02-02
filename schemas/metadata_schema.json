@@ -350,6 +350,7 @@
                            "Computar": "#/$defs/Computar",
                            "Conoptics": "#/$defs/Conoptics",
                            "Custom": "#/$defs/Custom",
+                           "Dodotronic": "#/$defs/Dodotronic",
                            "Doric": "#/$defs/Doric",
                            "Ealing": "#/$defs/Ealing",
                            "Edmund Optics": "#/$defs/EdmundOptics",
@@ -397,7 +398,8 @@
                            "Thorlabs": "#/$defs/Thorlabs",
                            "Tymphany": "#/$defs/Tymphany",
                            "Vieworks": "#/$defs/Vieworks",
-                           "Vortran": "#/$defs/Vortran"
+                           "Vortran": "#/$defs/Vortran",
+                           "ams OSRAM": "#/$defs/AmsOsram"
                         },
                         "propertyName": "name"
                      },
@@ -419,6 +421,9 @@
                         },
                         {
                            "$ref": "#/$defs/Allied"
+                        },
+                        {
+                           "$ref": "#/$defs/AmsOsram"
                         },
                         {
                            "$ref": "#/$defs/AppliedScientificInstrumentation"
@@ -455,6 +460,9 @@
                         },
                         {
                            "$ref": "#/$defs/Custom"
+                        },
+                        {
+                           "$ref": "#/$defs/Dodotronic"
                         },
                         {
                            "$ref": "#/$defs/Doric"
@@ -898,6 +906,47 @@
             }
          },
          "title": "Allied",
+         "type": "object"
+      },
+      "AmsOsram": {
+         "additionalProperties": false,
+         "description": "ams OSRAM",
+         "properties": {
+            "name": {
+               "const": "ams OSRAM",
+               "default": "ams OSRAM",
+               "title": "Name"
+            },
+            "abbreviation": {
+               "const": null,
+               "default": null,
+               "title": "Abbreviation"
+            },
+            "registry": {
+               "default": {
+                  "name": "Research Organization Registry",
+                  "abbreviation": "ROR"
+               },
+               "discriminator": {
+                  "mapping": {
+                     "Research Organization Registry": "#/$defs/ResearchOrganizationRegistry"
+                  },
+                  "propertyName": "name"
+               },
+               "oneOf": [
+                  {
+                     "$ref": "#/$defs/ResearchOrganizationRegistry"
+                  }
+               ],
+               "title": "Registry"
+            },
+            "registry_identifier": {
+               "const": "045d0h266",
+               "default": "045d0h266",
+               "title": "Registry Identifier"
+            }
+         },
+         "title": "AmsOsram",
          "type": "object"
       },
       "Anaesthetic": {
@@ -1525,6 +1574,41 @@
          ],
          "title": "BinMode",
          "type": "string"
+      },
+      "BreedingInfo": {
+         "additionalProperties": false,
+         "description": "Description of breeding info for subject",
+         "properties": {
+            "breeding_group": {
+               "title": "Breeding Group",
+               "type": "string"
+            },
+            "maternal_id": {
+               "title": "Maternal specimen ID",
+               "type": "string"
+            },
+            "maternal_genotype": {
+               "title": "Maternal genotype",
+               "type": "string"
+            },
+            "paternal_id": {
+               "title": "Paternal specimen ID",
+               "type": "string"
+            },
+            "paternal_genotype": {
+               "title": "Paternal genotype",
+               "type": "string"
+            }
+         },
+         "required": [
+            "breeding_group",
+            "maternal_id",
+            "maternal_genotype",
+            "paternal_id",
+            "paternal_genotype"
+         ],
+         "title": "BreedingInfo",
+         "type": "object"
       },
       "Calibration": {
          "additionalProperties": false,
@@ -3289,8 +3373,8 @@
                "type": "string"
             },
             "schema_version": {
-               "const": "0.12.4",
-               "default": "0.12.4",
+               "const": "0.13.0",
+               "default": "0.13.0",
                "title": "Schema Version"
             },
             "license": {
@@ -3514,6 +3598,7 @@
                "items": {
                   "discriminator": {
                      "mapping": {
+                        "Behavior": "#/$defs/aind_data_schema__models__modalities__Behavior",
                         "Behavior videos": "#/$defs/BehaviorVideos",
                         "Confocal microscopy": "#/$defs/aind_data_schema__models__modalities__Confocal",
                         "Electromyography": "#/$defs/Electromyography",
@@ -3526,12 +3611,14 @@
                         "Multiplexed error-robust fluorescence in situ hybridization": "#/$defs/aind_data_schema__models__modalities__Merfish",
                         "Planar optical physiology": "#/$defs/POphys",
                         "Scanned line projection imaging": "#/$defs/Slap",
-                        "Selective plane illumination microscopy": "#/$defs/Spim",
-                        "Trained behavior": "#/$defs/TrainedBehavior"
+                        "Selective plane illumination microscopy": "#/$defs/Spim"
                      },
                      "propertyName": "name"
                   },
                   "oneOf": [
+                     {
+                        "$ref": "#/$defs/aind_data_schema__models__modalities__Behavior"
+                     },
                      {
                         "$ref": "#/$defs/BehaviorVideos"
                      },
@@ -3570,9 +3657,6 @@
                      },
                      {
                         "$ref": "#/$defs/Spim"
-                     },
-                     {
-                        "$ref": "#/$defs/TrainedBehavior"
                      }
                   ]
                },
@@ -4262,6 +4346,7 @@
                            "Computar": "#/$defs/Computar",
                            "Conoptics": "#/$defs/Conoptics",
                            "Custom": "#/$defs/Custom",
+                           "Dodotronic": "#/$defs/Dodotronic",
                            "Doric": "#/$defs/Doric",
                            "Ealing": "#/$defs/Ealing",
                            "Edmund Optics": "#/$defs/EdmundOptics",
@@ -4309,7 +4394,8 @@
                            "Thorlabs": "#/$defs/Thorlabs",
                            "Tymphany": "#/$defs/Tymphany",
                            "Vieworks": "#/$defs/Vieworks",
-                           "Vortran": "#/$defs/Vortran"
+                           "Vortran": "#/$defs/Vortran",
+                           "ams OSRAM": "#/$defs/AmsOsram"
                         },
                         "propertyName": "name"
                      },
@@ -4331,6 +4417,9 @@
                         },
                         {
                            "$ref": "#/$defs/Allied"
+                        },
+                        {
+                           "$ref": "#/$defs/AmsOsram"
                         },
                         {
                            "$ref": "#/$defs/AppliedScientificInstrumentation"
@@ -4367,6 +4456,9 @@
                         },
                         {
                            "$ref": "#/$defs/Custom"
+                        },
+                        {
+                           "$ref": "#/$defs/Dodotronic"
                         },
                         {
                            "$ref": "#/$defs/Doric"
@@ -4652,6 +4744,7 @@
                            "Computar": "#/$defs/Computar",
                            "Conoptics": "#/$defs/Conoptics",
                            "Custom": "#/$defs/Custom",
+                           "Dodotronic": "#/$defs/Dodotronic",
                            "Doric": "#/$defs/Doric",
                            "Ealing": "#/$defs/Ealing",
                            "Edmund Optics": "#/$defs/EdmundOptics",
@@ -4699,7 +4792,8 @@
                            "Thorlabs": "#/$defs/Thorlabs",
                            "Tymphany": "#/$defs/Tymphany",
                            "Vieworks": "#/$defs/Vieworks",
-                           "Vortran": "#/$defs/Vortran"
+                           "Vortran": "#/$defs/Vortran",
+                           "ams OSRAM": "#/$defs/AmsOsram"
                         },
                         "propertyName": "name"
                      },
@@ -4721,6 +4815,9 @@
                         },
                         {
                            "$ref": "#/$defs/Allied"
+                        },
+                        {
+                           "$ref": "#/$defs/AmsOsram"
                         },
                         {
                            "$ref": "#/$defs/AppliedScientificInstrumentation"
@@ -4757,6 +4854,9 @@
                         },
                         {
                            "$ref": "#/$defs/Custom"
+                        },
+                        {
+                           "$ref": "#/$defs/Dodotronic"
                         },
                         {
                            "$ref": "#/$defs/Doric"
@@ -5158,6 +5258,7 @@
                            "Computar": "#/$defs/Computar",
                            "Conoptics": "#/$defs/Conoptics",
                            "Custom": "#/$defs/Custom",
+                           "Dodotronic": "#/$defs/Dodotronic",
                            "Doric": "#/$defs/Doric",
                            "Ealing": "#/$defs/Ealing",
                            "Edmund Optics": "#/$defs/EdmundOptics",
@@ -5205,7 +5306,8 @@
                            "Thorlabs": "#/$defs/Thorlabs",
                            "Tymphany": "#/$defs/Tymphany",
                            "Vieworks": "#/$defs/Vieworks",
-                           "Vortran": "#/$defs/Vortran"
+                           "Vortran": "#/$defs/Vortran",
+                           "ams OSRAM": "#/$defs/AmsOsram"
                         },
                         "propertyName": "name"
                      },
@@ -5227,6 +5329,9 @@
                         },
                         {
                            "$ref": "#/$defs/Allied"
+                        },
+                        {
+                           "$ref": "#/$defs/AmsOsram"
                         },
                         {
                            "$ref": "#/$defs/AppliedScientificInstrumentation"
@@ -5263,6 +5368,9 @@
                         },
                         {
                            "$ref": "#/$defs/Custom"
+                        },
+                        {
+                           "$ref": "#/$defs/Dodotronic"
                         },
                         {
                            "$ref": "#/$defs/Doric"
@@ -5586,6 +5694,34 @@
          "title": "Disc",
          "type": "object"
       },
+      "Dodotronic": {
+         "additionalProperties": false,
+         "description": "Dodotronic",
+         "properties": {
+            "name": {
+               "const": "Dodotronic",
+               "default": "Dodotronic",
+               "title": "Name"
+            },
+            "abbreviation": {
+               "const": null,
+               "default": null,
+               "title": "Abbreviation"
+            },
+            "registry": {
+               "const": null,
+               "default": null,
+               "title": "Registry"
+            },
+            "registry_identifier": {
+               "const": null,
+               "default": null,
+               "title": "Registry Identifier"
+            }
+         },
+         "title": "Dodotronic",
+         "type": "object"
+      },
       "DomeModule": {
          "additionalProperties": false,
          "description": "Movable module that is mounted on the ephys dome insertion system",
@@ -5864,6 +6000,7 @@
                            "Computar": "#/$defs/Computar",
                            "Conoptics": "#/$defs/Conoptics",
                            "Custom": "#/$defs/Custom",
+                           "Dodotronic": "#/$defs/Dodotronic",
                            "Doric": "#/$defs/Doric",
                            "Ealing": "#/$defs/Ealing",
                            "Edmund Optics": "#/$defs/EdmundOptics",
@@ -5911,7 +6048,8 @@
                            "Thorlabs": "#/$defs/Thorlabs",
                            "Tymphany": "#/$defs/Tymphany",
                            "Vieworks": "#/$defs/Vieworks",
-                           "Vortran": "#/$defs/Vortran"
+                           "Vortran": "#/$defs/Vortran",
+                           "ams OSRAM": "#/$defs/AmsOsram"
                         },
                         "propertyName": "name"
                      },
@@ -5933,6 +6071,9 @@
                         },
                         {
                            "$ref": "#/$defs/Allied"
+                        },
+                        {
+                           "$ref": "#/$defs/AmsOsram"
                         },
                         {
                            "$ref": "#/$defs/AppliedScientificInstrumentation"
@@ -5969,6 +6110,9 @@
                         },
                         {
                            "$ref": "#/$defs/Custom"
+                        },
+                        {
+                           "$ref": "#/$defs/Dodotronic"
                         },
                         {
                            "$ref": "#/$defs/Doric"
@@ -6435,6 +6579,7 @@
                            "Computar": "#/$defs/Computar",
                            "Conoptics": "#/$defs/Conoptics",
                            "Custom": "#/$defs/Custom",
+                           "Dodotronic": "#/$defs/Dodotronic",
                            "Doric": "#/$defs/Doric",
                            "Ealing": "#/$defs/Ealing",
                            "Edmund Optics": "#/$defs/EdmundOptics",
@@ -6482,7 +6627,8 @@
                            "Thorlabs": "#/$defs/Thorlabs",
                            "Tymphany": "#/$defs/Tymphany",
                            "Vieworks": "#/$defs/Vieworks",
-                           "Vortran": "#/$defs/Vortran"
+                           "Vortran": "#/$defs/Vortran",
+                           "ams OSRAM": "#/$defs/AmsOsram"
                         },
                         "propertyName": "name"
                      },
@@ -6504,6 +6650,9 @@
                         },
                         {
                            "$ref": "#/$defs/Allied"
+                        },
+                        {
+                           "$ref": "#/$defs/AmsOsram"
                         },
                         {
                            "$ref": "#/$defs/AppliedScientificInstrumentation"
@@ -6540,6 +6689,9 @@
                         },
                         {
                            "$ref": "#/$defs/Custom"
+                        },
+                        {
+                           "$ref": "#/$defs/Dodotronic"
                         },
                         {
                            "$ref": "#/$defs/Doric"
@@ -7167,6 +7319,7 @@
                            "Computar": "#/$defs/Computar",
                            "Conoptics": "#/$defs/Conoptics",
                            "Custom": "#/$defs/Custom",
+                           "Dodotronic": "#/$defs/Dodotronic",
                            "Doric": "#/$defs/Doric",
                            "Ealing": "#/$defs/Ealing",
                            "Edmund Optics": "#/$defs/EdmundOptics",
@@ -7214,7 +7367,8 @@
                            "Thorlabs": "#/$defs/Thorlabs",
                            "Tymphany": "#/$defs/Tymphany",
                            "Vieworks": "#/$defs/Vieworks",
-                           "Vortran": "#/$defs/Vortran"
+                           "Vortran": "#/$defs/Vortran",
+                           "ams OSRAM": "#/$defs/AmsOsram"
                         },
                         "propertyName": "name"
                      },
@@ -7236,6 +7390,9 @@
                         },
                         {
                            "$ref": "#/$defs/Allied"
+                        },
+                        {
+                           "$ref": "#/$defs/AmsOsram"
                         },
                         {
                            "$ref": "#/$defs/AppliedScientificInstrumentation"
@@ -7272,6 +7429,9 @@
                         },
                         {
                            "$ref": "#/$defs/Custom"
+                        },
+                        {
+                           "$ref": "#/$defs/Dodotronic"
                         },
                         {
                            "$ref": "#/$defs/Doric"
@@ -8883,6 +9043,7 @@
                            "Computar": "#/$defs/Computar",
                            "Conoptics": "#/$defs/Conoptics",
                            "Custom": "#/$defs/Custom",
+                           "Dodotronic": "#/$defs/Dodotronic",
                            "Doric": "#/$defs/Doric",
                            "Ealing": "#/$defs/Ealing",
                            "Edmund Optics": "#/$defs/EdmundOptics",
@@ -8930,7 +9091,8 @@
                            "Thorlabs": "#/$defs/Thorlabs",
                            "Tymphany": "#/$defs/Tymphany",
                            "Vieworks": "#/$defs/Vieworks",
-                           "Vortran": "#/$defs/Vortran"
+                           "Vortran": "#/$defs/Vortran",
+                           "ams OSRAM": "#/$defs/AmsOsram"
                         },
                         "propertyName": "name"
                      },
@@ -8952,6 +9114,9 @@
                         },
                         {
                            "$ref": "#/$defs/Allied"
+                        },
+                        {
+                           "$ref": "#/$defs/AmsOsram"
                         },
                         {
                            "$ref": "#/$defs/AppliedScientificInstrumentation"
@@ -8988,6 +9153,9 @@
                         },
                         {
                            "$ref": "#/$defs/Custom"
+                        },
+                        {
+                           "$ref": "#/$defs/Dodotronic"
                         },
                         {
                            "$ref": "#/$defs/Doric"
@@ -9742,8 +9910,8 @@
                "type": "string"
             },
             "schema_version": {
-               "const": "0.10.5",
-               "default": "0.10.5",
+               "const": "0.10.6",
+               "default": "0.10.6",
                "title": "Schema Version"
             },
             "instrument_id": {
@@ -9794,6 +9962,7 @@
                      "Computar": "#/$defs/Computar",
                      "Conoptics": "#/$defs/Conoptics",
                      "Custom": "#/$defs/Custom",
+                     "Dodotronic": "#/$defs/Dodotronic",
                      "Doric": "#/$defs/Doric",
                      "Ealing": "#/$defs/Ealing",
                      "Edmund Optics": "#/$defs/EdmundOptics",
@@ -9841,7 +10010,8 @@
                      "Thorlabs": "#/$defs/Thorlabs",
                      "Tymphany": "#/$defs/Tymphany",
                      "Vieworks": "#/$defs/Vieworks",
-                     "Vortran": "#/$defs/Vortran"
+                     "Vortran": "#/$defs/Vortran",
+                     "ams OSRAM": "#/$defs/AmsOsram"
                   },
                   "propertyName": "name"
                },
@@ -9863,6 +10033,9 @@
                   },
                   {
                      "$ref": "#/$defs/Allied"
+                  },
+                  {
+                     "$ref": "#/$defs/AmsOsram"
                   },
                   {
                      "$ref": "#/$defs/AppliedScientificInstrumentation"
@@ -9899,6 +10072,9 @@
                   },
                   {
                      "$ref": "#/$defs/Custom"
+                  },
+                  {
+                     "$ref": "#/$defs/Dodotronic"
                   },
                   {
                      "$ref": "#/$defs/Doric"
@@ -11274,6 +11450,7 @@
                            "Computar": "#/$defs/Computar",
                            "Conoptics": "#/$defs/Conoptics",
                            "Custom": "#/$defs/Custom",
+                           "Dodotronic": "#/$defs/Dodotronic",
                            "Doric": "#/$defs/Doric",
                            "Ealing": "#/$defs/Ealing",
                            "Edmund Optics": "#/$defs/EdmundOptics",
@@ -11321,7 +11498,8 @@
                            "Thorlabs": "#/$defs/Thorlabs",
                            "Tymphany": "#/$defs/Tymphany",
                            "Vieworks": "#/$defs/Vieworks",
-                           "Vortran": "#/$defs/Vortran"
+                           "Vortran": "#/$defs/Vortran",
+                           "ams OSRAM": "#/$defs/AmsOsram"
                         },
                         "propertyName": "name"
                      },
@@ -11343,6 +11521,9 @@
                         },
                         {
                            "$ref": "#/$defs/Allied"
+                        },
+                        {
+                           "$ref": "#/$defs/AmsOsram"
                         },
                         {
                            "$ref": "#/$defs/AppliedScientificInstrumentation"
@@ -11379,6 +11560,9 @@
                         },
                         {
                            "$ref": "#/$defs/Custom"
+                        },
+                        {
+                           "$ref": "#/$defs/Dodotronic"
                         },
                         {
                            "$ref": "#/$defs/Doric"
@@ -12349,11 +12533,15 @@
                      "Doric": "#/$defs/Doric",
                      "Other": "#/$defs/Other",
                      "Prizmatix": "#/$defs/Prizmatix",
-                     "Thorlabs": "#/$defs/Thorlabs"
+                     "Thorlabs": "#/$defs/Thorlabs",
+                     "ams OSRAM": "#/$defs/AmsOsram"
                   },
                   "propertyName": "name"
                },
                "oneOf": [
+                  {
+                     "$ref": "#/$defs/AmsOsram"
+                  },
                   {
                      "$ref": "#/$defs/Doric"
                   },
@@ -13260,6 +13448,7 @@
                            "Computar": "#/$defs/Computar",
                            "Conoptics": "#/$defs/Conoptics",
                            "Custom": "#/$defs/Custom",
+                           "Dodotronic": "#/$defs/Dodotronic",
                            "Doric": "#/$defs/Doric",
                            "Ealing": "#/$defs/Ealing",
                            "Edmund Optics": "#/$defs/EdmundOptics",
@@ -13307,7 +13496,8 @@
                            "Thorlabs": "#/$defs/Thorlabs",
                            "Tymphany": "#/$defs/Tymphany",
                            "Vieworks": "#/$defs/Vieworks",
-                           "Vortran": "#/$defs/Vortran"
+                           "Vortran": "#/$defs/Vortran",
+                           "ams OSRAM": "#/$defs/AmsOsram"
                         },
                         "propertyName": "name"
                      },
@@ -13329,6 +13519,9 @@
                         },
                         {
                            "$ref": "#/$defs/Allied"
+                        },
+                        {
+                           "$ref": "#/$defs/AmsOsram"
                         },
                         {
                            "$ref": "#/$defs/AppliedScientificInstrumentation"
@@ -13365,6 +13558,9 @@
                         },
                         {
                            "$ref": "#/$defs/Custom"
+                        },
+                        {
+                           "$ref": "#/$defs/Dodotronic"
                         },
                         {
                            "$ref": "#/$defs/Doric"
@@ -14511,6 +14707,7 @@
                            "Computar": "#/$defs/Computar",
                            "Conoptics": "#/$defs/Conoptics",
                            "Custom": "#/$defs/Custom",
+                           "Dodotronic": "#/$defs/Dodotronic",
                            "Doric": "#/$defs/Doric",
                            "Ealing": "#/$defs/Ealing",
                            "Edmund Optics": "#/$defs/EdmundOptics",
@@ -14558,7 +14755,8 @@
                            "Thorlabs": "#/$defs/Thorlabs",
                            "Tymphany": "#/$defs/Tymphany",
                            "Vieworks": "#/$defs/Vieworks",
-                           "Vortran": "#/$defs/Vortran"
+                           "Vortran": "#/$defs/Vortran",
+                           "ams OSRAM": "#/$defs/AmsOsram"
                         },
                         "propertyName": "name"
                      },
@@ -14580,6 +14778,9 @@
                         },
                         {
                            "$ref": "#/$defs/Allied"
+                        },
+                        {
+                           "$ref": "#/$defs/AmsOsram"
                         },
                         {
                            "$ref": "#/$defs/AppliedScientificInstrumentation"
@@ -14616,6 +14817,9 @@
                         },
                         {
                            "$ref": "#/$defs/Custom"
+                        },
+                        {
+                           "$ref": "#/$defs/Dodotronic"
                         },
                         {
                            "$ref": "#/$defs/Doric"
@@ -15559,6 +15763,7 @@
                            "Computar": "#/$defs/Computar",
                            "Conoptics": "#/$defs/Conoptics",
                            "Custom": "#/$defs/Custom",
+                           "Dodotronic": "#/$defs/Dodotronic",
                            "Doric": "#/$defs/Doric",
                            "Ealing": "#/$defs/Ealing",
                            "Edmund Optics": "#/$defs/EdmundOptics",
@@ -15606,7 +15811,8 @@
                            "Thorlabs": "#/$defs/Thorlabs",
                            "Tymphany": "#/$defs/Tymphany",
                            "Vieworks": "#/$defs/Vieworks",
-                           "Vortran": "#/$defs/Vortran"
+                           "Vortran": "#/$defs/Vortran",
+                           "ams OSRAM": "#/$defs/AmsOsram"
                         },
                         "propertyName": "name"
                      },
@@ -15628,6 +15834,9 @@
                         },
                         {
                            "$ref": "#/$defs/Allied"
+                        },
+                        {
+                           "$ref": "#/$defs/AmsOsram"
                         },
                         {
                            "$ref": "#/$defs/AppliedScientificInstrumentation"
@@ -15664,6 +15873,9 @@
                         },
                         {
                            "$ref": "#/$defs/Custom"
+                        },
+                        {
+                           "$ref": "#/$defs/Dodotronic"
                         },
                         {
                            "$ref": "#/$defs/Doric"
@@ -16339,6 +16551,7 @@
                            "Computar": "#/$defs/Computar",
                            "Conoptics": "#/$defs/Conoptics",
                            "Custom": "#/$defs/Custom",
+                           "Dodotronic": "#/$defs/Dodotronic",
                            "Doric": "#/$defs/Doric",
                            "Ealing": "#/$defs/Ealing",
                            "Edmund Optics": "#/$defs/EdmundOptics",
@@ -16386,7 +16599,8 @@
                            "Thorlabs": "#/$defs/Thorlabs",
                            "Tymphany": "#/$defs/Tymphany",
                            "Vieworks": "#/$defs/Vieworks",
-                           "Vortran": "#/$defs/Vortran"
+                           "Vortran": "#/$defs/Vortran",
+                           "ams OSRAM": "#/$defs/AmsOsram"
                         },
                         "propertyName": "name"
                      },
@@ -16408,6 +16622,9 @@
                         },
                         {
                            "$ref": "#/$defs/Allied"
+                        },
+                        {
+                           "$ref": "#/$defs/AmsOsram"
                         },
                         {
                            "$ref": "#/$defs/AppliedScientificInstrumentation"
@@ -16444,6 +16661,9 @@
                         },
                         {
                            "$ref": "#/$defs/Custom"
+                        },
+                        {
+                           "$ref": "#/$defs/Dodotronic"
                         },
                         {
                            "$ref": "#/$defs/Doric"
@@ -17029,6 +17249,7 @@
                            "Computar": "#/$defs/Computar",
                            "Conoptics": "#/$defs/Conoptics",
                            "Custom": "#/$defs/Custom",
+                           "Dodotronic": "#/$defs/Dodotronic",
                            "Doric": "#/$defs/Doric",
                            "Ealing": "#/$defs/Ealing",
                            "Edmund Optics": "#/$defs/EdmundOptics",
@@ -17076,7 +17297,8 @@
                            "Thorlabs": "#/$defs/Thorlabs",
                            "Tymphany": "#/$defs/Tymphany",
                            "Vieworks": "#/$defs/Vieworks",
-                           "Vortran": "#/$defs/Vortran"
+                           "Vortran": "#/$defs/Vortran",
+                           "ams OSRAM": "#/$defs/AmsOsram"
                         },
                         "propertyName": "name"
                      },
@@ -17098,6 +17320,9 @@
                         },
                         {
                            "$ref": "#/$defs/Allied"
+                        },
+                        {
+                           "$ref": "#/$defs/AmsOsram"
                         },
                         {
                            "$ref": "#/$defs/AppliedScientificInstrumentation"
@@ -17134,6 +17359,9 @@
                         },
                         {
                            "$ref": "#/$defs/Custom"
+                        },
+                        {
+                           "$ref": "#/$defs/Dodotronic"
                         },
                         {
                            "$ref": "#/$defs/Doric"
@@ -17447,6 +17675,7 @@
                            "Computar": "#/$defs/Computar",
                            "Conoptics": "#/$defs/Conoptics",
                            "Custom": "#/$defs/Custom",
+                           "Dodotronic": "#/$defs/Dodotronic",
                            "Doric": "#/$defs/Doric",
                            "Ealing": "#/$defs/Ealing",
                            "Edmund Optics": "#/$defs/EdmundOptics",
@@ -17494,7 +17723,8 @@
                            "Thorlabs": "#/$defs/Thorlabs",
                            "Tymphany": "#/$defs/Tymphany",
                            "Vieworks": "#/$defs/Vieworks",
-                           "Vortran": "#/$defs/Vortran"
+                           "Vortran": "#/$defs/Vortran",
+                           "ams OSRAM": "#/$defs/AmsOsram"
                         },
                         "propertyName": "name"
                      },
@@ -17516,6 +17746,9 @@
                         },
                         {
                            "$ref": "#/$defs/Allied"
+                        },
+                        {
+                           "$ref": "#/$defs/AmsOsram"
                         },
                         {
                            "$ref": "#/$defs/AppliedScientificInstrumentation"
@@ -17552,6 +17785,9 @@
                         },
                         {
                            "$ref": "#/$defs/Custom"
+                        },
+                        {
+                           "$ref": "#/$defs/Dodotronic"
                         },
                         {
                            "$ref": "#/$defs/Doric"
@@ -17884,8 +18120,8 @@
                "type": "string"
             },
             "schema_version": {
-               "const": "0.11.4",
-               "default": "0.11.4",
+               "const": "0.11.6",
+               "default": "0.11.6",
                "description": "schema version",
                "title": "Version"
             },
@@ -18759,6 +18995,7 @@
                            "Computar": "#/$defs/Computar",
                            "Conoptics": "#/$defs/Conoptics",
                            "Custom": "#/$defs/Custom",
+                           "Dodotronic": "#/$defs/Dodotronic",
                            "Doric": "#/$defs/Doric",
                            "Ealing": "#/$defs/Ealing",
                            "Edmund Optics": "#/$defs/EdmundOptics",
@@ -18806,7 +19043,8 @@
                            "Thorlabs": "#/$defs/Thorlabs",
                            "Tymphany": "#/$defs/Tymphany",
                            "Vieworks": "#/$defs/Vieworks",
-                           "Vortran": "#/$defs/Vortran"
+                           "Vortran": "#/$defs/Vortran",
+                           "ams OSRAM": "#/$defs/AmsOsram"
                         },
                         "propertyName": "name"
                      },
@@ -18828,6 +19066,9 @@
                         },
                         {
                            "$ref": "#/$defs/Allied"
+                        },
+                        {
+                           "$ref": "#/$defs/AmsOsram"
                         },
                         {
                            "$ref": "#/$defs/AppliedScientificInstrumentation"
@@ -18864,6 +19105,9 @@
                         },
                         {
                            "$ref": "#/$defs/Custom"
+                        },
+                        {
+                           "$ref": "#/$defs/Dodotronic"
                         },
                         {
                            "$ref": "#/$defs/Doric"
@@ -19187,8 +19431,8 @@
                "type": "string"
             },
             "schema_version": {
-               "const": "0.2.7",
-               "default": "0.2.7",
+               "const": "0.2.9",
+               "default": "0.2.9",
                "title": "Schema Version"
             },
             "rig_id": {
@@ -19461,6 +19705,7 @@
                "items": {
                   "discriminator": {
                      "mapping": {
+                        "Behavior": "#/$defs/aind_data_schema__models__modalities__Behavior",
                         "Behavior videos": "#/$defs/BehaviorVideos",
                         "Confocal microscopy": "#/$defs/aind_data_schema__models__modalities__Confocal",
                         "Electromyography": "#/$defs/Electromyography",
@@ -19473,12 +19718,14 @@
                         "Multiplexed error-robust fluorescence in situ hybridization": "#/$defs/aind_data_schema__models__modalities__Merfish",
                         "Planar optical physiology": "#/$defs/POphys",
                         "Scanned line projection imaging": "#/$defs/Slap",
-                        "Selective plane illumination microscopy": "#/$defs/Spim",
-                        "Trained behavior": "#/$defs/TrainedBehavior"
+                        "Selective plane illumination microscopy": "#/$defs/Spim"
                      },
                      "propertyName": "name"
                   },
                   "oneOf": [
+                     {
+                        "$ref": "#/$defs/aind_data_schema__models__modalities__Behavior"
+                     },
                      {
                         "$ref": "#/$defs/BehaviorVideos"
                      },
@@ -19517,9 +19764,6 @@
                      },
                      {
                         "$ref": "#/$defs/Spim"
-                     },
-                     {
-                        "$ref": "#/$defs/TrainedBehavior"
                      }
                   ]
                },
@@ -19663,6 +19907,7 @@
                            "Computar": "#/$defs/Computar",
                            "Conoptics": "#/$defs/Conoptics",
                            "Custom": "#/$defs/Custom",
+                           "Dodotronic": "#/$defs/Dodotronic",
                            "Doric": "#/$defs/Doric",
                            "Ealing": "#/$defs/Ealing",
                            "Edmund Optics": "#/$defs/EdmundOptics",
@@ -19710,7 +19955,8 @@
                            "Thorlabs": "#/$defs/Thorlabs",
                            "Tymphany": "#/$defs/Tymphany",
                            "Vieworks": "#/$defs/Vieworks",
-                           "Vortran": "#/$defs/Vortran"
+                           "Vortran": "#/$defs/Vortran",
+                           "ams OSRAM": "#/$defs/AmsOsram"
                         },
                         "propertyName": "name"
                      },
@@ -19732,6 +19978,9 @@
                         },
                         {
                            "$ref": "#/$defs/Allied"
+                        },
+                        {
+                           "$ref": "#/$defs/AmsOsram"
                         },
                         {
                            "$ref": "#/$defs/AppliedScientificInstrumentation"
@@ -19768,6 +20017,9 @@
                         },
                         {
                            "$ref": "#/$defs/Custom"
+                        },
+                        {
+                           "$ref": "#/$defs/Dodotronic"
                         },
                         {
                            "$ref": "#/$defs/Doric"
@@ -20139,8 +20391,8 @@
                "type": "string"
             },
             "schema_version": {
-               "const": "0.1.3",
-               "default": "0.1.3",
+               "const": "0.1.7",
+               "default": "0.1.7",
                "title": "Schema Version"
             },
             "protocol_id": {
@@ -21032,6 +21284,8 @@
             "Hybridication and amplification",
             "Hybridization Chain Reaction",
             "Immunolabeling",
+            "Mounting",
+            "Sectioning",
             "Soak",
             "Storage",
             "Stripping",
@@ -21721,6 +21975,7 @@
                "items": {
                   "discriminator": {
                      "mapping": {
+                        "Behavior": "#/$defs/aind_data_schema__models__modalities__Behavior",
                         "Behavior videos": "#/$defs/BehaviorVideos",
                         "Confocal microscopy": "#/$defs/aind_data_schema__models__modalities__Confocal",
                         "Electromyography": "#/$defs/Electromyography",
@@ -21733,12 +21988,14 @@
                         "Multiplexed error-robust fluorescence in situ hybridization": "#/$defs/aind_data_schema__models__modalities__Merfish",
                         "Planar optical physiology": "#/$defs/POphys",
                         "Scanned line projection imaging": "#/$defs/Slap",
-                        "Selective plane illumination microscopy": "#/$defs/Spim",
-                        "Trained behavior": "#/$defs/TrainedBehavior"
+                        "Selective plane illumination microscopy": "#/$defs/Spim"
                      },
                      "propertyName": "name"
                   },
                   "oneOf": [
+                     {
+                        "$ref": "#/$defs/aind_data_schema__models__modalities__Behavior"
+                     },
                      {
                         "$ref": "#/$defs/BehaviorVideos"
                      },
@@ -21777,9 +22034,6 @@
                      },
                      {
                         "$ref": "#/$defs/Spim"
-                     },
-                     {
-                        "$ref": "#/$defs/TrainedBehavior"
                      }
                   ]
                },
@@ -21820,9 +22074,35 @@
                "type": "string"
             },
             "schema_version": {
-               "const": "0.5.4",
-               "default": "0.5.4",
+               "const": "0.5.5",
+               "default": "0.5.5",
                "title": "Schema Version"
+            },
+            "subject_id": {
+               "description": "Unique identifier for the subject. If this is not a Allen LAS ID, indicate this in the Notes.",
+               "title": "Subject ID",
+               "type": "string"
+            },
+            "sex": {
+               "$ref": "#/$defs/Sex"
+            },
+            "date_of_birth": {
+               "format": "date",
+               "title": "Date of birth",
+               "type": "string"
+            },
+            "genotype": {
+               "anyOf": [
+                  {
+                     "type": "string"
+                  },
+                  {
+                     "type": "null"
+                  }
+               ],
+               "default": null,
+               "description": "Genotype of the animal providing both alleles",
+               "title": "Genotype"
             },
             "species": {
                "discriminator": {
@@ -21854,32 +22134,6 @@
                ],
                "title": "Species"
             },
-            "subject_id": {
-               "description": "Unique identifier for the subject. If this is not a Allen LAS ID, indicate this in the Notes.",
-               "title": "Subject ID",
-               "type": "string"
-            },
-            "sex": {
-               "$ref": "#/$defs/Sex"
-            },
-            "date_of_birth": {
-               "format": "date",
-               "title": "Date of birth",
-               "type": "string"
-            },
-            "genotype": {
-               "anyOf": [
-                  {
-                     "type": "string"
-                  },
-                  {
-                     "type": "null"
-                  }
-               ],
-               "default": null,
-               "description": "Genotype of the animal providing both alleles",
-               "title": "Genotype"
-            },
             "alleles": {
                "default": [],
                "description": "Allele names and persistent IDs",
@@ -21901,47 +22155,51 @@
                "default": null,
                "title": "Background strain"
             },
-            "source": {
+            "breeding_info": {
                "anyOf": [
                   {
-                     "discriminator": {
-                        "mapping": {
-                           "Allen Institute": "#/$defs/AllenInstitute",
-                           "Columbia University": "#/$defs/ColumbiaUniversity",
-                           "Huazhong University of Science and Technology": "#/$defs/HuazhongUniversityOfScienceAndTechnology",
-                           "Jackson Laboratory": "#/$defs/JacksonLaboratory",
-                           "New York University": "#/$defs/NewYorkUniversity",
-                           "Other": "#/$defs/Other"
-                        },
-                        "propertyName": "name"
-                     },
-                     "oneOf": [
-                        {
-                           "$ref": "#/$defs/AllenInstitute"
-                        },
-                        {
-                           "$ref": "#/$defs/ColumbiaUniversity"
-                        },
-                        {
-                           "$ref": "#/$defs/HuazhongUniversityOfScienceAndTechnology"
-                        },
-                        {
-                           "$ref": "#/$defs/JacksonLaboratory"
-                        },
-                        {
-                           "$ref": "#/$defs/NewYorkUniversity"
-                        },
-                        {
-                           "$ref": "#/$defs/Other"
-                        }
-                     ]
+                     "$ref": "#/$defs/BreedingInfo"
                   },
                   {
                      "type": "null"
                   }
                ],
                "default": null,
-               "description": "If the subject was not bred in house, where was it acquired from.",
+               "title": "Breeding Info"
+            },
+            "source": {
+               "description": "Where the subject was acquired from. If bred in-house, use Allen Institute.",
+               "discriminator": {
+                  "mapping": {
+                     "Allen Institute": "#/$defs/AllenInstitute",
+                     "Columbia University": "#/$defs/ColumbiaUniversity",
+                     "Huazhong University of Science and Technology": "#/$defs/HuazhongUniversityOfScienceAndTechnology",
+                     "Jackson Laboratory": "#/$defs/JacksonLaboratory",
+                     "New York University": "#/$defs/NewYorkUniversity",
+                     "Other": "#/$defs/Other"
+                  },
+                  "propertyName": "name"
+               },
+               "oneOf": [
+                  {
+                     "$ref": "#/$defs/AllenInstitute"
+                  },
+                  {
+                     "$ref": "#/$defs/ColumbiaUniversity"
+                  },
+                  {
+                     "$ref": "#/$defs/HuazhongUniversityOfScienceAndTechnology"
+                  },
+                  {
+                     "$ref": "#/$defs/JacksonLaboratory"
+                  },
+                  {
+                     "$ref": "#/$defs/NewYorkUniversity"
+                  },
+                  {
+                     "$ref": "#/$defs/Other"
+                  }
+               ],
                "title": "Source"
             },
             "rrid": {
@@ -21969,66 +22227,6 @@
                "default": null,
                "description": "Any restrictions on use or publishing based on subject source",
                "title": "Restrictions"
-            },
-            "breeding_group": {
-               "anyOf": [
-                  {
-                     "type": "string"
-                  },
-                  {
-                     "type": "null"
-                  }
-               ],
-               "default": null,
-               "title": "Breeding Group"
-            },
-            "maternal_id": {
-               "anyOf": [
-                  {
-                     "type": "string"
-                  },
-                  {
-                     "type": "null"
-                  }
-               ],
-               "default": null,
-               "title": "Maternal specimen ID"
-            },
-            "maternal_genotype": {
-               "anyOf": [
-                  {
-                     "type": "string"
-                  },
-                  {
-                     "type": "null"
-                  }
-               ],
-               "default": null,
-               "title": "Maternal genotype"
-            },
-            "paternal_id": {
-               "anyOf": [
-                  {
-                     "type": "string"
-                  },
-                  {
-                     "type": "null"
-                  }
-               ],
-               "default": null,
-               "title": "Paternal specimen ID"
-            },
-            "paternal_genotype": {
-               "anyOf": [
-                  {
-                     "type": "string"
-                  },
-                  {
-                     "type": "null"
-                  }
-               ],
-               "default": null,
-               "title": "Paternal genotype"
             },
             "wellness_reports": {
                "default": [],
@@ -22064,10 +22262,11 @@
             }
          },
          "required": [
-            "species",
             "subject_id",
             "sex",
-            "date_of_birth"
+            "date_of_birth",
+            "species",
+            "source"
          ],
          "title": "Subject",
          "type": "object"
@@ -22592,24 +22791,6 @@
          "title": "TimestampGeneratorGen3",
          "type": "object"
       },
-      "TrainedBehavior": {
-         "additionalProperties": false,
-         "description": "TrainedBehavior",
-         "properties": {
-            "name": {
-               "const": "Trained behavior",
-               "default": "Trained behavior",
-               "title": "Name"
-            },
-            "abbreviation": {
-               "const": "trained-behavior",
-               "default": "trained-behavior",
-               "title": "Abbreviation"
-            }
-         },
-         "title": "TrainedBehavior",
-         "type": "object"
-      },
       "TrainingProtocol": {
          "additionalProperties": false,
          "description": "Description of an animal training protocol",
@@ -22747,6 +22928,7 @@
                            "Computar": "#/$defs/Computar",
                            "Conoptics": "#/$defs/Conoptics",
                            "Custom": "#/$defs/Custom",
+                           "Dodotronic": "#/$defs/Dodotronic",
                            "Doric": "#/$defs/Doric",
                            "Ealing": "#/$defs/Ealing",
                            "Edmund Optics": "#/$defs/EdmundOptics",
@@ -22794,7 +22976,8 @@
                            "Thorlabs": "#/$defs/Thorlabs",
                            "Tymphany": "#/$defs/Tymphany",
                            "Vieworks": "#/$defs/Vieworks",
-                           "Vortran": "#/$defs/Vortran"
+                           "Vortran": "#/$defs/Vortran",
+                           "ams OSRAM": "#/$defs/AmsOsram"
                         },
                         "propertyName": "name"
                      },
@@ -22816,6 +22999,9 @@
                         },
                         {
                            "$ref": "#/$defs/Allied"
+                        },
+                        {
+                           "$ref": "#/$defs/AmsOsram"
                         },
                         {
                            "$ref": "#/$defs/AppliedScientificInstrumentation"
@@ -22852,6 +23038,9 @@
                         },
                         {
                            "$ref": "#/$defs/Custom"
+                        },
+                        {
+                           "$ref": "#/$defs/Dodotronic"
                         },
                         {
                            "$ref": "#/$defs/Doric"
@@ -23181,6 +23370,7 @@
                            "Computar": "#/$defs/Computar",
                            "Conoptics": "#/$defs/Conoptics",
                            "Custom": "#/$defs/Custom",
+                           "Dodotronic": "#/$defs/Dodotronic",
                            "Doric": "#/$defs/Doric",
                            "Ealing": "#/$defs/Ealing",
                            "Edmund Optics": "#/$defs/EdmundOptics",
@@ -23228,7 +23418,8 @@
                            "Thorlabs": "#/$defs/Thorlabs",
                            "Tymphany": "#/$defs/Tymphany",
                            "Vieworks": "#/$defs/Vieworks",
-                           "Vortran": "#/$defs/Vortran"
+                           "Vortran": "#/$defs/Vortran",
+                           "ams OSRAM": "#/$defs/AmsOsram"
                         },
                         "propertyName": "name"
                      },
@@ -23250,6 +23441,9 @@
                         },
                         {
                            "$ref": "#/$defs/Allied"
+                        },
+                        {
+                           "$ref": "#/$defs/AmsOsram"
                         },
                         {
                            "$ref": "#/$defs/AppliedScientificInstrumentation"
@@ -23286,6 +23480,9 @@
                         },
                         {
                            "$ref": "#/$defs/Custom"
+                        },
+                        {
+                           "$ref": "#/$defs/Dodotronic"
                         },
                         {
                            "$ref": "#/$defs/Doric"
@@ -23936,6 +24133,7 @@
                            "Computar": "#/$defs/Computar",
                            "Conoptics": "#/$defs/Conoptics",
                            "Custom": "#/$defs/Custom",
+                           "Dodotronic": "#/$defs/Dodotronic",
                            "Doric": "#/$defs/Doric",
                            "Ealing": "#/$defs/Ealing",
                            "Edmund Optics": "#/$defs/EdmundOptics",
@@ -23983,7 +24181,8 @@
                            "Thorlabs": "#/$defs/Thorlabs",
                            "Tymphany": "#/$defs/Tymphany",
                            "Vieworks": "#/$defs/Vieworks",
-                           "Vortran": "#/$defs/Vortran"
+                           "Vortran": "#/$defs/Vortran",
+                           "ams OSRAM": "#/$defs/AmsOsram"
                         },
                         "propertyName": "name"
                      },
@@ -24005,6 +24204,9 @@
                         },
                         {
                            "$ref": "#/$defs/Allied"
+                        },
+                        {
+                           "$ref": "#/$defs/AmsOsram"
                         },
                         {
                            "$ref": "#/$defs/AppliedScientificInstrumentation"
@@ -24041,6 +24243,9 @@
                         },
                         {
                            "$ref": "#/$defs/Custom"
+                        },
+                        {
+                           "$ref": "#/$defs/Dodotronic"
                         },
                         {
                            "$ref": "#/$defs/Doric"
@@ -24652,6 +24857,24 @@
          "title": "Olfactometer",
          "type": "object"
       },
+      "aind_data_schema__models__modalities__Behavior": {
+         "additionalProperties": false,
+         "description": "Behavior",
+         "properties": {
+            "name": {
+               "const": "Behavior",
+               "default": "Behavior",
+               "title": "Name"
+            },
+            "abbreviation": {
+               "const": "behavior",
+               "default": "behavior",
+               "title": "Abbreviation"
+            }
+         },
+         "title": "Behavior",
+         "type": "object"
+      },
       "aind_data_schema__models__modalities__Confocal": {
          "additionalProperties": false,
          "description": "Confocal",
@@ -24889,8 +25112,8 @@
          "type": "string"
       },
       "schema_version": {
-         "const": "0.1.18",
-         "default": "0.1.18",
+         "const": "0.1.25",
+         "default": "0.1.25",
          "title": "Schema Version"
       },
       "_id": {

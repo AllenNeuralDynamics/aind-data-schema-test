@@ -123,24 +123,6 @@
          "title": "AllenInstituteForNeuralDynamics",
          "type": "object"
       },
-      "Behavior": {
-         "additionalProperties": false,
-         "description": "Behavior",
-         "properties": {
-            "name": {
-               "const": "Behavior platform",
-               "default": "Behavior platform",
-               "title": "Name"
-            },
-            "abbreviation": {
-               "const": "behavior",
-               "default": "behavior",
-               "title": "Abbreviation"
-            }
-         },
-         "title": "Behavior",
-         "type": "object"
-      },
       "BehaviorVideos": {
          "additionalProperties": false,
          "description": "BehaviorVideos",
@@ -797,22 +779,22 @@
          "title": "Spim",
          "type": "object"
       },
-      "TrainedBehavior": {
+      "aind_data_schema__models__modalities__Behavior": {
          "additionalProperties": false,
-         "description": "TrainedBehavior",
+         "description": "Behavior",
          "properties": {
             "name": {
-               "const": "Trained behavior",
-               "default": "Trained behavior",
+               "const": "Behavior",
+               "default": "Behavior",
                "title": "Name"
             },
             "abbreviation": {
-               "const": "trained-behavior",
-               "default": "trained-behavior",
+               "const": "behavior",
+               "default": "behavior",
                "title": "Abbreviation"
             }
          },
-         "title": "TrainedBehavior",
+         "title": "Behavior",
          "type": "object"
       },
       "aind_data_schema__models__modalities__Confocal": {
@@ -903,6 +885,24 @@
             }
          },
          "title": "Mri",
+         "type": "object"
+      },
+      "aind_data_schema__models__platforms__Behavior": {
+         "additionalProperties": false,
+         "description": "Behavior",
+         "properties": {
+            "name": {
+               "const": "Behavior platform",
+               "default": "Behavior platform",
+               "title": "Name"
+            },
+            "abbreviation": {
+               "const": "behavior",
+               "default": "behavior",
+               "title": "Abbreviation"
+            }
+         },
+         "title": "Behavior",
          "type": "object"
       },
       "aind_data_schema__models__platforms__Confocal": {
@@ -1006,8 +1006,8 @@
          "type": "string"
       },
       "schema_version": {
-         "const": "0.12.4",
-         "default": "0.12.4",
+         "const": "0.13.0",
+         "default": "0.13.0",
          "title": "Schema Version"
       },
       "license": {
@@ -1019,7 +1019,7 @@
          "description": "Name for a standardized primary data collection system",
          "discriminator": {
             "mapping": {
-               "Behavior platform": "#/$defs/Behavior",
+               "Behavior platform": "#/$defs/aind_data_schema__models__platforms__Behavior",
                "Confocal microscopy platform": "#/$defs/aind_data_schema__models__platforms__Confocal",
                "Electrophysiology platform": "#/$defs/aind_data_schema__models__platforms__Ecephys",
                "ExaSPIM platform": "#/$defs/ExaSpim",
@@ -1039,7 +1039,7 @@
          },
          "oneOf": [
             {
-               "$ref": "#/$defs/Behavior"
+               "$ref": "#/$defs/aind_data_schema__models__platforms__Behavior"
             },
             {
                "$ref": "#/$defs/aind_data_schema__models__platforms__Confocal"
@@ -1231,6 +1231,7 @@
          "items": {
             "discriminator": {
                "mapping": {
+                  "Behavior": "#/$defs/aind_data_schema__models__modalities__Behavior",
                   "Behavior videos": "#/$defs/BehaviorVideos",
                   "Confocal microscopy": "#/$defs/aind_data_schema__models__modalities__Confocal",
                   "Electromyography": "#/$defs/Electromyography",
@@ -1243,12 +1244,14 @@
                   "Multiplexed error-robust fluorescence in situ hybridization": "#/$defs/aind_data_schema__models__modalities__Merfish",
                   "Planar optical physiology": "#/$defs/POphys",
                   "Scanned line projection imaging": "#/$defs/Slap",
-                  "Selective plane illumination microscopy": "#/$defs/Spim",
-                  "Trained behavior": "#/$defs/TrainedBehavior"
+                  "Selective plane illumination microscopy": "#/$defs/Spim"
                },
                "propertyName": "name"
             },
             "oneOf": [
+               {
+                  "$ref": "#/$defs/aind_data_schema__models__modalities__Behavior"
+               },
                {
                   "$ref": "#/$defs/BehaviorVideos"
                },
@@ -1287,9 +1290,6 @@
                },
                {
                   "$ref": "#/$defs/Spim"
-               },
-               {
-                  "$ref": "#/$defs/TrainedBehavior"
                }
             ]
          },
