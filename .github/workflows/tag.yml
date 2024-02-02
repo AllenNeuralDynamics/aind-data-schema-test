@@ -91,7 +91,7 @@ jobs:
           echo "Finished schema version bump" 
       - name: Create new schemas
         run: |
-          rm -rf $OUTPUT_DIR
+          rm -rf $SCHEMAS_DIR
           python -m pip install -e .
           python -m aind_data_schema.utils.json_writer --output $SCHEMAS_DIR
           echo "Finished building latest schemas"
