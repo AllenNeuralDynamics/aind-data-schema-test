@@ -47,6 +47,8 @@ jobs:
         uses: actions/setup-python@v3
         with:
           python-version: 3.8
+      - name: Install dependencies
+        run: python -m pip install -e .[dev] --no-cache-dir
       - name: Build current branch schemas
         run: |
           mkdir /tmp/branch_schemas
@@ -77,7 +79,9 @@ jobs:
       - name: Set up Python 3.8
         uses: actions/setup-python@v3
         with:
-          python-version: 3.8 
+          python-version: 3.8
+      - name: Install dependencies
+        run: python -m pip install -e .[dev] --no-cache-dir
       - name: Create schemas
         run: |
           rm -rf $OUTPUT_DIR
