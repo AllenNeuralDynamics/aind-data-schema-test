@@ -55,7 +55,8 @@ jobs:
       - name: Bump schema versions
         run: |
           python -m aind_data_schema.utils.schema_version_bump --new-schema-folder /tmp/branch_schemas
-          echo "Finished schema version bump" 
+          echo "Finished schema version bump"
+          git diff HEAD  --name-only
       - name: Commit changes
         uses: EndBug/add-and-commit@v9
         with:
