@@ -12,9 +12,12 @@ import dictdiffer
 import semver
 
 CURRENT_DIR = Path(os.path.dirname(os.path.realpath(__file__)))
+print("****",CURRENT_DIR,"*****")
 ROOT_DIR = CURRENT_DIR.parents[2]
+print("****",ROOT_DIR,"*****")
 OLD_SCHEMA_DIR = ROOT_DIR / "schemas"
 CORE_SCHEMA_DIR = ROOT_DIR / "src" / "aind_data_schema" / "core"
+print("****",CORE_SCHEMA_DIR,"*****")
 
 def bump_version(old_ver: Optional[str]) -> str:
     """
@@ -80,6 +83,7 @@ def run_job(new_schema_folder: str) -> None:
             )
             new_schema_version = bump_version(old_schema_version)
             core_schema_file = CORE_SCHEMA_DIR / file.replace("_schema.json", ".py")
+            print("****",core_schema_file,"*****")
             sed_command = f'sed -i \'/^schema_version:/s/"[^\"]*"/"{new_schema_version}"/g\' {core_schema_file}'
             try:
                 subprocess.run(sed_command, shell=True, check=True)
