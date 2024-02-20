@@ -83,7 +83,7 @@ def run_job(new_schema_folder: str) -> None:
             sed_command = f'sed -i \'/^schema_version:/s/"[^\"]*"/"{new_schema_version}"/g\' {core_schema_file}'
             try:
                 subprocess.run(sed_command, shell=True, check=True)
-                print(f"Schema version in {file.replace('_schema.json', '')} have been bumped to {new_schema_version}")
+                print(f"Schema version in {core_schema_file} have been bumped to {new_schema_version}")
             except subprocess.CalledProcessError:
                 print("Error while bumping schema version. Please check the file structure or permissions.")
 
