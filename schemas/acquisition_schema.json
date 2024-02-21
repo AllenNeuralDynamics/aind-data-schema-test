@@ -735,7 +735,7 @@
       }
    },
    "additionalProperties": false,
-   "description": "Description of an imaging acquisition session [ version-bump-run-5 ]",
+   "description": "Description of an imaging acquisition session [ version-bump-run-6 ]",
    "properties": {
       "describedBy": {
          "const": "https://raw.githubusercontent.com/AllenNeuralDynamics/aind-data-schema/main/src/aind_data_schema/core/acquisition.py",
