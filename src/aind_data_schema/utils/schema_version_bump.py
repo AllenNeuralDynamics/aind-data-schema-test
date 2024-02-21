@@ -82,7 +82,7 @@ def run_job(new_schema_folder: str) -> None:
             core_schema_file = CORE_SCHEMA_DIR / file.replace("_schema.json", ".py")
             sed_command = f'sed -i \'/^schema_version:/s/"[^\"]*"/"{new_schema_version}"/g\' {core_schema_file}'
             try:
-                subprocess.run(sed_command, shell=True, check=True)
+                subprocess.run(sed_command, shell=False, check=True)
                 grep_command = ["grep", "-E", "^ *schema_version:", core_schema_file]
                 result = subprocess.run(grep_command, stdout=subprocess.PIPE)
                 output = result.stdout.decode('utf-8')
