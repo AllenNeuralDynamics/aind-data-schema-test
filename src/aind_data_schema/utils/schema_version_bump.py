@@ -5,6 +5,7 @@ import json
 import os
 import sys
 import subprocess
+import re
 from pathlib import Path
 from typing import Optional
 
@@ -66,9 +67,9 @@ def run_job(new_schema_folder: str) -> None:
     files_in_old_schema_folder = os.listdir(OLD_SCHEMA_DIR)
     files_in_new_schema_folder = os.listdir(Path(new_schema_folder))
     common_files: list = list(set(files_in_old_schema_folder).intersection(set(files_in_new_schema_folder)))
-    for file in common_files:
-        old_model = open_json_file(OLD_SCHEMA_DIR / file)
-        new_model = open_json_file(Path(new_schema_folder) / file)
+    for file_name in common_files:
+        old_model = open_json_file(OLD_SCHEMA_DIR / file_name)
+        new_model = open_json_file(Path(new_schema_folder) / file_name)
         diff = dictdiffer.diff(old_model, new_model)
         is_equal = len(list(diff)) == 0
         if not is_equal:
@@ -79,18 +80,19 @@ def run_job(new_schema_folder: str) -> None:
                 else old_schema_version_dict.get("const")
             )
             new_schema_version = bump_version(old_schema_version)
-            core_schema_file = CORE_SCHEMA_DIR / file.replace("_schema.json", ".py")
-            sed_command = f'sed -i \'/^schema_version:/s/"[^\"]*"/"{new_schema_version}"/g\' {core_schema_file}'
-            try:
-                subprocess.run(sed_command, shell=False, check=True)
-                grep_command = ["grep", "-E", "^ *schema_version:", core_schema_file]
-                result = subprocess.run(grep_command, stdout=subprocess.PIPE)
-                output = result.stdout.decode('utf-8')
-                print("****", output.strip(),"****")
-                print(f"Schema version in {core_schema_file} have been bumped to {new_schema_version}")
-            except subprocess.CalledProcessError:
-                print("Error while bumping schema version. Please check the file structure or permissions.")
+            core_schema_file = CORE_SCHEMA_DIR / file_name.replace("_schema.json", ".py")
 
+            with open(core_schema_file, 'r') as file:
+                for line in file:
+                    if line.lstrip().startswith("schema"):
+                        current_version_line = line
+            with open(core_schema_file, 'r') as file:
+                filedata = file.read()
+            bumped_version_line = current_version_line.replace(old_schema_version, new_schema_version)
+            filedata = filedata.replace(current_version_line, bumped_version_line)
+            with open(core_schema_file, 'w') as file:
+                file.write(filedata)
+            print(f"Schema version in {file_name.replace('_schema.json', '')} have been bumped to {new_schema_version}")
     return None
 
 
