@@ -54,6 +54,7 @@ jobs:
           echo "Finished building current branch schemas"
       - name: Bump schema versions
         run: |
+          echo $PWD
           python -m aind_data_schema.utils.schema_version_bump --new-schema-folder /tmp/branch_schemas
           echo "Finished schema version bump"
           grep -E '^ *schema_version:' src/aind_data_schema/core/acquisition.py
