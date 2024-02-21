@@ -57,8 +57,6 @@ jobs:
           echo $PWD
           python -m aind_data_schema.utils.schema_version_bump --new-schema-folder /tmp/branch_schemas
           echo "Finished schema version bump"
-          grep -E '^ *schema_version:' src/aind_data_schema/core/acquisition.py
-          git diff HEAD  --name-only
       - name: Commit changes
         uses: EndBug/add-and-commit@v9
         with:
@@ -88,13 +86,13 @@ jobs:
           rm -rf $OUTPUT_DIR
           python -m pip install -e .
           python -m aind_data_schema.utils.json_writer --output $OUTPUT_DIR
-          git diff HEAD  --name-only
       - name: Commit changes
         uses: EndBug/add-and-commit@v9
         with:
           default_author: github_actions
           message: "updates schemas [skip actions]"
           add: 'schemas'
+          pull: '--rebase'
 
   # tag:
   #   needs: update_docs
