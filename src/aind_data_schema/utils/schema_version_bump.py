@@ -80,15 +80,10 @@ def run_job(new_schema_folder: str) -> None:
             )
             new_schema_version = bump_version(old_schema_version)
             core_schema_file = CORE_SCHEMA_DIR / file.replace("_schema.json", ".py")
-            print("****",core_schema_file,"*****")
             sed_command = f'sed -i \'/^schema_version:/s/"[^\"]*"/"{new_schema_version}"/g\' {core_schema_file}'
             try:
                 subprocess.run(sed_command, shell=True, check=True)
-                grep_command = ["grep", "-E", "^ *schema_version:", core_schema_file]
-                result = subprocess.run(grep_command, stdout=subprocess.PIPE)
-                output = result.stdout.decode('utf-8')
-                print("****", output.strip(),"****")
-                print(f"Schema version in {core_schema_file} have been bumped to {new_schema_version}")
+                print(f"Schema version in {file.replace('_schema.json', '')} have been bumped to {new_schema_version}")
             except subprocess.CalledProcessError:
                 print("Error while bumping schema version. Please check the file structure or permissions.")
 
