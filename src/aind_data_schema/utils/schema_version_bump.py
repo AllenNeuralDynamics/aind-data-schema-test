@@ -12,12 +12,9 @@ import dictdiffer
 import semver
 
 CURRENT_DIR = Path(os.path.dirname(os.path.realpath(__file__)))
-print("****",CURRENT_DIR,"*****")
 ROOT_DIR = CURRENT_DIR.parents[2]
-print("****",ROOT_DIR,"*****")
 OLD_SCHEMA_DIR = ROOT_DIR / "schemas"
 CORE_SCHEMA_DIR = ROOT_DIR / "src" / "aind_data_schema" / "core"
-print("****",CORE_SCHEMA_DIR,"*****")
 
 def bump_version(old_ver: Optional[str]) -> str:
     """
@@ -87,6 +84,10 @@ def run_job(new_schema_folder: str) -> None:
             sed_command = f'sed -i \'/^schema_version:/s/"[^\"]*"/"{new_schema_version}"/g\' {core_schema_file}'
             try:
                 subprocess.run(sed_command, shell=True, check=True)
+                grep_command = ["grep", "-E", "^ *schema_version:", core_schema_file]
+                result = subprocess.run(grep_command, stdout=subprocess.PIPE)
+                output = result.stdout.decode('utf-8')
+                print("****", output.strip(),"****")
                 print(f"Schema version in {core_schema_file} have been bumped to {new_schema_version}")
             except subprocess.CalledProcessError:
                 print("Error while bumping schema version. Please check the file structure or permissions.")
