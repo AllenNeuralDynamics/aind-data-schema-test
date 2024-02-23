@@ -71,7 +71,7 @@
       },
       "Acquisition": {
          "additionalProperties": false,
-         "description": "Description of an imaging acquisition session",
+         "description": "Description of an imaging acquisition session [test version bump run 18]",
          "properties": {
             "describedBy": {
                "const": "https://raw.githubusercontent.com/AllenNeuralDynamics/aind-data-schema/main/src/aind_data_schema/core/acquisition.py",
@@ -80,8 +80,8 @@
                "type": "string"
             },
             "schema_version": {
-               "const": "0.6.8",
-               "default": "0.6.8",
+               "const": "0.6.9",
+               "default": "0.6.9",
                "title": "Schema Version"
             },
             "protocol_id": {
@@ -27688,8 +27688,8 @@
          "type": "string"
       },
       "schema_version": {
-         "const": "0.1.30",
-         "default": "0.1.30",
+         "const": "0.1.31",
+         "default": "0.1.31",
          "title": "Schema Version"
       },
       "_id": {
