@@ -28,6 +28,47 @@
          "title": "AAOptoElectronic",
          "type": "object"
       },
+      "Abcam": {
+         "additionalProperties": false,
+         "description": "Abcam",
+         "properties": {
+            "name": {
+               "const": "Abcam",
+               "default": "Abcam",
+               "title": "Name"
+            },
+            "abbreviation": {
+               "const": null,
+               "default": null,
+               "title": "Abbreviation"
+            },
+            "registry": {
+               "default": {
+                  "name": "Research Organization Registry",
+                  "abbreviation": "ROR"
+               },
+               "discriminator": {
+                  "mapping": {
+                     "Research Organization Registry": "#/$defs/ResearchOrganizationRegistry"
+                  },
+                  "propertyName": "name"
+               },
+               "oneOf": [
+                  {
+                     "$ref": "#/$defs/ResearchOrganizationRegistry"
+                  }
+               ],
+               "title": "Registry"
+            },
+            "registry_identifier": {
+               "const": "02e1wjw63",
+               "default": "02e1wjw63",
+               "title": "Registry Identifier"
+            }
+         },
+         "title": "Abcam",
+         "type": "object"
+      },
       "AilipuTechnologyCo": {
          "additionalProperties": false,
          "description": "AilipuTechnologyCo",
@@ -54,6 +95,13 @@
             }
          },
          "title": "AilipuTechnologyCo",
+         "type": "object"
+      },
+      "AindGeneric": {
+         "additionalProperties": true,
+         "description": "Base class for generic types that can be used in AIND schema",
+         "properties": {},
+         "title": "AindGeneric",
          "type": "object"
       },
       "AllenInstitute": {
@@ -395,59 +443,6 @@
          "title": "Asus",
          "type": "object"
       },
-      "Axis": {
-         "additionalProperties": false,
-         "description": "Description of an image axis",
-         "properties": {
-            "name": {
-               "allOf": [
-                  {
-                     "$ref": "#/$defs/AxisName"
-                  }
-               ],
-               "title": "Name"
-            },
-            "dimension": {
-               "description": "Reference axis number for stitching",
-               "title": "Dimension",
-               "type": "integer"
-            },
-            "direction": {
-               "allOf": [
-                  {
-                     "$ref": "#/$defs/Direction"
-                  }
-               ],
-               "description": "Tissue direction as the value of axis increases. If Other describe in notes."
-            },
-            "unit": {
-               "allOf": [
-                  {
-                     "$ref": "#/$defs/SizeUnit"
-                  }
-               ],
-               "default": "micrometer",
-               "title": "Axis physical units"
-            }
-         },
-         "required": [
-            "name",
-            "dimension",
-            "direction"
-         ],
-         "title": "Axis",
-         "type": "object"
-      },
-      "AxisName": {
-         "description": "Image axis name",
-         "enum": [
-            "X",
-            "Y",
-            "Z"
-         ],
-         "title": "AxisName",
-         "type": "string"
-      },
       "Basler": {
          "additionalProperties": false,
          "description": "Basler",
@@ -779,20 +774,6 @@
          },
          "title": "Custom",
          "type": "object"
-      },
-      "Direction": {
-         "description": "Anatomical direction name",
-         "enum": [
-            "Left_to_right",
-            "Right_to_left",
-            "Anterior_to_posterior",
-            "Posterior_to_anterior",
-            "Inferior_to_superior",
-            "Superior_to_inferior",
-            "Other"
-         ],
-         "title": "Direction",
-         "type": "string"
       },
       "Dodotronic": {
          "additionalProperties": false,
@@ -1406,6 +1387,10 @@
          "additionalProperties": false,
          "description": "Description of a 3D scan",
          "properties": {
+            "scan_index": {
+               "title": "Scan index",
+               "type": "integer"
+            },
             "scan_type": {
                "allOf": [
                   {
@@ -1427,34 +1412,17 @@
                ],
                "title": "Scan sequence"
             },
-            "axes": {
-               "items": {
-                  "$ref": "#/$defs/Axis"
-               },
-               "title": "Imaging axes",
-               "type": "array"
-            },
-            "voxel_sizes": {
-               "allOf": [
+            "rare_factor": {
+               "anyOf": [
                   {
-                     "$ref": "#/$defs/Scale3dTransform"
+                     "type": "integer"
+                  },
+                  {
+                     "type": "null"
                   }
                ],
-               "description": "Size of voxels in order as specified in axes",
-               "title": "Voxel sizes"
-            },
-            "processing_steps": {
-               "default": [],
-               "items": {
-                  "enum": [
-                     "Fiducial segmentation",
-                     "Registration to template",
-                     "Skull stripping"
-                  ],
-                  "type": "string"
-               },
-               "title": "Processing Steps",
-               "type": "array"
+               "default": null,
+               "title": "RARE factor"
             },
             "echo_time": {
                "anyOf": [
@@ -1507,9 +1475,59 @@
                "default": "millisecond",
                "title": "Repetition time unit"
             },
+            "vc_orientation": {
+               "allOf": [
+                  {
+                     "$ref": "#/$defs/Rotation3dTransform"
+                  }
+               ],
+               "title": "Scan orientation"
+            },
+            "vc_position": {
+               "allOf": [
+                  {
+                     "$ref": "#/$defs/Translation3dTransform"
+                  }
+               ],
+               "title": "Scan position"
+            },
+            "subject_position": {
+               "allOf": [
+                  {
+                     "$ref": "#/$defs/SubjectPosition"
+                  }
+               ],
+               "title": "Subject position"
+            },
+            "voxel_sizes": {
+               "allOf": [
+                  {
+                     "$ref": "#/$defs/Scale3dTransform"
+                  }
+               ],
+               "description": "Resolution",
+               "title": "Voxel sizes"
+            },
+            "processing_steps": {
+               "default": [],
+               "items": {
+                  "enum": [
+                     "Fiducial segmentation",
+                     "Registration to template",
+                     "Skull stripping"
+                  ],
+                  "type": "string"
+               },
+               "title": "Processing Steps",
+               "type": "array"
+            },
             "additional_scan_parameters": {
-               "title": "Parameters",
-               "type": "object"
+               "allOf": [
+                  {
+                     "$ref": "#/$defs/AindGeneric"
+                  }
+               ],
+               "title": "Parameters"
             },
             "notes": {
                "anyOf": [
@@ -1525,14 +1543,17 @@
             }
          },
          "required": [
+            "scan_index",
             "scan_type",
             "primary_scan",
             "scan_sequence_type",
-            "axes",
-            "voxel_sizes",
             "echo_time",
             "effective_echo_time",
             "repetition_time",
+            "vc_orientation",
+            "vc_position",
+            "subject_position",
+            "voxel_sizes",
             "additional_scan_parameters"
          ],
          "title": "MRIScan",
@@ -1773,6 +1794,34 @@
             }
          },
          "title": "Navitar",
+         "type": "object"
+      },
+      "Neurophotometrics": {
+         "additionalProperties": false,
+         "description": "Neurophotometrics",
+         "properties": {
+            "name": {
+               "const": "Neurophotometrics",
+               "default": "Neurophotometrics",
+               "title": "Name"
+            },
+            "abbreviation": {
+               "const": null,
+               "default": null,
+               "title": "Abbreviation"
+            },
+            "registry": {
+               "const": null,
+               "default": null,
+               "title": "Registry"
+            },
+            "registry_identifier": {
+               "const": null,
+               "default": null,
+               "title": "Registry Identifier"
+            }
+         },
+         "title": "Neurophotometrics",
          "type": "object"
       },
       "NewScaleTechnologies": {
@@ -2153,6 +2202,38 @@
          "title": "ResearchOrganizationRegistry",
          "type": "object"
       },
+      "Rotation3dTransform": {
+         "additionalProperties": false,
+         "description": "Values to be vector-added to a 3D position. Often needed to specify a device or tile's origin.",
+         "properties": {
+            "type": {
+               "const": "rotation",
+               "default": "rotation",
+               "title": "Type"
+            },
+            "rotation": {
+               "items": {
+                  "anyOf": [
+                     {
+                        "type": "number"
+                     },
+                     {
+                        "type": "string"
+                     }
+                  ]
+               },
+               "maxItems": 9,
+               "minItems": 9,
+               "title": "3D rotation matrix values (3x3) ",
+               "type": "array"
+            }
+         },
+         "required": [
+            "rotation"
+         ],
+         "title": "Rotation3dTransform",
+         "type": "object"
+      },
       "Scale3dTransform": {
          "additionalProperties": false,
          "description": "Values to be vector-multiplied with a 3D position, equivalent to the diagonals of a 3x3 transform matrix.\nRepresents voxel spacing if used as the first applied coordinate transform.",
@@ -2226,6 +2307,7 @@
                         "mapping": {
                            "AA Opto Electronic": "#/$defs/AAOptoElectronic",
                            "ASUS": "#/$defs/Asus",
+                           "Abcam": "#/$defs/Abcam",
                            "Ailipu Technology Co": "#/$defs/AilipuTechnologyCo",
                            "Allen Institute": "#/$defs/AllenInstitute",
                            "Allen Institute for Brain Science": "#/$defs/AllenInstituteForBrainScience",
@@ -2267,6 +2349,7 @@
                            "National Institute of Neurological Disorders and Stroke": "#/$defs/NationalInstituteOfNeurologicalDisordersAndStroke",
                            "National Instruments": "#/$defs/NationalInstruments",
                            "Navitar": "#/$defs/Navitar",
+                           "Neurophotometrics": "#/$defs/Neurophotometrics",
                            "New Scale Technologies": "#/$defs/NewScaleTechnologies",
                            "New York University": "#/$defs/NewYorkUniversity",
                            "Nikon": "#/$defs/Nikon",
@@ -2288,6 +2371,7 @@
                            "Teledyne FLIR": "#/$defs/TeledyneFLIR",
                            "The Imaging Source": "#/$defs/TheImagingSource",
                            "The Lee Company": "#/$defs/TheLeeCompany",
+                           "Thermo Fisher": "#/$defs/Thermofisher",
                            "Thorlabs": "#/$defs/Thorlabs",
                            "Tymphany": "#/$defs/Tymphany",
                            "Vieworks": "#/$defs/Vieworks",
@@ -2299,6 +2383,9 @@
                      "oneOf": [
                         {
                            "$ref": "#/$defs/AAOptoElectronic"
+                        },
+                        {
+                           "$ref": "#/$defs/Abcam"
                         },
                         {
                            "$ref": "#/$defs/AilipuTechnologyCo"
@@ -2436,6 +2523,9 @@
                            "$ref": "#/$defs/Navitar"
                         },
                         {
+                           "$ref": "#/$defs/Neurophotometrics"
+                        },
+                        {
                            "$ref": "#/$defs/NewScaleTechnologies"
                         },
                         {
@@ -2482,6 +2572,9 @@
                         },
                         {
                            "$ref": "#/$defs/Tamron"
+                        },
+                        {
+                           "$ref": "#/$defs/Thermofisher"
                         },
                         {
                            "$ref": "#/$defs/Thorlabs"
@@ -2551,12 +2644,9 @@
                "title": "Port index"
             },
             "additional_settings": {
-               "anyOf": [
+               "allOf": [
                   {
-                     "type": "object"
-                  },
-                  {
-                     "type": "null"
+                     "$ref": "#/$defs/AindGeneric"
                   }
                ],
                "default": {},
@@ -2738,20 +2828,6 @@
          "title": "SimonsFoundation",
          "type": "object"
       },
-      "SizeUnit": {
-         "description": "Enumeration of Length Measurements",
-         "enum": [
-            "meter",
-            "centimeter",
-            "millimeter",
-            "micrometer",
-            "nanometer",
-            "inch",
-            "pixel"
-         ],
-         "title": "SizeUnit",
-         "type": "string"
-      },
       "Spinnaker": {
          "additionalProperties": false,
          "description": "Spinnaker",
@@ -2779,6 +2855,15 @@
          },
          "title": "Spinnaker",
          "type": "object"
+      },
+      "SubjectPosition": {
+         "description": "Subject position",
+         "enum": [
+            "Prone",
+            "Supine"
+         ],
+         "title": "SubjectPosition",
+         "type": "string"
       },
       "TMC": {
          "additionalProperties": false,
@@ -2933,6 +3018,47 @@
          "title": "TheLeeCompany",
          "type": "object"
       },
+      "Thermofisher": {
+         "additionalProperties": false,
+         "description": "Thermofisher",
+         "properties": {
+            "name": {
+               "const": "Thermo Fisher",
+               "default": "Thermo Fisher",
+               "title": "Name"
+            },
+            "abbreviation": {
+               "const": null,
+               "default": null,
+               "title": "Abbreviation"
+            },
+            "registry": {
+               "default": {
+                  "name": "Research Organization Registry",
+                  "abbreviation": "ROR"
+               },
+               "discriminator": {
+                  "mapping": {
+                     "Research Organization Registry": "#/$defs/ResearchOrganizationRegistry"
+                  },
+                  "propertyName": "name"
+               },
+               "oneOf": [
+                  {
+                     "$ref": "#/$defs/ResearchOrganizationRegistry"
+                  }
+               ],
+               "title": "Registry"
+            },
+            "registry_identifier": {
+               "const": "03x1ewr52",
+               "default": "03x1ewr52",
+               "title": "Registry Identifier"
+            }
+         },
+         "title": "Thermofisher",
+         "type": "object"
+      },
       "Thorlabs": {
          "additionalProperties": false,
          "description": "Thorlabs",
@@ -2986,6 +3112,38 @@
          ],
          "title": "TimeUnit",
          "type": "string"
+      },
+      "Translation3dTransform": {
+         "additionalProperties": false,
+         "description": "Values to be vector-added to a 3D position. Often needed to specify a device or tile's origin.",
+         "properties": {
+            "type": {
+               "const": "translation",
+               "default": "translation",
+               "title": "Type"
+            },
+            "translation": {
+               "items": {
+                  "anyOf": [
+                     {
+                        "type": "number"
+                     },
+                     {
+                        "type": "string"
+                     }
+                  ]
+               },
+               "maxItems": 3,
+               "minItems": 3,
+               "title": "3D translation parameters",
+               "type": "array"
+            }
+         },
+         "required": [
+            "translation"
+         ],
+         "title": "Translation3dTransform",
+         "type": "object"
       },
       "Tymphany": {
          "additionalProperties": false,
@@ -3082,8 +3240,8 @@
          "type": "string"
       },
       "schema_version": {
-         "const": "0.2.7",
-         "default": "0.2.7",
+         "const": "0.3.2",
+         "default": "0.3.2",
          "title": "Schema Version"
       },
       "subject_id": {

@@ -7,6 +7,7 @@ from pydantic import Field, ValidationInfo, field_validator
 from typing_extensions import Annotated
 
 from aind_data_schema.base import AindCoreModel
+from aind_data_schema.models.coordinates import Axis, Origin
 from aind_data_schema.models.devices import (
     LIGHT_SOURCES,
     Calibration,
@@ -33,7 +34,6 @@ from aind_data_schema.models.devices import (
     PolygonalScanner,
     RewardDelivery,
     Speaker,
-    StickMicroscopeAssembly,
 )
 from aind_data_schema.models.modalities import Modality
 
@@ -49,7 +49,7 @@ class Rig(AindCoreModel):
 
     _DESCRIBED_BY_URL = AindCoreModel._DESCRIBED_BY_BASE_URL.default + "aind_data_schema/core/rig.py"
     describedBy: str = Field(_DESCRIBED_BY_URL, json_schema_extra={"const": _DESCRIBED_BY_URL})
-    schema_version: Literal["0.2.9"] = Field("0.2.9")
+    schema_version: Literal["0.2.15"] = Field("0.2.15")
     rig_id: str = Field(..., description="room_stim apparatus_version", title="Rig ID")
     modification_date: date = Field(..., title="Date of modification")
     mouse_platform: MOUSE_PLATFORMS
@@ -58,7 +58,7 @@ class Rig(AindCoreModel):
     enclosure: Optional[Enclosure] = Field(None, title="Enclosure")
     ephys_assemblies: List[EphysAssembly] = Field(default=[], title="Ephys probes")
     fiber_assemblies: List[FiberAssembly] = Field(default=[], title="Inserted fiber optics")
-    stick_microscopes: List[StickMicroscopeAssembly] = Field(default=[], title="Stick microscopes")
+    stick_microscopes: List[CameraAssembly] = Field(default=[], title="Stick microscopes")
     laser_assemblies: List[LaserAssembly] = Field(default=[], title="Laser modules")
     patch_cords: List[Patch] = Field(default=[], title="Patch cords")
     light_sources: List[LIGHT_SOURCES] = Field(default=[], title="Light sources")
@@ -77,6 +77,8 @@ class Rig(AindCoreModel):
         title="CCF coordinate transform",
         description="Path to file that details the CCF-to-lab coordinate transform",
     )
+    origin: Optional[Origin] = Field(None, title="Origin point for rig position transforms")
+    rig_axes: Optional[List[Axis]] = Field(default=[], title="Rig axes", min_length=3, max_length=3)
     modalities: Set[Modality.ONE_OF] = Field(..., title="Modalities")
     notes: Optional[str] = Field(None, title="Notes")
 
