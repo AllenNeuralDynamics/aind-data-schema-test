@@ -49,17 +49,16 @@ jobs:
           python-version: 3.8
       - name: Install dependencies
         run: python -m pip install -e .[dev] --no-cache-dir
-      - name: Build current branch schemas
-        run: |
-          mkdir /tmp/branch_schemas
-          python -m aind_data_schema.utils.json_writer --output /tmp/branch_schemas
-          echo "Finished building current branch schemas"
+      # - name: Build current branch schemas
+      #   run: |
+      #     mkdir /tmp/branch_schemas
+      #     python -m aind_data_schema.utils.json_writer --output /tmp/branch_schemas
+      #     echo "Finished building current branch schemas"
       - name: Bump schema versions
         run: |
-          echo $PWD
-          python -m aind_data_schema.utils.schema_version_bump --new-schema-folder /tmp/branch_schemas
+          python -m aind_data_schema.utils.schema_version_bump
           echo "Finished schema version bump"
-      - name: Create schemas
+      - name: Update schemas
         run: |
           rm -rf $OUTPUT_DIR
           python -m pip install -e .
