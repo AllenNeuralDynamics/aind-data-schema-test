@@ -1,13 +1,32 @@
 """Tests metadata module"""
 
 import json
+import re
 import unittest
+from datetime import time
 
 from pydantic import ValidationError
+from pydantic import __version__ as pyd_version
 
+from aind_data_schema.core.acquisition import Acquisition
+from aind_data_schema.core.data_description import DataDescription
+from aind_data_schema.core.instrument import Instrument
 from aind_data_schema.core.metadata import Metadata, MetadataStatus
-from aind_data_schema.core.procedures import Procedures
-from aind_data_schema.core.subject import Sex, Species, Subject
+from aind_data_schema.core.procedures import (
+    IontophoresisInjection,
+    NanojectInjection,
+    Procedures,
+    Surgery,
+    ViralMaterial,
+)
+from aind_data_schema.core.processing import Processing
+from aind_data_schema.core.rig import Rig
+from aind_data_schema.core.session import Session
+from aind_data_schema.core.subject import BreedingInfo, Sex, Species, Subject
+from aind_data_schema.models.organizations import Organization
+from aind_data_schema.models.platforms import Ecephys, SmartSpim
+
+PYD_VERSION = re.match(r"(\d+.\d+).\d+", pyd_version).group(1)
 
 
 class TestMetadata(unittest.TestCase):
@@ -21,7 +40,15 @@ class TestMetadata(unittest.TestCase):
             subject_id="123345",
             sex=Sex.MALE,
             date_of_birth="2020-10-10",
-            genotype="Emx1-IRES-Cre;Camk2a-tTA;Ai93(TITL-GCaMP6f)",
+            source=Organization.AI,
+            breeding_info=BreedingInfo(
+                breeding_group="Emx1-IRES-Cre(ND)",
+                maternal_id="546543",
+                maternal_genotype="Emx1-IRES-Cre/wt; Camk2a-tTa/Camk2a-tTA",
+                paternal_id="232323",
+                paternal_genotype="Ai93(TITL-GCaMP6f)/wt",
+            ),
+            genotype="Emx1-IRES-Cre;Camk2a-tTA;Ai93(TITL-GCaMP6f)/wt",
         )
         d1 = Metadata(name="ecephys_655019_2023-04-03_18-17-09", location="bucket", subject=s1)
         self.assertEqual("ecephys_655019_2023-04-03_18-17-09", d1.name)
@@ -48,10 +75,10 @@ class TestMetadata(unittest.TestCase):
             "2 validation errors for Metadata\n"
             "name\n"
             "  Field required [type=missing, input_value={}, input_type=dict]\n"
-            "    For further information visit https://errors.pydantic.dev/2.5/v/missing\n"
+            f"    For further information visit https://errors.pydantic.dev/{PYD_VERSION}/v/missing\n"
             "location\n"
             "  Field required [type=missing, input_value={}, input_type=dict]\n"
-            "    For further information visit https://errors.pydantic.dev/2.5/v/missing"
+            f"    For further information visit https://errors.pydantic.dev/{PYD_VERSION}/v/missing"
         )
         self.assertEqual(expected_exception_message, str(e.exception))
 
@@ -69,13 +96,21 @@ class TestMetadata(unittest.TestCase):
             subject_id="123345",
             sex=Sex.MALE,
             date_of_birth="2020-10-10",
-            genotype="Emx1-IRES-Cre;Camk2a-tTA;Ai93(TITL-GCaMP6f)",
+            source=Organization.AI,
+            breeding_info=BreedingInfo(
+                breeding_group="Emx1-IRES-Cre(ND)",
+                maternal_id="546543",
+                maternal_genotype="Emx1-IRES-Cre/wt; Camk2a-tTa/Camk2a-tTA",
+                paternal_id="232323",
+                paternal_genotype="Ai93(TITL-GCaMP6f)/wt",
+            ),
+            genotype="Emx1-IRES-Cre;Camk2a-tTA;Ai93(TITL-GCaMP6f)/wt",
         )
         d2 = Metadata(
             name="ecephys_655019_2023-04-03_18-17-09",
             location="bucket",
             subject=s2,
-            procedures=Procedures.model_construct(),
+            procedures=Procedures.model_construct(injection_materials=["some materials"]),
         )
         self.assertEqual(MetadataStatus.INVALID, d2.metadata_status)
 
@@ -84,13 +119,91 @@ class TestMetadata(unittest.TestCase):
             name="ecephys_655019_2023-04-03_18-17-09",
             location="bucket",
             subject=json.loads(Subject.model_construct().model_dump_json()),
-            procedures=json.loads(Procedures.model_construct().model_dump_json()),
         )
         self.assertEqual(MetadataStatus.INVALID, d3.metadata_status)
 
     def test_default_file_extension(self):
         """Tests that the default file extension used is as expected."""
         self.assertEqual(".nd.json", Metadata._FILE_EXTENSION.default)
+
+    def test_validate_smartspim_metadata(self):
+        """Tests that smartspim validator works as expected"""
+        viral_material = ViralMaterial.model_construct()
+        nano_inj = NanojectInjection.model_construct()
+        ionto_inj = IontophoresisInjection.model_construct(injection_materials=[viral_material])
+
+        # Tests missing metadata
+        surgery1 = Surgery.model_construct(procedures=[nano_inj, ionto_inj])
+        with self.assertRaises(ValueError) as context:
+            Metadata(
+                name="ecephys_655019_2023-04-03_18-17-09",
+                location="bucket",
+                data_description=DataDescription.model_construct(
+                    label="some label", platform=SmartSpim, creation_time=time(12, 12, 12)
+                ),
+                procedures=Procedures.model_construct(subject_procedures=[surgery1]),
+                acquisition=Acquisition.model_construct(),
+            )
+        self.assertIn(
+            "Missing some metadata for SmartSpim. Requires subject, procedures, acquisition, and instrument.",
+            str(context.exception),
+        )
+
+        # Tests missing injection materials
+        surgery2 = Surgery.model_construct(procedures=[nano_inj])
+        with self.assertRaises(ValueError) as context:
+            Metadata(
+                name="ecephys_655019_2023-04-03_18-17-09",
+                location="bucket",
+                data_description=DataDescription.model_construct(
+                    label="some label", platform=SmartSpim, creation_time=time(12, 12, 12)
+                ),
+                subject=Subject.model_construct(),
+                procedures=Procedures.model_construct(subject_procedures=[surgery2]),
+                acquisition=Acquisition.model_construct(),
+                instrument=Instrument.model_construct(),
+            )
+        self.assertIn("Injection is missing injection_materials.", str(context.exception))
+
+    def test_validate_ecephys_metadata(self):
+        """Tests that ecephys validator works as expected"""
+        viral_material = ViralMaterial.model_construct()
+        nano_inj = NanojectInjection.model_construct()
+        ionto_inj = IontophoresisInjection.model_construct(injection_materials=[viral_material])
+
+        # Tests missing metadata
+        surgery1 = Surgery.model_construct(procedures=[nano_inj, ionto_inj])
+        with self.assertRaises(ValueError) as context:
+            Metadata(
+                name="ecephys_655019_2023-04-03_18-17-09",
+                location="bucket",
+                data_description=DataDescription.model_construct(
+                    label="some label", platform=Ecephys, creation_time=time(12, 12, 12)
+                ),
+                procedures=Procedures.model_construct(subject_procedures=[surgery1]),
+                rig=Rig.model_construct(),
+            )
+        self.assertIn(
+            "Missing some metadata for Ecephys. Requires subject, procedures, session, rig, and processing.",
+            str(context.exception),
+        )
+
+        # Tests missing injection materials
+        surgery2 = Surgery.model_construct(procedures=[nano_inj])
+        with self.assertRaises(ValueError) as context:
+            Metadata(
+                name="ecephys_655019_2023-04-03_18-17-09",
+                location="bucket",
+                data_description=DataDescription.model_construct(
+                    label="some label", platform=Ecephys, creation_time=time(12, 12, 12)
+                ),
+                subject=Subject.model_construct(),
+                procedures=Procedures.model_construct(subject_procedures=[surgery2]),
+                rig=Rig.model_construct(),
+                processing=Processing.model_construct(),
+                session=Session.model_construct(),
+            )
+        self.assertIn("Injection is missing injection_materials.", str(context.exception))
 
 
 if __name__ == "__main__":
