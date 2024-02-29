@@ -42,3 +42,4 @@ jobs:
           default_author: github_actions
           message: "bump schema version [skip actions]"
           add: '["src", "schemas", "examples"]'
+          
