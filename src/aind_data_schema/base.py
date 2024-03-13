@@ -30,7 +30,7 @@ class AindCoreModel(AindModel):
 
     _FILE_EXTENSION = PrivateAttr(default=".json")
     _DESCRIBED_BY_BASE_URL = PrivateAttr(
-        default="https://raw.githubusercontent.com/AllenNeuralDynamics/aind-data-schema/main/src/"
+        default="https://raw.githubusercontent.com/AllenNeuralDynamics/aind-data-schema-test/main/src/"
     )
 
     describedBy: str = Field(...)

@@ -1477,7 +1477,10 @@
             "oil",
             "PBS",
             "water",
-            "other"
+            "other",
+            "easy index",
+            "ethyl cinnimate",
+            "aqueous clearing buffer"
          ],
          "title": "ImmersionMedium",
          "type": "string"
@@ -3455,7 +3458,7 @@
       }
    },
    "additionalProperties": false,
-   "description": "Description of an imaging acquisition session [test version bump run 19]",
+   "description": "Description of an imaging acquisition session",
    "properties": {
       "describedBy": {
          "const": "https://raw.githubusercontent.com/AllenNeuralDynamics/aind-data-schema/main/src/aind_data_schema/core/acquisition.py",
@@ -3464,8 +3467,8 @@
          "type": "string"
       },
       "schema_version": {
-         "const": "0.7.1",
-         "default": "0.7.1",
+         "const": "0.6.9",
+         "default": "0.6.9",
          "title": "Schema Version"
       },
       "protocol_id": {

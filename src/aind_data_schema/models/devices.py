@@ -142,6 +142,9 @@ class ImmersionMedium(str, Enum):
     PBS = "PBS"
     WATER = "water"
     OTHER = "other"
+    EASYINDEX = "easy index"
+    ECI = "ethyl cinnimate"
+    ACB = "aqueous clearing buffer"
 
 
 class ObjectiveType(str, Enum):
@@ -193,6 +196,7 @@ class Cooling(str, Enum):
 
     AIR = "Air"
     WATER = "Water"
+    NONE = "None"
 
 
 class BinMode(str, Enum):
@@ -292,7 +296,7 @@ class Detector(Device):
     detector_type: DetectorType = Field(..., title="Detector Type")
     manufacturer: Organization.DETECTOR_MANUFACTURERS
     data_interface: DataInterface = Field(..., title="Data interface")
-    cooling: Cooling = Field(None, title="Cooling")
+    cooling: Cooling = Field(Cooling.NONE, title="Cooling")
     computer_name: Optional[str] = Field(None, title="Name of computer receiving data from this camera")
     max_frame_rate: Optional[Decimal] = Field(None, title="Maximum frame rate (Hz)")
     frame_rate_unit: FrequencyUnit = Field(FrequencyUnit.HZ, title="Frame rate unit")
@@ -571,7 +575,7 @@ class FiberProbe(Device):
     device_type: Literal["Fiber optic probe"] = "Fiber optic probe"
     core_diameter: Decimal = Field(..., title="Core diameter (um)")
     #  TODO: Check if this should be an enum?
-    core_diameter_unit: str = Field("um", title="Core diameter unit")
+    core_diameter_unit: SizeUnit = Field(SizeUnit.UM, title="Core diameter unit")
     numerical_aperture: Decimal = Field(..., title="Numerical aperture")
     ferrule_material: Optional[FerruleMaterial] = Field(None, title="Ferrule material")
     active_length: Optional[Decimal] = Field(None, title="Active length (mm)", description="Length of taper")
