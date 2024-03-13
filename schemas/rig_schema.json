@@ -14535,14 +14535,14 @@
    "description": "Description of a rig",
    "properties": {
       "describedBy": {
-         "const": "https://raw.githubusercontent.com/AllenNeuralDynamics/aind-data-schema/main/src/aind_data_schema/core/rig.py",
-         "default": "https://raw.githubusercontent.com/AllenNeuralDynamics/aind-data-schema/main/src/aind_data_schema/core/rig.py",
+         "const": "https://raw.githubusercontent.com/AllenNeuralDynamics/aind-data-schema-test/main/src/aind_data_schema/core/rig.py",
+         "default": "https://raw.githubusercontent.com/AllenNeuralDynamics/aind-data-schema-test/main/src/aind_data_schema/core/rig.py",
          "title": "Describedby",
          "type": "string"
       },
       "schema_version": {
-         "const": "0.2.18",
-         "default": "0.2.18",
+         "const": "0.2.19",
+         "default": "0.2.19",
          "title": "Schema Version"
       },
       "rig_id": {

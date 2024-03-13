@@ -1078,14 +1078,14 @@
    "description": "Description of a logical collection of data files",
    "properties": {
       "describedBy": {
-         "const": "https://raw.githubusercontent.com/AllenNeuralDynamics/aind-data-schema/main/src/aind_data_schema/core/data_description.py",
-         "default": "https://raw.githubusercontent.com/AllenNeuralDynamics/aind-data-schema/main/src/aind_data_schema/core/data_description.py",
+         "const": "https://raw.githubusercontent.com/AllenNeuralDynamics/aind-data-schema-test/main/src/aind_data_schema/core/data_description.py",
+         "default": "https://raw.githubusercontent.com/AllenNeuralDynamics/aind-data-schema-test/main/src/aind_data_schema/core/data_description.py",
          "title": "Describedby",
          "type": "string"
       },
       "schema_version": {
-         "const": "0.13.2",
-         "default": "0.13.2",
+         "const": "0.13.3",
+         "default": "0.13.3",
          "title": "Schema Version"
       },
       "license": {

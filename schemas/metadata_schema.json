@@ -74,14 +74,14 @@
          "description": "Description of an imaging acquisition session",
          "properties": {
             "describedBy": {
-               "const": "https://raw.githubusercontent.com/AllenNeuralDynamics/aind-data-schema/main/src/aind_data_schema/core/acquisition.py",
-               "default": "https://raw.githubusercontent.com/AllenNeuralDynamics/aind-data-schema/main/src/aind_data_schema/core/acquisition.py",
+               "const": "https://raw.githubusercontent.com/AllenNeuralDynamics/aind-data-schema-test/main/src/aind_data_schema/core/acquisition.py",
+               "default": "https://raw.githubusercontent.com/AllenNeuralDynamics/aind-data-schema-test/main/src/aind_data_schema/core/acquisition.py",
                "title": "Describedby",
                "type": "string"
             },
             "schema_version": {
-               "const": "0.6.9",
-               "default": "0.6.9",
+               "const": "0.6.10",
+               "default": "0.6.10",
                "title": "Schema Version"
             },
             "protocol_id": {
@@ -3668,14 +3668,14 @@
          "description": "Description of a logical collection of data files",
          "properties": {
             "describedBy": {
-               "const": "https://raw.githubusercontent.com/AllenNeuralDynamics/aind-data-schema/main/src/aind_data_schema/core/data_description.py",
-               "default": "https://raw.githubusercontent.com/AllenNeuralDynamics/aind-data-schema/main/src/aind_data_schema/core/data_description.py",
+               "const": "https://raw.githubusercontent.com/AllenNeuralDynamics/aind-data-schema-test/main/src/aind_data_schema/core/data_description.py",
+               "default": "https://raw.githubusercontent.com/AllenNeuralDynamics/aind-data-schema-test/main/src/aind_data_schema/core/data_description.py",
                "title": "Describedby",
                "type": "string"
             },
             "schema_version": {
-               "const": "0.13.2",
-               "default": "0.13.2",
+               "const": "0.13.3",
+               "default": "0.13.3",
                "title": "Schema Version"
             },
             "license": {
@@ -10938,14 +10938,14 @@
          "description": "Description of an instrument, which is a collection of devices",
          "properties": {
             "describedBy": {
-               "const": "https://raw.githubusercontent.com/AllenNeuralDynamics/aind-data-schema/main/src/aind_data_schema/core/instrument.py",
-               "default": "https://raw.githubusercontent.com/AllenNeuralDynamics/aind-data-schema/main/src/aind_data_schema/core/instrument.py",
+               "const": "https://raw.githubusercontent.com/AllenNeuralDynamics/aind-data-schema-test/main/src/aind_data_schema/core/instrument.py",
+               "default": "https://raw.githubusercontent.com/AllenNeuralDynamics/aind-data-schema-test/main/src/aind_data_schema/core/instrument.py",
                "title": "Describedby",
                "type": "string"
             },
             "schema_version": {
-               "const": "0.10.13",
-               "default": "0.10.13",
+               "const": "0.10.14",
+               "default": "0.10.14",
                "title": "Schema Version"
             },
             "instrument_id": {
@@ -19849,14 +19849,14 @@
          "description": "Description of all procedures performed on a subject",
          "properties": {
             "describedBy": {
-               "const": "https://raw.githubusercontent.com/AllenNeuralDynamics/aind-data-schema/main/src/aind_data_schema/core/procedures.py",
-               "default": "https://raw.githubusercontent.com/AllenNeuralDynamics/aind-data-schema/main/src/aind_data_schema/core/procedures.py",
+               "const": "https://raw.githubusercontent.com/AllenNeuralDynamics/aind-data-schema-test/main/src/aind_data_schema/core/procedures.py",
+               "default": "https://raw.githubusercontent.com/AllenNeuralDynamics/aind-data-schema-test/main/src/aind_data_schema/core/procedures.py",
                "title": "Describedby",
                "type": "string"
             },
             "schema_version": {
-               "const": "0.12.6",
-               "default": "0.12.6",
+               "const": "0.12.7",
+               "default": "0.12.7",
                "title": "Schema Version"
             },
             "subject_id": {
@@ -19968,14 +19968,14 @@
          "description": "Description of all processes run on data",
          "properties": {
             "describedBy": {
-               "const": "https://raw.githubusercontent.com/AllenNeuralDynamics/aind-data-schema/main/src/aind_data_schema/core/processing.py",
-               "default": "https://raw.githubusercontent.com/AllenNeuralDynamics/aind-data-schema/main/src/aind_data_schema/core/processing.py",
+               "const": "https://raw.githubusercontent.com/AllenNeuralDynamics/aind-data-schema-test/main/src/aind_data_schema/core/processing.py",
+               "default": "https://raw.githubusercontent.com/AllenNeuralDynamics/aind-data-schema-test/main/src/aind_data_schema/core/processing.py",
                "title": "Describedby",
                "type": "string"
             },
             "schema_version": {
-               "const": "0.4.4",
-               "default": "0.4.4",
+               "const": "0.4.5",
+               "default": "0.4.5",
                "title": "Schema Version"
             },
             "processing_pipeline": {
@@ -21708,14 +21708,14 @@
          "description": "Description of a rig",
          "properties": {
             "describedBy": {
-               "const": "https://raw.githubusercontent.com/AllenNeuralDynamics/aind-data-schema/main/src/aind_data_schema/core/rig.py",
-               "default": "https://raw.githubusercontent.com/AllenNeuralDynamics/aind-data-schema/main/src/aind_data_schema/core/rig.py",
+               "const": "https://raw.githubusercontent.com/AllenNeuralDynamics/aind-data-schema-test/main/src/aind_data_schema/core/rig.py",
+               "default": "https://raw.githubusercontent.com/AllenNeuralDynamics/aind-data-schema-test/main/src/aind_data_schema/core/rig.py",
                "title": "Describedby",
                "type": "string"
             },
             "schema_version": {
-               "const": "0.2.18",
-               "default": "0.2.18",
+               "const": "0.2.19",
+               "default": "0.2.19",
                "title": "Schema Version"
             },
             "rig_id": {
@@ -22706,14 +22706,14 @@
          "description": "Description of a physiology and/or behavior session",
          "properties": {
             "describedBy": {
-               "const": "https://raw.githubusercontent.com/AllenNeuralDynamics/aind-data-schema/main/src/aind_data_schema/core/session.py",
-               "default": "https://raw.githubusercontent.com/AllenNeuralDynamics/aind-data-schema/main/src/aind_data_schema/core/session.py",
+               "const": "https://raw.githubusercontent.com/AllenNeuralDynamics/aind-data-schema-test/main/src/aind_data_schema/core/session.py",
+               "default": "https://raw.githubusercontent.com/AllenNeuralDynamics/aind-data-schema-test/main/src/aind_data_schema/core/session.py",
                "title": "Describedby",
                "type": "string"
             },
             "schema_version": {
-               "const": "0.1.9",
-               "default": "0.1.9",
+               "const": "0.1.10",
+               "default": "0.1.10",
                "title": "Schema Version"
             },
             "protocol_id": {
@@ -24720,14 +24720,14 @@
          "description": "Description of a subject of data collection",
          "properties": {
             "describedBy": {
-               "const": "https://raw.githubusercontent.com/AllenNeuralDynamics/aind-data-schema/main/src/aind_data_schema/core/subject.py",
-               "default": "https://raw.githubusercontent.com/AllenNeuralDynamics/aind-data-schema/main/src/aind_data_schema/core/subject.py",
+               "const": "https://raw.githubusercontent.com/AllenNeuralDynamics/aind-data-schema-test/main/src/aind_data_schema/core/subject.py",
+               "default": "https://raw.githubusercontent.com/AllenNeuralDynamics/aind-data-schema-test/main/src/aind_data_schema/core/subject.py",
                "title": "Describedby",
                "type": "string"
             },
             "schema_version": {
-               "const": "0.5.5",
-               "default": "0.5.5",
+               "const": "0.5.6",
+               "default": "0.5.6",
                "title": "Schema Version"
             },
             "subject_id": {
@@ -27827,14 +27827,14 @@
    "description": "The records in the Data Asset Collection needs to contain certain fields\nto easily query and index the data.",
    "properties": {
       "describedBy": {
-         "const": "https://raw.githubusercontent.com/AllenNeuralDynamics/aind-data-schema/main/src/aind_data_schema/core/metadata.py",
-         "default": "https://raw.githubusercontent.com/AllenNeuralDynamics/aind-data-schema/main/src/aind_data_schema/core/metadata.py",
+         "const": "https://raw.githubusercontent.com/AllenNeuralDynamics/aind-data-schema-test/main/src/aind_data_schema/core/metadata.py",
+         "default": "https://raw.githubusercontent.com/AllenNeuralDynamics/aind-data-schema-test/main/src/aind_data_schema/core/metadata.py",
          "title": "Describedby",
          "type": "string"
       },
       "schema_version": {
-         "const": "0.1.36",
-         "default": "0.1.36",
+         "const": "0.1.37",
+         "default": "0.1.37",
          "title": "Schema Version"
       },
       "_id": {

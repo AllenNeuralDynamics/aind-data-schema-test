@@ -325,14 +325,14 @@
    "description": "Description of all processes run on data",
    "properties": {
       "describedBy": {
-         "const": "https://raw.githubusercontent.com/AllenNeuralDynamics/aind-data-schema/main/src/aind_data_schema/core/processing.py",
-         "default": "https://raw.githubusercontent.com/AllenNeuralDynamics/aind-data-schema/main/src/aind_data_schema/core/processing.py",
+         "const": "https://raw.githubusercontent.com/AllenNeuralDynamics/aind-data-schema-test/main/src/aind_data_schema/core/processing.py",
+         "default": "https://raw.githubusercontent.com/AllenNeuralDynamics/aind-data-schema-test/main/src/aind_data_schema/core/processing.py",
          "title": "Describedby",
          "type": "string"
       },
       "schema_version": {
-         "const": "0.4.4",
-         "default": "0.4.4",
+         "const": "0.4.5",
+         "default": "0.4.5",
          "title": "Schema Version"
       },
       "processing_pipeline": {

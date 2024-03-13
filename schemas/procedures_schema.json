@@ -8920,14 +8920,14 @@
    "description": "Description of all procedures performed on a subject",
    "properties": {
       "describedBy": {
-         "const": "https://raw.githubusercontent.com/AllenNeuralDynamics/aind-data-schema/main/src/aind_data_schema/core/procedures.py",
-         "default": "https://raw.githubusercontent.com/AllenNeuralDynamics/aind-data-schema/main/src/aind_data_schema/core/procedures.py",
+         "const": "https://raw.githubusercontent.com/AllenNeuralDynamics/aind-data-schema-test/main/src/aind_data_schema/core/procedures.py",
+         "default": "https://raw.githubusercontent.com/AllenNeuralDynamics/aind-data-schema-test/main/src/aind_data_schema/core/procedures.py",
          "title": "Describedby",
          "type": "string"
       },
       "schema_version": {
-         "const": "0.12.6",
-         "default": "0.12.6",
+         "const": "0.12.7",
+         "default": "0.12.7",
          "title": "Schema Version"
       },
       "subject_id": {

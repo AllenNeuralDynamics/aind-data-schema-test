@@ -7339,14 +7339,14 @@
    "description": "Description of an instrument, which is a collection of devices",
    "properties": {
       "describedBy": {
-         "const": "https://raw.githubusercontent.com/AllenNeuralDynamics/aind-data-schema/main/src/aind_data_schema/core/instrument.py",
-         "default": "https://raw.githubusercontent.com/AllenNeuralDynamics/aind-data-schema/main/src/aind_data_schema/core/instrument.py",
+         "const": "https://raw.githubusercontent.com/AllenNeuralDynamics/aind-data-schema-test/main/src/aind_data_schema/core/instrument.py",
+         "default": "https://raw.githubusercontent.com/AllenNeuralDynamics/aind-data-schema-test/main/src/aind_data_schema/core/instrument.py",
          "title": "Describedby",
          "type": "string"
       },
       "schema_version": {
-         "const": "0.10.13",
-         "default": "0.10.13",
+         "const": "0.10.14",
+         "default": "0.10.14",
          "title": "Schema Version"
       },
       "instrument_id": {

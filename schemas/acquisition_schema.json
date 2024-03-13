@@ -3461,14 +3461,14 @@
    "description": "Description of an imaging acquisition session",
    "properties": {
       "describedBy": {
-         "const": "https://raw.githubusercontent.com/AllenNeuralDynamics/aind-data-schema/main/src/aind_data_schema/core/acquisition.py",
-         "default": "https://raw.githubusercontent.com/AllenNeuralDynamics/aind-data-schema/main/src/aind_data_schema/core/acquisition.py",
+         "const": "https://raw.githubusercontent.com/AllenNeuralDynamics/aind-data-schema-test/main/src/aind_data_schema/core/acquisition.py",
+         "default": "https://raw.githubusercontent.com/AllenNeuralDynamics/aind-data-schema-test/main/src/aind_data_schema/core/acquisition.py",
          "title": "Describedby",
          "type": "string"
       },
       "schema_version": {
-         "const": "0.6.9",
-         "default": "0.6.9",
+         "const": "0.6.10",
+         "default": "0.6.10",
          "title": "Schema Version"
       },
       "protocol_id": {
