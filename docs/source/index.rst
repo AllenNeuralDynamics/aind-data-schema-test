@@ -58,7 +58,7 @@ yields JSON:
 .. code-block:: json
 
    {
-      "describedBy": "https://raw.githubusercontent.com/AllenNeuralDynamics/aind-data-schema-test/main/src/aind_data_schema/subject.py",
+      "describedBy": "https://raw.githubusercontent.com/AllenNeuralDynamics/aind-data-schema/main/src/aind_data_schema/subject.py",
       "schema_version": "0.3.0",
       "species": "Mus musculus",
       "subject_id": "12345",
@@ -91,7 +91,8 @@ yields JSON:
 .. toctree::
    :maxdepth: 1
    :caption: Contents:
-
+   
+   diagrams
    modules
 
 Indices and tables
