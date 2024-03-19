@@ -60,7 +60,9 @@ jobs:
         with:
           python-version: 3.8
       - name: Install dependencies
-        run: python -m pip install -e .[dev] -e .[docs] --no-cache-dir
+        run: |
+          apt install graphviz libgraphviz-dev -y
+          python -m pip install -e .[dev] -e .[docs] --no-cache-dir
       - name: Generate erdantic diagrams
         run: |
           mkdir docs/source/diagrams
