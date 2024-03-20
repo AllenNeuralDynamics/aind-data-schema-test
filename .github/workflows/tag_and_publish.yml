@@ -65,7 +65,7 @@ jobs:
           python -m pip install -e .[dev] -e .[docs] --no-cache-dir
       - name: Generate erdantic diagrams
         run: |
-          mkdir docs/source/diagrams
+          mkdir ./docs/source/_static/diagrams
           python -m aind_data_schema.utils.diagrams $DIAGRAM_DIRECTORY
       - name: Generate new rst files
         run: |
