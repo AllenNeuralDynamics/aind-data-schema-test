@@ -27,7 +27,7 @@ Diagrams
 |
 |
 
-.. figure:: https://aind-data-schema-dev-u5u0i5.s3.us-west-2.amazonaws.com/instrument.svg
+.. figure:: https://aind-data-schema-dev-u5u0i5.s3.us-west-2.amazonaws.com/diagrams/instrument.svg
     :align: center
     :alt: instrument
 
@@ -40,7 +40,7 @@ Diagrams
 |
 |
 
-.. figure:: https://aind-data-schema-dev-u5u0i5.s3.us-west-2.amazonaws.com/metadata.nd.svg
+.. figure:: https://aind-data-schema-dev-u5u0i5.s3.us-west-2.amazonaws.com/diagrams/metadata.nd.svg
     :align: center
     :alt: metadata
 
@@ -53,7 +53,7 @@ Diagrams
 |
 |
 
-.. figure:: https://aind-data-schema-dev-u5u0i5.s3.us-west-2.amazonaws.com/mri_session.svg
+.. figure:: https://aind-data-schema-dev-u5u0i5.s3.us-west-2.amazonaws.com/diagrams/mri_session.svg
     :align: center
     :alt: mri_session
 
@@ -66,7 +66,7 @@ Diagrams
 |
 |
 
-.. figure:: https://aind-data-schema-dev-u5u0i5.s3.us-west-2.amazonaws.com/procedures.svg
+.. figure:: https://aind-data-schema-dev-u5u0i5.s3.us-west-2.amazonaws.com/diagrams/procedures.svg
     :align: center
     :alt: procedures
 
@@ -79,7 +79,7 @@ Diagrams
 |
 |
 
-.. figure:: https://aind-data-schema-dev-u5u0i5.s3.us-west-2.amazonaws.com/processing.svg
+.. figure:: https://aind-data-schema-dev-u5u0i5.s3.us-west-2.amazonaws.com/diagrams/processing.svg
     :align: center
     :alt: processing
 
@@ -92,7 +92,7 @@ Diagrams
 |
 |
 
-.. figure:: https://aind-data-schema-dev-u5u0i5.s3.us-west-2.amazonaws.com/rig.svg
+.. figure:: https://aind-data-schema-dev-u5u0i5.s3.us-west-2.amazonaws.com/diagrams/rig.svg
     :align: center
     :alt: rig
 
@@ -105,7 +105,7 @@ Diagrams
 |
 |
 
-.. figure:: https://aind-data-schema-dev-u5u0i5.s3.us-west-2.amazonaws.com/session.svg
+.. figure:: https://aind-data-schema-dev-u5u0i5.s3.us-west-2.amazonaws.com/diagrams/session.svg
     :align: center
     :alt: session
 
@@ -118,7 +118,7 @@ Diagrams
 |
 |
 
-.. figure:: https://aind-data-schema-dev-u5u0i5.s3.us-west-2.amazonaws.com/subject.svg
+.. figure:: https://aind-data-schema-dev-u5u0i5.s3.us-west-2.amazonaws.com/diagrams/subject.svg
     :align: center
     :alt: subject
 
