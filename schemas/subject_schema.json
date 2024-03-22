@@ -763,14 +763,14 @@
    "description": "Description of a subject of data collection",
    "properties": {
       "describedBy": {
-         "const": "https://raw.githubusercontent.com/AllenNeuralDynamics/aind-data-schema-test/main/src/aind_data_schema/core/subject.py",
-         "default": "https://raw.githubusercontent.com/AllenNeuralDynamics/aind-data-schema-test/main/src/aind_data_schema/core/subject.py",
+         "const": "https://raw.githubusercontent.com/AllenNeuralDynamics/aind-data-schema/main/src/aind_data_schema/core/subject.py",
+         "default": "https://raw.githubusercontent.com/AllenNeuralDynamics/aind-data-schema/main/src/aind_data_schema/core/subject.py",
          "title": "Describedby",
          "type": "string"
       },
       "schema_version": {
-         "const": "0.5.6",
-         "default": "0.5.6",
+         "const": "0.5.5",
+         "default": "0.5.5",
          "title": "Schema Version"
       },
       "subject_id": {
