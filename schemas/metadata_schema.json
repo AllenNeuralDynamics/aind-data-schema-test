@@ -80,8 +80,8 @@
                "type": "string"
             },
             "schema_version": {
-               "const": "0.6.13",
-               "default": "0.6.13",
+               "const": "0.6.15",
+               "default": "0.6.15",
                "title": "Schema Version"
             },
             "protocol_id": {
@@ -28526,8 +28526,8 @@
          "type": "string"
       },
       "schema_version": {
-         "const": "0.1.42",
-         "default": "0.1.42",
+         "const": "0.1.43",
+         "default": "0.1.43",
          "title": "Schema Version"
       },
       "_id": {
