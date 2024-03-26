@@ -23,6 +23,7 @@ dependencies = [
 
 [project.optional-dependencies]
 dev = [
+    'aind_data_schema[docs]',
     'aind_data_schema[linters]'
 ]
 
@@ -38,8 +39,7 @@ linters = [
 docs = [
     'Sphinx',
     'sphinx-jinja',
-    'furo',
-    'erdantic>=0.7.0'
+    'furo'
 ]
 
 [tool.setuptools.packages.find]
