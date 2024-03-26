@@ -20,10 +20,18 @@ aind\_data\_schema.models.devices module
    :undoc-members:
    :show-inheritance:
 
-aind\_data\_schema.models.harp\_types module
---------------------------------------------
+aind\_data\_schema.models.institutions module
+---------------------------------------------
 
-.. automodule:: aind_data_schema.models.harp_types
+.. automodule:: aind_data_schema.models.institutions
+   :members:
+   :undoc-members:
+   :show-inheritance:
+
+aind\_data\_schema.models.manufacturers module
+----------------------------------------------
+
+.. automodule:: aind_data_schema.models.manufacturers
    :members:
    :undoc-members:
    :show-inheritance:
@@ -32,14 +40,6 @@ aind\_data\_schema.models.modalities module
 -------------------------------------------
 
 .. automodule:: aind_data_schema.models.modalities
-   :members:
-   :undoc-members:
-   :show-inheritance:
-
-aind\_data\_schema.models.organizations module
-----------------------------------------------
-
-.. automodule:: aind_data_schema.models.organizations
    :members:
    :undoc-members:
    :show-inheritance:

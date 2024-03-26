@@ -91,8 +91,7 @@ yields JSON:
 .. toctree::
    :maxdepth: 1
    :caption: Contents:
-   
-   diagrams
+
    modules
 
 Indices and tables
