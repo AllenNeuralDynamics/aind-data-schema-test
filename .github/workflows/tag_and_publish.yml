@@ -80,8 +80,6 @@ jobs:
   changelogs:
     name: changelogs
     runs-on: ubuntu-latest
-    secrets:
-      SERVICE_TOKEN: ${{ secrets.SERVICE_TOKEN }} # required
     steps:
     - name: Checkout
       uses: actions/checkout@v3
