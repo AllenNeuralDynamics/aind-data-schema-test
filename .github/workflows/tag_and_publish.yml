@@ -90,7 +90,7 @@ jobs:
         default_bump: patch
         dry_run: true  # Perform dryrun first to calculate new version
     - name:
-      run: sed -i "1i${{ steps.tag_version.outputs.changelog }}" CHANGELOG.md
+      run: sed -i '1i${{ steps.tag_version.outputs.changelog }}' CHANGELOG.md
     - name: Commit changes
       uses: EndBug/add-and-commit@v9
       with:
