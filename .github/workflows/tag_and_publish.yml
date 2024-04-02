@@ -96,7 +96,7 @@ jobs:
       with:
         default_author: github_actions
         message: "updates changelogs [skip actions]"
-        add: '["CHANGELOGS.md"]'
+        add: '["CHANGELOG.md"]'
 
   tag:
     needs: changelog
