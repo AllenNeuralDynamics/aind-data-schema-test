@@ -1,3 +1,13 @@
+### [0.1.2](https://github.com/AllenNeuralDynamics/aind-data-schema-test/compare/v0.1.1...v0.1.2) (2024-04-02)
+
+
+### Continuous Integration
+
+* fixes commit step in changelog job ([#55](https://github.com/AllenNeuralDynamics/aind-data-schema-test/issues/55)) ([9f786c3](https://github.com/AllenNeuralDynamics/aind-data-schema-test/commit/9f786c326f228fbeb3d6cef854764a539eeba9a2))
+* use echo to prepend changelogs ([#57](https://github.com/AllenNeuralDynamics/aind-data-schema-test/issues/57)) ([2e933f3](https://github.com/AllenNeuralDynamics/aind-data-schema-test/commit/2e933f3beaf2c16c3b599fd32e040584b739fe9f))
+* uses single quote in sed command for changelog ([#56](https://github.com/AllenNeuralDynamics/aind-data-schema-test/issues/56)) ([eeea81c](https://github.com/AllenNeuralDynamics/aind-data-schema-test/commit/eeea81ccf0e84719ff6913af47c70a601da3afff))
+
+
 ## [0.1.0](https://github.com/AllenNeuralDynamics/aind-data-schema-test/compare/v0.0.18...v0.1.0) (2024-04-01)
 
 
