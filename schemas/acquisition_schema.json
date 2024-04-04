@@ -3563,7 +3563,7 @@
       }
    },
    "additionalProperties": false,
-   "description": "Description of an imaging acquisition session",
+   "description": "Description of an imaging acquisition session - test merge queue",
    "properties": {
       "describedBy": {
          "const": "https://raw.githubusercontent.com/AllenNeuralDynamics/aind-data-schema/main/src/aind_data_schema/core/acquisition.py",
@@ -3572,8 +3572,8 @@
          "type": "string"
       },
       "schema_version": {
-         "const": "0.6.15",
-         "default": "0.6.15",
+         "const": "0.6.16",
+         "default": "0.6.16",
          "title": "Schema Version"
       },
       "protocol_id": {
