@@ -63,7 +63,7 @@ jobs:
           python -m pip install -e .[dev] -e .[docs] --no-cache-dir
       - name: Generate new rst files
         run: |
-          sphinx-apidoc -o docs/source/ src
+          sphinx-apidoc -M -f -o docs/source/ src
       - name: Commit changes
         uses: EndBug/add-and-commit@v9
         with:
