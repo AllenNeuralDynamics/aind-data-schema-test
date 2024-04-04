@@ -1,6 +1,11 @@
 aind\_data\_schema package
 ==========================
 
+.. automodule:: aind_data_schema
+   :members:
+   :undoc-members:
+   :show-inheritance:
+
 Subpackages
 -----------
 
@@ -19,14 +24,6 @@ aind\_data\_schema.base module
 ------------------------------
 
 .. automodule:: aind_data_schema.base
-   :members:
-   :undoc-members:
-   :show-inheritance:
-
-Module contents
----------------
-
-.. automodule:: aind_data_schema
    :members:
    :undoc-members:
    :show-inheritance:
