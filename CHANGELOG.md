@@ -5,7 +5,7 @@
 
 * adds pull request pre-check workflow ([#60](https://github.com/AllenNeuralDynamics/aind-data-schema-test/issues/60)) ([f23ac60](https://github.com/AllenNeuralDynamics/aind-data-schema-test/commit/f23ac60cbbf11cdf16295feb6aeb52174ccc772e))
 * adds venv to exclude lists in .flake8 ([#58](https://github.com/AllenNeuralDynamics/aind-data-schema-test/issues/58)) ([8c3922e](https://github.com/AllenNeuralDynamics/aind-data-schema-test/commit/8c3922eb5a80ddb9e055dec8791f41e15569f3f5))
-* disables nmerge queue workflow ([#63](https://github.com/AllenNeuralDynamics/aind-data-schema-test/issues/63)) ([15f2b33](https://github.com/AllenNeuralDynamics/aind-data-schema-test/commit/15f2b33268811a61e5ac9904218309f59ed0297c))
+* disables merge queue workflow ([#63](https://github.com/AllenNeuralDynamics/aind-data-schema-test/issues/63)) ([15f2b33](https://github.com/AllenNeuralDynamics/aind-data-schema-test/commit/15f2b33268811a61e5ac9904218309f59ed0297c))
 * modifies merge queue workflow trigger ([#62](https://github.com/AllenNeuralDynamics/aind-data-schema-test/issues/62)) ([9939ab8](https://github.com/AllenNeuralDynamics/aind-data-schema-test/commit/9939ab8fb129b2052aae2d27dde4a476368941f8))
 
 
