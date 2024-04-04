@@ -1,3 +1,12 @@
+### [0.3.5](https://github.com/AllenNeuralDynamics/aind-data-schema-test/compare/v0.3.4...v0.3.5) (2024-04-04)
+
+
+### Continuous Integration
+
+* adds venv to .flake8 exclude list ([#83](https://github.com/AllenNeuralDynamics/aind-data-schema-test/issues/83)) ([5992223](https://github.com/AllenNeuralDynamics/aind-data-schema-test/commit/599222380185af4bd5913825ac614ae7059cfc20))
+* rmeoves linter tests workflow ([#84](https://github.com/AllenNeuralDynamics/aind-data-schema-test/issues/84)) ([4cefd3c](https://github.com/AllenNeuralDynamics/aind-data-schema-test/commit/4cefd3c4003c0c5f4c1e7c49efa96a25f7022c08))
+
+
 ### [0.3.4](https://github.com/AllenNeuralDynamics/aind-data-schema-test/compare/v0.3.3...v0.3.4) (2024-04-04)
 
 
