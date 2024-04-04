@@ -1,3 +1,23 @@
+## [0.3.0](https://github.com/AllenNeuralDynamics/aind-data-schema-test/compare/v0.2.0...v0.3.0) (2024-04-04)
+
+
+### Features
+
+* modifies acquisition description ([#68](https://github.com/AllenNeuralDynamics/aind-data-schema-test/issues/68)) ([c68f462](https://github.com/AllenNeuralDynamics/aind-data-schema-test/commit/c68f462f9f307bba7bfe5d91a881fda51227ae72))
+
+
+### Documentation
+
+* workflow for sphinx-apidoc to replace existing rst files ([#70](https://github.com/AllenNeuralDynamics/aind-data-schema-test/issues/70)) ([2c91627](https://github.com/AllenNeuralDynamics/aind-data-schema-test/commit/2c916275c1866c61c45c0ef2db3470c30c10c0d4))
+
+
+### Continuous Integration
+
+* add run to pulls changes after check out ([#72](https://github.com/AllenNeuralDynamics/aind-data-schema-test/issues/72)) ([10d9511](https://github.com/AllenNeuralDynamics/aind-data-schema-test/commit/10d9511f6bbb5223b2377885bbbcfd52fbd64287))
+* adds pull to commit changes step ([#71](https://github.com/AllenNeuralDynamics/aind-data-schema-test/issues/71)) ([f88a6fe](https://github.com/AllenNeuralDynamics/aind-data-schema-test/commit/f88a6fecae4f1406f1915167297e618ce7fc2a3f))
+* removes venv from flake8 exclude list ([#69](https://github.com/AllenNeuralDynamics/aind-data-schema-test/issues/69)) ([a3c62f1](https://github.com/AllenNeuralDynamics/aind-data-schema-test/commit/a3c62f18677791e3eb30a4600eba651e8d8fdbd6))
+
+
 ## [0.2.0](https://github.com/AllenNeuralDynamics/aind-data-schema-test/compare/v0.1.3...v0.2.0) (2024-04-04)
 
 
