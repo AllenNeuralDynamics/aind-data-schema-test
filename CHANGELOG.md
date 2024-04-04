@@ -1,3 +1,17 @@
+### [0.3.1](https://github.com/AllenNeuralDynamics/aind-data-schema-test/compare/v0.3.0...v0.3.1) (2024-04-04)
+
+
+### Bug Fixes
+
+* adds content to acquisition description ([#74](https://github.com/AllenNeuralDynamics/aind-data-schema-test/issues/74)) ([15c29aa](https://github.com/AllenNeuralDynamics/aind-data-schema-test/commit/15c29aaac79fa1b7c6807b1d167829dd625969da))
+* adds content to instrument description ([#75](https://github.com/AllenNeuralDynamics/aind-data-schema-test/issues/75)) ([9c705ad](https://github.com/AllenNeuralDynamics/aind-data-schema-test/commit/9c705ad99292e685efc9c04049fc1b6f1c580652))
+
+
+### Continuous Integration
+
+* adds git pull run for update_docs job ([#73](https://github.com/AllenNeuralDynamics/aind-data-schema-test/issues/73)) ([c8a1cb5](https://github.com/AllenNeuralDynamics/aind-data-schema-test/commit/c8a1cb51435b59f61fd720f0c139b432b748df96))
+
+
 ## [0.3.0](https://github.com/AllenNeuralDynamics/aind-data-schema-test/compare/v0.2.0...v0.3.0) (2024-04-04)
 
 
