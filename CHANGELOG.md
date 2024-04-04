@@ -1,3 +1,11 @@
+### [0.3.3](https://github.com/AllenNeuralDynamics/aind-data-schema-test/compare/v0.3.2...v0.3.3) (2024-04-04)
+
+
+### Continuous Integration
+
+* adds --rebase flag to git pull run ([#79](https://github.com/AllenNeuralDynamics/aind-data-schema-test/issues/79)) ([d05e764](https://github.com/AllenNeuralDynamics/aind-data-schema-test/commit/d05e764f98056bec255a5bca14dca0fc5d467aea))
+
+
 ### [0.3.2](https://github.com/AllenNeuralDynamics/aind-data-schema-test/compare/v0.3.1...v0.3.2) (2024-04-04)
 
 
