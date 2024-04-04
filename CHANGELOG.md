@@ -1,3 +1,20 @@
+### [0.1.3](https://github.com/AllenNeuralDynamics/aind-data-schema-test/compare/v0.1.2...v0.1.3) (2024-04-04)
+
+
+### Continuous Integration
+
+* adds pull request pre-check workflow ([#60](https://github.com/AllenNeuralDynamics/aind-data-schema-test/issues/60)) ([f23ac60](https://github.com/AllenNeuralDynamics/aind-data-schema-test/commit/f23ac60cbbf11cdf16295feb6aeb52174ccc772e))
+* adds venv to exclude lists in .flake8 ([#58](https://github.com/AllenNeuralDynamics/aind-data-schema-test/issues/58)) ([8c3922e](https://github.com/AllenNeuralDynamics/aind-data-schema-test/commit/8c3922eb5a80ddb9e055dec8791f41e15569f3f5))
+* disables nmerge queue workflow ([#63](https://github.com/AllenNeuralDynamics/aind-data-schema-test/issues/63)) ([15f2b33](https://github.com/AllenNeuralDynamics/aind-data-schema-test/commit/15f2b33268811a61e5ac9904218309f59ed0297c))
+* modifies merge queue workflow trigger ([#62](https://github.com/AllenNeuralDynamics/aind-data-schema-test/issues/62)) ([9939ab8](https://github.com/AllenNeuralDynamics/aind-data-schema-test/commit/9939ab8fb129b2052aae2d27dde4a476368941f8))
+
+
+### Documentation
+
+* adds actions workflow for merge queue ([#61](https://github.com/AllenNeuralDynamics/aind-data-schema-test/issues/61)) ([f1a0821](https://github.com/AllenNeuralDynamics/aind-data-schema-test/commit/f1a0821fb31ea36d1194f74c448878ad0ae47e4d))
+* creates dummy object to bypass lint error ([#59](https://github.com/AllenNeuralDynamics/aind-data-schema-test/issues/59)) ([2c6f627](https://github.com/AllenNeuralDynamics/aind-data-schema-test/commit/2c6f6278474084a8ca1c99b81351783eb388b8d2))
+
+
 ### [0.1.2](https://github.com/AllenNeuralDynamics/aind-data-schema-test/compare/v0.1.1...v0.1.2) (2024-04-02)
 
 
