@@ -68,6 +68,8 @@ jobs:
       - name: Generate new rst files
         run: |
           sphinx-apidoc -M -f -o docs/source/ src
+          sed -i "1s/.*/Schema Modules/" docs/source/modules.rst 
+          sed -i "2s/.*/==============/" docs/source/modules.rst
       - name: Commit changes
         uses: EndBug/add-and-commit@v9
         with:
