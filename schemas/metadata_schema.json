@@ -71,7 +71,7 @@
       },
       "Acquisition": {
          "additionalProperties": false,
-         "description": "Description of an imaging acquisition session - Test merge queue",
+         "description": "Description of an imaging acquisition session",
          "properties": {
             "describedBy": {
                "const": "https://raw.githubusercontent.com/AllenNeuralDynamics/aind-data-schema/main/src/aind_data_schema/core/acquisition.py",
@@ -80,8 +80,8 @@
                "type": "string"
             },
             "schema_version": {
-               "const": "0.6.14",
-               "default": "0.6.14",
+               "const": "0.6.15",
+               "default": "0.6.15",
                "title": "Schema Version"
             },
             "protocol_id": {
@@ -11164,7 +11164,7 @@
       },
       "Instrument": {
          "additionalProperties": false,
-         "description": "Description of an instrument, which is a collection of devices - Test merge queue",
+         "description": "Description of an instrument, which is a collection of devices",
          "properties": {
             "describedBy": {
                "const": "https://raw.githubusercontent.com/AllenNeuralDynamics/aind-data-schema/main/src/aind_data_schema/core/instrument.py",
@@ -11173,8 +11173,8 @@
                "type": "string"
             },
             "schema_version": {
-               "const": "0.10.16",
-               "default": "0.10.16",
+               "const": "0.10.17",
+               "default": "0.10.17",
                "title": "Schema Version"
             },
             "instrument_id": {
@@ -28857,8 +28857,8 @@
          "type": "string"
       },
       "schema_version": {
-         "const": "0.2.6",
-         "default": "0.2.6",
+         "const": "0.2.7",
+         "default": "0.2.7",
          "title": "Schema Version"
       },
       "_id": {
