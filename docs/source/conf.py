@@ -11,9 +11,9 @@ from pathlib import Path
 
 from aind_data_schema import __version__ as package_version
 from aind_data_schema.core import (
-    acquisition, 
-    data_description, 
-    instrument, 
+    acquisition,
+    data_description,
+    instrument,
     metadata,
     mri_session,
     procedures,
@@ -24,9 +24,9 @@ from aind_data_schema.core import (
     )
 
 dummy_object = [
-    acquisition, 
-    data_description, 
-    instrument, 
+    acquisition,
+    data_description,
+    instrument,
     metadata,
     mri_session,
     procedures,
