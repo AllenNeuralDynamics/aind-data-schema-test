@@ -96,6 +96,7 @@ jobs:
       with:
         default_author: github_actions
         message: "updates changelogs [skip actions]"
+        pull: '--rebase'
         add: '["CHANGELOG.md"]'
 
   tag:
