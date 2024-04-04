@@ -1,3 +1,21 @@
+### [0.3.7](https://github.com/AllenNeuralDynamics/aind-data-schema-test/compare/v0.3.6...v0.3.7) (2024-04-04)
+
+
+### Bug Fixes
+
+* updates acquisition description ([#87](https://github.com/AllenNeuralDynamics/aind-data-schema-test/issues/87)) ([a1505a9](https://github.com/AllenNeuralDynamics/aind-data-schema-test/commit/a1505a95bd9c4d3f3940924da58e6bfd7828cf75))
+
+
+### Continuous Integration
+
+* adds venv to list of exclude in .flake8 ([#86](https://github.com/AllenNeuralDynamics/aind-data-schema-test/issues/86)) ([a9c86c8](https://github.com/AllenNeuralDynamics/aind-data-schema-test/commit/a9c86c80c13e21f1aa6d65121197f2d0ae56650b))
+
+
+### Documentation
+
+* edits modules.rst header ([#85](https://github.com/AllenNeuralDynamics/aind-data-schema-test/issues/85)) ([417e400](https://github.com/AllenNeuralDynamics/aind-data-schema-test/commit/417e40064b04ced3a68dcb76233173d6866d707f))
+
+
 ### [0.3.6](https://github.com/AllenNeuralDynamics/aind-data-schema-test/compare/v0.3.5...v0.3.6) (2024-04-04)
 
 
