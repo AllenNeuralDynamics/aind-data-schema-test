@@ -1,3 +1,22 @@
+## [0.2.0](https://github.com/AllenNeuralDynamics/aind-data-schema-test/compare/v0.1.3...v0.2.0) (2024-04-04)
+
+
+### Features
+
+* adds description to acquisition class ([#66](https://github.com/AllenNeuralDynamics/aind-data-schema-test/issues/66)) ([b2457f3](https://github.com/AllenNeuralDynamics/aind-data-schema-test/commit/b2457f333c520ab4fe2c237135d30ce34027434f))
+
+
+### Documentation
+
+* fixes typo in changelogs ([#64](https://github.com/AllenNeuralDynamics/aind-data-schema-test/issues/64)) ([1c9b05b](https://github.com/AllenNeuralDynamics/aind-data-schema-test/commit/1c9b05b88d48e1d358ef6dacc21b54bdae66c0df))
+
+
+### Continuous Integration
+
+* fixes workflow step in changelog job ([#67](https://github.com/AllenNeuralDynamics/aind-data-schema-test/issues/67)) ([0551082](https://github.com/AllenNeuralDynamics/aind-data-schema-test/commit/0551082cb5e222eaba05a2acef3c8290e7389ae3))
+* removes merge_queue workflow ([#65](https://github.com/AllenNeuralDynamics/aind-data-schema-test/issues/65)) ([f0517ce](https://github.com/AllenNeuralDynamics/aind-data-schema-test/commit/f0517ce1f6755554fd7a4112417a08783e372e6c))
+
+
 ### [0.1.3](https://github.com/AllenNeuralDynamics/aind-data-schema-test/compare/v0.1.2...v0.1.3) (2024-04-04)
 
 
