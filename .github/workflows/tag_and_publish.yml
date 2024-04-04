@@ -78,7 +78,7 @@ jobs:
     - name: Checkout
       uses: actions/checkout@v3
       with:
-        ref: ${{ inputs.default_branch }}
+        ref: ${{ env.DEFAULT_BRANCH }}
         fetch-depth: 0
         token: ${{ secrets.SERVICE_TOKEN }}
     - name: Compute new version number
@@ -86,7 +86,7 @@ jobs:
       uses: mathieudutour/github-tag-action@v6.1
       with:
         github_token: ${{ secrets.SERVICE_TOKEN }}
-        release_branches: ${{ inputs.default_branch }}
+        release_branches: ${{ env.DEFAULT_BRANCH }}
         default_bump: patch
         dry_run: true  # Perform dryrun first to calculate new version
     - name:
