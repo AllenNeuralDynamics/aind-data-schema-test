@@ -40,7 +40,7 @@ class ProcessingSteps(AindModel):
 
 
 class Acquisition(AindCoreModel):
-    """Description of an imaging acquisition session"""
+    """Description of an imaging acquisition session - test merge queue"""
 
     _DESCRIBED_BY_URL = AindCoreModel._DESCRIBED_BY_BASE_URL.default + "aind_data_schema/core/acquisition.py"
     describedBy: str = Field(_DESCRIBED_BY_URL, json_schema_extra={"const": _DESCRIBED_BY_URL})
