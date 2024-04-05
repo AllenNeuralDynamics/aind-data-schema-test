@@ -1,3 +1,21 @@
+## [0.4.0](https://github.com/AllenNeuralDynamics/aind-data-schema-test/compare/v0.3.7...v0.4.0) (2024-04-05)
+
+
+### Features
+
+* adds description to Instrument ([#89](https://github.com/AllenNeuralDynamics/aind-data-schema-test/issues/89)) ([5fae668](https://github.com/AllenNeuralDynamics/aind-data-schema-test/commit/5fae668d3629fefa97da372d31029041a487638a))
+
+
+### Bug Fixes
+
+* adds description to Acquisition ([#90](https://github.com/AllenNeuralDynamics/aind-data-schema-test/issues/90)) ([c83c0c2](https://github.com/AllenNeuralDynamics/aind-data-schema-test/commit/c83c0c244d73c9a9f44818c296f72f460c8df8e7))
+
+
+### Continuous Integration
+
+* removes venv from exclude lists in flake8 ([#88](https://github.com/AllenNeuralDynamics/aind-data-schema-test/issues/88)) ([d23173e](https://github.com/AllenNeuralDynamics/aind-data-schema-test/commit/d23173eeed6714473f0c86cf3591baf2d5aadb04))
+
+
 ### [0.3.7](https://github.com/AllenNeuralDynamics/aind-data-schema-test/compare/v0.3.6...v0.3.7) (2024-04-04)
 
 
