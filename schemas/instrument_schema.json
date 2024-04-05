@@ -7508,7 +7508,7 @@
       }
    },
    "additionalProperties": false,
-   "description": "Description of an instrument, which is a collection of devices",
+   "description": "Description of an instrument, which is a collection of devices - test merge queue",
    "properties": {
       "describedBy": {
          "const": "https://raw.githubusercontent.com/AllenNeuralDynamics/aind-data-schema/main/src/aind_data_schema/core/instrument.py",
@@ -7517,8 +7517,8 @@
          "type": "string"
       },
       "schema_version": {
-         "const": "0.10.19",
-         "default": "0.10.19",
+         "const": "0.10.20",
+         "default": "0.10.20",
          "title": "Schema Version"
       },
       "instrument_id": {
