@@ -1,3 +1,11 @@
+### [0.5.1](https://github.com/AllenNeuralDynamics/aind-data-schema-test/compare/v0.5.0...v0.5.1) (2024-04-18)
+
+
+### Bug Fixes
+
+* updates instrument description ([#94](https://github.com/AllenNeuralDynamics/aind-data-schema-test/issues/94)) ([09b2772](https://github.com/AllenNeuralDynamics/aind-data-schema-test/commit/09b2772924731f1bbf2ed45fc54bcb9e70c151a4))
+
+
 ## [0.5.0](https://github.com/AllenNeuralDynamics/aind-data-schema-test/compare/v0.4.0...v0.5.0) (2024-04-05)
 
 
