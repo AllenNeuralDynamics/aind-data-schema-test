@@ -14,7 +14,7 @@ AIND metadata records describe the `metadata.nd.json` for a data asset.
 MongoDB Compass is a database GUI that can be used to query and interact with our document database.
 
 ### How to connect
-<img src="github_pages/public/mongodb_compass_connection.jpg" alt="MongoDB Compass Connection" style="max-height: 500px; max-width: 500px;">
+![MongoDB Compass Connection](github_pages/public/mongodb_compass_connection.JPG)
 
 1.	Download the full version of [MongoDB Compass](https://www.mongodb.com/try/download/compass)
 2.	When connecting, click “Advanced Connection Options” and use the configurations from the list below. Leave any unspecified fields on their default setting.
@@ -32,14 +32,10 @@ MongoDB Compass is a database GUI that can be used to query and interact with ou
 |                | SSH Password             | {EC2 password}                                 |
 
 3. You should be able to see the home page with the `metadata-index` database. It should have 1 single collection called `data_assets`.
-4. Compass Docs: https://www.mongodb.com/docs/compass/master/connect/advanced-connection-options/
-
-
+4. Compass Docs: [https://www.mongodb.com/docs/compass/master/connect/advanced-connection-options/](https://www.mongodb.com/docs/compass/master/connect/advanced-connection-options/)
 
 ## Interact with AIND Metadata
-[MongoDB Compass Documents Query](github_pages/public/mongodb_compass_documents_query.JPG)
-
-<img src="github_pages/public/mongodb_compass_documents_query.jpg" alt="MongoDB Compass Documents Query" style="max-height: 800px; max-width: 800px;">
+![MongoDB Compass Documents Query](github_pages/public/mongodb_compass_documents_query.JPG)
 
 Within Compass, you can use the UI or the embedded mongo shell to interact with the data.
 
@@ -57,9 +53,9 @@ Some useful features include:
    - An update query can also be saved for later use.
 - Mongo shell: Use mongo shell to interact with the data.
 - Compass Docs:
-   - https://www.mongodb.com/docs/compass/master/query/filter/
-   - https://www.mongodb.com/docs/compass/master/documents/modify/
-   - https://www.mongodb.com/docs/compass/master/embedded-shell/
+   - [https://www.mongodb.com/docs/compass/master/query/filter/](https://www.mongodb.com/docs/compass/master/query/filter/)
+   - [https://www.mongodb.com/docs/compass/master/documents/modify/](https://www.mongodb.com/docs/compass/master/documents/modify/)
+   - [https://www.mongodb.com/docs/compass/master/embedded-shell/](https://www.mongodb.com/docs/compass/master/embedded-shell/)
 
 
 ### Sample queries
