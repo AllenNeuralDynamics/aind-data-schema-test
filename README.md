@@ -37,6 +37,8 @@ MongoDB Compass is a database GUI that can be used to query and interact with ou
 
 
 ## Interact with AIND Metadata
+[MongoDB Compass Documents Query](github_pages/public/mongodb_compass_documents_query.JPG)
+
 <img src="github_pages/public/mongodb_compass_documents_query.jpg" alt="MongoDB Compass Documents Query" style="max-height: 800px; max-width: 800px;">
 
 Within Compass, you can use the UI or the embedded mongo shell to interact with the data.
