@@ -21,18 +21,28 @@ MongoDB Compass is a database GUI that can be used to query and interact with ou
 
 | Tab            | Config                   | Value                                               |
 |----------------|--------------------------|-----------------------------------------------------|
-| General        | Host                     | docdb-us-west-2-dev.cluster-************.us-west-2.docdb.amazonaws.com |
+| General        | Host                     | ************.us-west-2.docdb.amazonaws.com          |
 | Authentication | Username                 | {database username}                                 |
 |                | Password                 | {database password}                                 |
+|                | Authentication Mechanism | SCRAM-SHA-1                                         |
 | TLS/SSL        | SSL/TLS Connection       | OFF                                                 |
 | Proxy/SSH      | SSH Tunnel/ Proxy Method | SSH with Password                                   |
 |                | SSH Hostname             | {EC2 IPv4 Address}                                  |
 |                | SSH Port                 | 22                                                  |
-|                | SSH Username             | {EC2 username}                                 |
-|                | SSH Password             | {EC2 password}                                 |
+|                | SSH Username             | {EC2 username}                                      |
+|                | SSH Password             | {EC2 password}                                      |
 
 3. You should be able to see the home page with the `metadata-index` database. It should have 1 single collection called `data_assets`.
-4. Compass Docs: [https://www.mongodb.com/docs/compass/master/connect/advanced-connection-options/](https://www.mongodb.com/docs/compass/master/connect/advanced-connection-options/)
+4. Please change your own database password from the default using the embedded mongo shell in Compass, and then reconnect.
+```
+db.updateUser(
+   "{database username}",
+   {
+      pwd: passwordPrompt()
+   }
+)
+```
+5. Compass Docs: [https://www.mongodb.com/docs/compass/master/connect/advanced-connection-options/](https://www.mongodb.com/docs/compass/master/connect/advanced-connection-options/)
 
 ## Interact with AIND Metadata
 ![MongoDB Compass Documents Query](github_pages/public/mongodb_compass_documents_query.JPG)
