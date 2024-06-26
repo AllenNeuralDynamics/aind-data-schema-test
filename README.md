@@ -83,7 +83,9 @@ DOC_DB_SSH_HOST=ssh_host
 DOC_DB_SSH_USERNAME=ssh_username
 DOC_DB_SSH_PASSWORD=ssh_password
 ```
+
 2. Usage:
+
 ```python
 from aind_data_access_api.document_db_ssh import DocumentDbSSHClient, DocumentDbSSHCredentials
 
@@ -106,4 +108,4 @@ with DocumentDbSSHClient(credentials=credentials) as doc_db_client:
     response = list(doc_db_client.collection.find(filter=filter, projection=projection))
 ```
 
-3. More examples can be found at: https://github.com/AllenNeuralDynamics/aind-data-access-api/tree/docdb_examples/src/aind_data_access_api/examples
+3. More examples: https://github.com/AllenNeuralDynamics/aind-data-access-api/tree/docdb_examples/src/aind_data_access_api/examples
