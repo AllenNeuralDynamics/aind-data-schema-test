@@ -1,11 +1,15 @@
 """ example data description """
+
 from datetime import datetime, timezone
 
+from aind_data_schema_models.modalities import Modality
+from aind_data_schema_models.organizations import Organization
+from aind_data_schema_models.pid_names import PIDName
+from aind_data_schema_models.platforms import Platform
+
 from aind_data_schema.core.data_description import Funding, RawDataDescription
-from aind_data_schema.models.modalities import Modality
-from aind_data_schema.models.organizations import Organization
-from aind_data_schema.models.pid_names import PIDName
-from aind_data_schema.models.platforms import Platform
+
+OUTPUT_PATH = "examples/"
 
 d = RawDataDescription(
     modality=[Modality.ECEPHYS, Modality.BEHAVIOR_VIDEOS],
@@ -17,4 +21,6 @@ d = RawDataDescription(
     funding_source=[Funding(funder=Organization.AI)],
 )
 
-d.write_standard_file()
+serialized = d.model_dump_json()
+deserialized = RawDataDescription.model_validate_json(serialized)
+deserialized.write_standard_file(output_directory=OUTPUT_PATH)

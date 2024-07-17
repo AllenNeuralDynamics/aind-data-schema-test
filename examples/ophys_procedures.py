@@ -1,5 +1,10 @@
 """ 0phys procedure mouse 625100 """
+
 import datetime
+
+from aind_data_schema_models.organizations import Organization
+from aind_data_schema_models.pid_names import PIDName
+from aind_data_schema_models.registry import Registry
 
 from aind_data_schema.core.procedures import (
     Anaesthetic,
@@ -7,7 +12,6 @@ from aind_data_schema.core.procedures import (
     FiberImplant,
     FiberProbe,
     Headframe,
-    Immunolabeling,
     NanojectInjection,
     OphysProbe,
     Perfusion,
@@ -17,9 +21,8 @@ from aind_data_schema.core.procedures import (
     ViralMaterial,
     WaterRestriction,
 )
-from aind_data_schema.models.organizations import Organization
-from aind_data_schema.models.pid_names import PIDName
-from aind_data_schema.models.registry import Registry
+
+OUTPUT_PATH = "examples/"
 
 t = datetime.datetime(2022, 7, 12, 7, 00, 00)
 t2 = datetime.datetime(2022, 9, 23, 10, 22, 00)
@@ -35,6 +38,7 @@ p = Procedures(
             animal_weight_post=22.3,
             anaesthesia=Anaesthetic(type="Isoflurane", duration=180, level=1.5),
             workstation_id="SWS 3",
+            protocol_id="doi",
             procedures=[
                 Headframe(
                     protocol_id="2109",
@@ -103,6 +107,7 @@ p = Procedures(
             iacuc_protocol="2109",
             anaesthesia=Anaesthetic(type="Isoflurane", duration=30, level=3),
             workstation_id="SWS 3",
+            protocol_id="doi",
             procedures=[
                 Perfusion(protocol_id="dx.doi.org/10.17504/protocols.io.bg5vjy66", output_specimen_ids={"672640"})
             ],
@@ -115,10 +120,10 @@ p = Procedures(
             start_date="2023-06-09",
             end_date="2023-06-12",
             experimenter_full_name="John Apple",
-            protocol_id="TO ENTER",
+            protocol_id=["TO ENTER"],
             reagents=[],
-            immunolabeling=Immunolabeling(
-                antibody=Antibody(
+            antibodies=[
+                Antibody(
                     name="Chicken polyclonal",
                     source=Organization.ABCAM,
                     rrid=PIDName(
@@ -127,9 +132,9 @@ p = Procedures(
                     lot_number="GR3361051-16",
                     immunolabel_class="Primary",
                     fluorophore=None,
+                    mass=10,
                 ),
-                concentration=10,
-            ),
+            ],
             notes="Primary dilution factor 1:1000 ---final concentration is 10ug/ml",
         ),
         SpecimenProcedure(
@@ -138,10 +143,10 @@ p = Procedures(
             start_date="2023-06-12",
             end_date="2023-06-13",
             experimenter_full_name="John Apple",
-            protocol_id="TO ENTER",
+            protocol_id=["TO ENTER"],
             reagents=[],
-            immunolabeling=Immunolabeling(
-                antibody=Antibody(
+            antibodies=[
+                Antibody(
                     name="Alexa Fluor 488 goat anti-chicken IgY (H+L)",
                     source=Organization.THERMOFISHER,
                     rrid=PIDName(
@@ -152,12 +157,13 @@ p = Procedures(
                     lot_number="2420700",
                     immunolabel_class="Secondary",
                     fluorophore="Alexa Fluor 488",
+                    mass=4,
                 ),
-                concentration=4,
-            ),
+            ],
             notes="Secondary dilution factor 1:500 - final concentration 4ug/ml",
         ),
     ],
 )
-
-p.write_standard_file(prefix="ophys")
+serialized = p.model_dump_json()
+deserialized = Procedures.model_validate_json(serialized)
+deserialized.write_standard_file(prefix="ophys", output_directory=OUTPUT_PATH)

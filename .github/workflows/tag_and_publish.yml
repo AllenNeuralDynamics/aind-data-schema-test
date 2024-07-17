@@ -22,7 +22,9 @@ jobs:
         with:
           python-version: 3.8
       - name: Install dependencies
-        run: python -m pip install -e .[dev] --no-cache-dir
+        run: |
+          python -m pip install -e .[dev] --no-cache-dir
+          python -m pip install pydantic==2.6.4
       - name: Bump schema versions
         run: |
           python -m aind_data_schema.utils.schema_version_bump
@@ -31,6 +33,7 @@ jobs:
         run: |
           rm -rf $OUTPUT_DIR
           python -m pip install -e .
+          python -m pip install pydantic==2.6.4
           python -m aind_data_schema.utils.json_writer --output $OUTPUT_DIR
       - name: Create example schemas
         run: |
@@ -65,11 +68,10 @@ jobs:
         run: |
           sudo apt install graphviz libgraphviz-dev -y
           python -m pip install -e .[dev] -e .[docs] --no-cache-dir
+          python -m pip install pydantic==2.6.4
       - name: Generate new rst files
         run: |
-          sphinx-apidoc -M -f -o docs/source/ src
-          sed -i "1s/.*/Schema Modules/" docs/source/modules.rst 
-          sed -i "2s/.*/==============/" docs/source/modules.rst
+          sphinx-apidoc -o docs/source/ src
       - name: Commit changes
         uses: EndBug/add-and-commit@v9
         with:
@@ -77,37 +79,8 @@ jobs:
           message: "updates diagrams [skip actions]"
           add: '["*.rst"]'
 
-  changelog:
-    needs: update_docs
-    runs-on: ubuntu-latest
-    steps:
-    - name: Checkout
-      uses: actions/checkout@v3
-      with:
-        ref: ${{ env.DEFAULT_BRANCH }}
-        fetch-depth: 0
-        token: ${{ secrets.SERVICE_TOKEN }}
-    - name: Pull changes
-      run: git pull --rebase
-    - name: Compute new version number
-      id: tag_version
-      uses: mathieudutour/github-tag-action@v6.1
-      with:
-        github_token: ${{ secrets.SERVICE_TOKEN }}
-        release_branches: ${{ env.DEFAULT_BRANCH }}
-        default_bump: patch
-        dry_run: true  # Perform dryrun first to calculate new version
-    - name:
-      run: echo "${{ steps.tag_version.outputs.changelog }}" | cat - CHANGELOG.md > temp && mv temp CHANGELOG.md
-    - name: Commit changes
-      uses: EndBug/add-and-commit@v9
-      with:
-        default_author: github_actions
-        message: "updates changelogs [skip actions]"
-        add: '["CHANGELOG.md"]'
-
   tag:
-    needs: changelog
+    needs: update_docs
     uses: AllenNeuralDynamics/aind-github-actions/.github/workflows/tag.yml@main
     secrets:
       SERVICE_TOKEN: ${{ secrets.SERVICE_TOKEN }} # required
@@ -133,105 +106,74 @@ jobs:
   #       with:
   #         password: ${{ secrets.AIND_PYPI_TOKEN }}
 
-  # upload_schemas_prod:
-  #   needs: publish
-  #   runs-on: ubuntu-latest
-  #   permissions:
-  #     id-token: write
-  #     contents: read
-  #   env:
-  #     AWS_DATA_SCHEMA_ROLE: ${{ secrets.AWS_DATA_SCHEMA_ROLE_PROD}}
-  #     AWS_DATA_SCHEMA_BUCKET: ${{ vars.AWS_DATA_SCHEMA_BUCKET_PROD }}
-  #     AWS_REGION: ${{ vars.AWS_REGION_PROD }}
-  #     TEMP_DIR: 'temp_schemas'
-  #     S3_PREFIX: 'schemas'
-  #   steps:
-  #     - uses: actions/checkout@master
-  #     - name: Pull latest changes
-  #       run: git pull origin main
-  #     - name: Set up Python 3.8
-  #       uses: actions/setup-python@v3
-  #       with:
-  #         python-version: 3.8
-  #     - name: Configure aws credentials
-  #       uses: aws-actions/configure-aws-credentials@v2
-  #       with:
-  #         role-to-assume: ${{ env.AWS_DATA_SCHEMA_ROLE }}
-  #         role-session-name: github-schema-upload-session
-  #         aws-region: ${{ env.AWS_REGION }}
-  #     - name: Create and upload schemas
-  #       run: |
-  #         python -m pip install -e .
-  #         python -m aind_data_schema.utils.json_writer --output $TEMP_DIR --attach-version
-  #         python -m pip install awscli
-  #         aws s3 sync $TEMP_DIR s3://${AWS_DATA_SCHEMA_BUCKET}/$S3_PREFIX
+  upload_schemas_prod:
+    needs: tag
+    runs-on: ubuntu-latest
+    permissions:
+      id-token: write
+      contents: read
+    env:
+      AWS_DATA_SCHEMA_ROLE: ${{ secrets.AWS_DATA_SCHEMA_ROLE_PROD}}
+      AWS_DATA_SCHEMA_BUCKET: ${{ vars.AWS_DATA_SCHEMA_BUCKET_PROD }}
+      AWS_REGION: ${{ vars.AWS_REGION_PROD }}
+      TEMP_DIR: 'temp_schemas'
+      S3_PREFIX: 'schemas'
+    steps:
+      - uses: actions/checkout@master
+      - name: Pull latest changes
+        run: git pull origin main
+      - name: Set up Python 3.8
+        uses: actions/setup-python@v3
+        with:
+          python-version: 3.8
+      - name: Configure aws credentials
+        uses: aws-actions/configure-aws-credentials@v2
+        with:
+          role-to-assume: ${{ env.AWS_DATA_SCHEMA_ROLE }}
+          role-session-name: github-schema-upload-session
+          aws-region: ${{ env.AWS_REGION }}
+      - name: Create and upload schemas
+        run: |
+          python -m pip install -e .
+          python -m pip install pydantic==2.6.4
+          python -m aind_data_schema.utils.json_writer --output $TEMP_DIR --attach-version
+          python -m pip install awscli
+          aws s3 sync $TEMP_DIR s3://${AWS_DATA_SCHEMA_BUCKET}/$S3_PREFIX --dryrun
 
-  # upload_schemas_dev:
-  #   needs: upload_schemas_prod
-  #   runs-on: ubuntu-latest
-  #   permissions:
-  #     id-token: write
-  #     contents: read
-  #   env:
-  #     AWS_DATA_SCHEMA_ROLE: ${{ secrets.AWS_DATA_SCHEMA_ROLE_DEV }}
-  #     AWS_DATA_SCHEMA_BUCKET: ${{ vars.AWS_DATA_SCHEMA_BUCKET_DEV }}
-  #     AWS_REGION : ${{ vars.AWS_REGION_DEV }}
-  #     TEMP_DIR: 'temp_schemas'
-  #     S3_PREFIX: 'schemas'
-  #   steps:
-  #     - uses: actions/checkout@master
-  #     - name: Pull latest changes
-  #       run: git pull origin main
-  #     - name: Set up Python 3.8
-  #       uses: actions/setup-python@v3
-  #       with:
-  #         python-version: 3.8
-  #     - name: Configure aws credentials
-  #       uses: aws-actions/configure-aws-credentials@v2
-  #       with:
-  #         role-to-assume: ${{ env.AWS_DATA_SCHEMA_ROLE }}
-  #         role-session-name: github-schema-upload-session
-  #         aws-region: ${{ env.AWS_REGION }}
-  #     - name: Create and upload schemas
-  #       run: | 
-  #         python -m pip install -e .
-  #         python -m aind_data_schema.utils.json_writer --output $TEMP_DIR --attach-version
-  #         python -m pip install awscli
-  #         aws s3 sync $TEMP_DIR s3://${AWS_DATA_SCHEMA_BUCKET}/$S3_PREFIX
-
-  # upload_diagrams:
-  #   needs: publish
-  #   runs-on: ubuntu-latest
-  #   permissions:
-  #     id-token: write
-  #     contents: read
-  #   env:
-  #     AWS_DATA_SCHEMA_ROLE: ${{ secrets.AWS_DATA_SCHEMA_ROLE_DEV }}
-  #     AWS_DATA_SCHEMA_BUCKET: ${{ vars.AWS_DATA_SCHEMA_BUCKET_DEV }}
-  #     AWS_REGION : ${{ vars.AWS_REGION_DEV }}
-  #     DIAGRAM_DIRECTORY: ./docs/source/_static/diagrams
-  #   steps:
-  #     - uses: actions/checkout@master
-  #     - name: Pull latest changes
-  #       run: git pull origin main
-  #     - name: Set up Python 3.8
-  #       uses: actions/setup-python@v3
-  #       with:
-  #         python-version: 3.8
-  #     - name: Install dependencies
-  #       run: |
-  #         sudo apt install graphviz libgraphviz-dev -y
-  #         python -m pip install -e .[docs] --no-cache-dir
-  #         python -m pip install awscli
-  #     - name: Generate erdantic diagrams
-  #       run: |
-  #         mkdir $DIAGRAM_DIRECTORY
-  #         python -m aind_data_schema.utils.diagrams $DIAGRAM_DIRECTORY
-  #     - name: Configure aws credentials
-  #       uses: aws-actions/configure-aws-credentials@v2
-  #       with:
-  #         role-to-assume: ${{ env.AWS_DATA_SCHEMA_ROLE }}
-  #         role-session-name: github-diagram-upload-session
-  #         aws-region: ${{ env.AWS_REGION }}
-  #     - name: Create and upload diagrams
-  #       run: aws s3 sync $DIAGRAM_DIRECTORY s3://${AWS_DATA_SCHEMA_BUCKET}/diagrams
+  upload_diagrams:
+    needs: tag
+    runs-on: ubuntu-latest
+    permissions:
+      id-token: write
+      contents: read
+    env:
+      AWS_DATA_SCHEMA_ROLE: ${{ secrets.AWS_DATA_SCHEMA_ROLE_PROD }}
+      AWS_DATA_SCHEMA_BUCKET: ${{ vars.AWS_DATA_SCHEMA_BUCKET_PROD }}
+      AWS_REGION : ${{ vars.AWS_REGION_PROD }}
+      DIAGRAM_DIRECTORY: ./docs/source/_static/diagrams
+    steps:
+      - uses: actions/checkout@master
+      - name: Pull latest changes
+        run: git pull origin main
+      - name: Set up Python 3.8
+        uses: actions/setup-python@v3
+        with:
+          python-version: 3.8
+      - name: Install dependencies
+        run: |
+          sudo apt install graphviz libgraphviz-dev -y
+          python -m pip install -e .[docs] --no-cache-dir
+          python -m pip install pydantic==2.6.4
+          python -m pip install awscli
+      - name: Generate erdantic diagrams
+        run: |
+          mkdir $DIAGRAM_DIRECTORY
+          python -m aind_data_schema.utils.diagrams $DIAGRAM_DIRECTORY
+      - name: Configure aws credentials
+        uses: aws-actions/configure-aws-credentials@v2
+        with:
+          role-to-assume: ${{ env.AWS_DATA_SCHEMA_ROLE }}
+          role-session-name: github-diagram-upload-session
+          aws-region: ${{ env.AWS_REGION }}
+      - name: Create and upload diagrams
+        run: aws s3 sync $DIAGRAM_DIRECTORY s3://${AWS_DATA_SCHEMA_BUCKET}/diagrams --dryrun

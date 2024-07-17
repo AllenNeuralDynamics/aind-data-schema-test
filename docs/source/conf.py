@@ -1,4 +1,5 @@
 """Configuration file for the Sphinx documentation builder."""
+
 #
 # For the full list of built-in configuration values, see the documentation:
 # https://www.sphinx-doc.org/en/master/usage/configuration.html
@@ -10,31 +11,29 @@ from os.path import abspath, dirname
 from pathlib import Path
 
 from aind_data_schema import __version__ as package_version
-from aind_data_schema.core import (
+from aind_data_schema.core import (  # A temporary workaround to fix NameError when building Sphinx
     acquisition,
     data_description,
     instrument,
     metadata,
-    mri_session,
     procedures,
     processing,
     rig,
     session,
-    subject
-    )
+    subject,
+)
 
 dummy_object = [
     acquisition,
     data_description,
     instrument,
     metadata,
-    mri_session,
     procedures,
     processing,
     rig,
     session,
-    subject
-]
+    subject,
+]  # A temporary workaround to bypass "Imported but unused" error
 
 INSTITUTE_NAME = "Allen Institute for Neural Dynamics"
 
@@ -84,15 +83,19 @@ diagrams_list = [
     "data_description",
     "instrument",
     "metadata.nd",
-    "mri_session",
     "procedures",
     "processing",
     "rig",
     "session",
-    "subject"
-    ]
+    "subject",
+]
 rst_epilog = ""
 for diagram in diagrams_list:
-    rst_epilog = rst_epilog + """
+    rst_epilog = (
+        rst_epilog
+        + """
 .. |{diagram}| image:: {url_base}/{diagram}.svg
-""".format(diagram=diagram, url_base=DIAGRAM_URL)
+""".format(
+            diagram=diagram, url_base=DIAGRAM_URL
+        )
+    )

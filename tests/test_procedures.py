@@ -1,11 +1,14 @@
 """ test Procedures """
+
 import re
 import unittest
 from datetime import date
 
+from aind_data_schema_models.organizations import Organization
 from pydantic import ValidationError
 from pydantic import __version__ as pyd_version
 
+from aind_data_schema.components.devices import FiberProbe
 from aind_data_schema.core.procedures import (
     FiberImplant,
     IntraperitonealInjection,
@@ -14,13 +17,12 @@ from aind_data_schema.core.procedures import (
     OphysProbe,
     Procedures,
     RetroOrbitalInjection,
+    Sectioning,
     SpecimenProcedure,
     Surgery,
     TarsVirusIdentifiers,
     ViralMaterial,
 )
-from aind_data_schema.models.devices import FiberProbe
-from aind_data_schema.models.organizations import Organization
 
 PYD_VERSION = re.match(r"(\d+.\d+).\d+", pyd_version).group(1)
 
@@ -135,6 +137,7 @@ class ProceduresTests(unittest.TestCase):
                     start_date=start_date,
                     experimenter_full_name="Chip Munk",
                     iacuc_protocol="234",
+                    protocol_id="123",
                     procedures=[
                         RetroOrbitalInjection(
                             protocol_id="134",
@@ -237,7 +240,7 @@ class ProceduresTests(unittest.TestCase):
                 start_date=date.fromisoformat("2020-10-10"),
                 end_date=date.fromisoformat("2020-10-11"),
                 experimenter_full_name="guy person",
-                protocol_id="10",
+                protocol_id=["10"],
                 reagents=[],
                 notes=None,
             )
@@ -257,13 +260,13 @@ class ProceduresTests(unittest.TestCase):
                 start_date=date.fromisoformat("2020-10-10"),
                 end_date=date.fromisoformat("2020-10-11"),
                 experimenter_full_name="guy person",
-                protocol_id="10",
+                protocol_id=["10"],
                 reagents=[],
                 notes=None,
             )
         expected_exception = (
             "1 validation error for SpecimenProcedure\n"
-            "  Assertion failed, immunolabeling cannot be empty if procedure_type is Immunolabeling."
+            "  Assertion failed, antibodies cannot be empty if procedure_type is Immunolabeling."
             " [type=assertion_error, input_value={'specimen_id': '1000', '...nts': [], 'notes': None},"
             " input_type=dict]\n"
             f"    For further information visit https://errors.pydantic.dev/{PYD_VERSION}/v/assertion_error"
@@ -277,7 +280,7 @@ class ProceduresTests(unittest.TestCase):
                 start_date=date.fromisoformat("2020-10-10"),
                 end_date=date.fromisoformat("2020-10-11"),
                 experimenter_full_name="guy person",
-                protocol_id="10",
+                protocol_id=["10"],
                 reagents=[],
                 notes=None,
             )
@@ -298,7 +301,7 @@ class ProceduresTests(unittest.TestCase):
                 start_date=date.fromisoformat("2020-10-10"),
                 end_date=date.fromisoformat("2020-10-11"),
                 experimenter_full_name="guy person",
-                protocol_id="10",
+                protocol_id=["10"],
                 reagents=[],
                 notes="some extra information",
             )
@@ -339,6 +342,34 @@ class ProceduresTests(unittest.TestCase):
                 injection_angle=1,
                 injection_coordinate_depth=[0.1],
                 injection_volume=[1, 2],
+            )
+
+    def test_sectioning(self):
+        """Test sectioning"""
+
+        section = Sectioning(
+            number_of_slices=3,
+            output_specimen_ids=["123456_001", "123456_002", "123456_003"],
+            section_orientation="Coronal",
+            section_thickness=0.2,
+            section_distance_from_reference=0.3,
+            reference_location="Bregma",
+            section_strategy="Whole Brain",
+            targeted_structure="MOp",
+        )
+        self.assertEqual(section.number_of_slices, len(section.output_specimen_ids))
+
+        # Number of output ids does not match number of slices
+        with self.assertRaises(ValidationError):
+            Sectioning(
+                number_of_slices=2,
+                output_specimen_ids=["123456_001", "123456_002", "123456_003"],
+                section_orientation="Coronal",
+                section_thickness=0.2,
+                section_distance_from_reference=0.3,
+                reference_location="Bregma",
+                section_strategy="Whole Brain",
+                targeted_structure="MOp",
             )
 
 

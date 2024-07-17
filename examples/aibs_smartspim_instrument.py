@@ -1,8 +1,10 @@
 """ example SmartSPIM instrument """
+
 import datetime
 
-from aind_data_schema.core.instrument import Com, Instrument
-from aind_data_schema.models.devices import (
+from aind_data_schema_models.organizations import Organization
+
+from aind_data_schema.components.devices import (
     AdditionalImagingDevice,
     Detector,
     Filter,
@@ -12,10 +14,12 @@ from aind_data_schema.models.devices import (
     OpticalTable,
     ScanningStage,
 )
-from aind_data_schema.models.organizations import Organization
+from aind_data_schema.core.instrument import Com, Instrument
+
+OUTPUT_PATH = "examples/"
 
 inst = Instrument(
-    instrument_id="SmartSPIM2-2",
+    instrument_id="440_SmartSPIM2_20231004",
     modification_date=datetime.date(2023, 10, 4),
     instrument_type="SmartSPIM",
     manufacturer=Organization.LIFECANVAS,
@@ -189,23 +193,24 @@ inst = Instrument(
     additional_devices=[
         AdditionalImagingDevice(
             name="Lens 1",
-            type="Tunable lens",
+            imaging_device_type="Tunable lens",
             manufacturer=Organization.OPTOTUNE,
             model="EL-16-40-TC",
         ),
         AdditionalImagingDevice(
             name="Lens 2",
-            type="Tunable lens",
+            imaging_device_type="Tunable lens",
             manufacturer=Organization.OPTOTUNE,
             model="EL-16-40-TC",
         ),
         AdditionalImagingDevice(
             name="Sample chamber",
-            type="Sample Chamber",
+            imaging_device_type="Sample Chamber",
             manufacturer=Organization.LIFECANVAS,
             model="Large-uncoated-glass",
         ),
     ],
 )
-
-inst.write_standard_file(prefix="aibs_smartspim")
+serialized = inst.model_dump_json()
+deserialized = Instrument.model_validate_json(serialized)
+deserialized.write_standard_file(prefix="aibs_smartspim", output_directory=OUTPUT_PATH)

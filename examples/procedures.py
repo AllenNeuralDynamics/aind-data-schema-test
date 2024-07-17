@@ -1,4 +1,5 @@
 """ ephys procedure mouse 625100 """
+
 from datetime import datetime, timezone
 
 from aind_data_schema.core.procedures import (
@@ -12,6 +13,8 @@ from aind_data_schema.core.procedures import (
     ViralMaterial,
 )
 
+OUTPUT_PATH = "examples/"
+
 # If a timezone isn't specified, the timezone of the computer running this
 # script will be used as default
 t = datetime(2022, 7, 12, 7, 00, 00, tzinfo=timezone.utc)
@@ -22,6 +25,7 @@ p = Procedures(
     subject_procedures=[
         Surgery(
             start_date=t.date(),
+            protocol_id="doi",
             experimenter_full_name="John Apple",
             iacuc_protocol="2109",
             animal_weight_prior=22.6,
@@ -67,14 +71,16 @@ p = Procedures(
             start_date=t2.date(),
             experimenter_full_name="Frank Lee",
             iacuc_protocol="2109",
+            protocol_id="doi",
             procedures=[
                 Perfusion(
                     protocol_id="doi_of_protocol",
-                    output_specimen_ids=["1"],
+                    output_specimen_ids=["2", "1"],
                 )
             ],
         ),
     ],
 )
-
-p.write_standard_file()
+serialized = p.model_dump_json()
+deserialized = Procedures.model_validate_json(serialized)
+deserialized.write_standard_file(output_directory=OUTPUT_PATH)

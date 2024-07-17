@@ -1,10 +1,11 @@
 {
    "describedBy": "https://raw.githubusercontent.com/AllenNeuralDynamics/aind-data-schema/main/src/aind_data_schema/core/procedures.py",
-   "schema_version": "0.13.2",
+   "schema_version": "0.13.13",
    "subject_id": "625100",
    "subject_procedures": [
       {
          "procedure_type": "Surgery",
+         "protocol_id": "doi",
          "start_date": "2022-07-12",
          "experimenter_full_name": "John Apple",
          "iacuc_protocol": "2109",
@@ -126,6 +127,7 @@
       },
       {
          "procedure_type": "Surgery",
+         "protocol_id": "doi",
          "start_date": "2023-05-31",
          "experimenter_full_name": "John Apple",
          "iacuc_protocol": "2109",
@@ -159,12 +161,13 @@
          "start_date": "2023-06-09",
          "end_date": "2023-06-12",
          "experimenter_full_name": "John Apple",
-         "protocol_id": "TO ENTER",
+         "protocol_id": [
+            "TO ENTER"
+         ],
          "reagents": [],
          "hcr_series": null,
-         "immunolabeling": {
-            "procedure_type": "Immunolabeling",
-            "antibody": {
+         "antibodies": [
+            {
                "name": "Chicken polyclonal",
                "source": {
                   "name": "Abcam",
@@ -188,13 +191,12 @@
                "expiration_date": null,
                "immunolabel_class": "Primary",
                "fluorophore": null,
-               "degree_of_labeling": null,
-               "degree_of_labeling_unit": "Fluorophore per antibody",
-               "conjugation_protocol": null
-            },
-            "concentration": "10",
-            "concentration_unit": "ug/ml"
-         },
+               "mass": "10",
+               "mass_unit": "microgram",
+               "notes": null
+            }
+         ],
+         "sectioning": null,
          "notes": "Primary dilution factor 1:1000 ---final concentration is 10ug/ml"
       },
       {
@@ -204,12 +206,13 @@
          "start_date": "2023-06-12",
          "end_date": "2023-06-13",
          "experimenter_full_name": "John Apple",
-         "protocol_id": "TO ENTER",
+         "protocol_id": [
+            "TO ENTER"
+         ],
          "reagents": [],
          "hcr_series": null,
-         "immunolabeling": {
-            "procedure_type": "Immunolabeling",
-            "antibody": {
+         "antibodies": [
+            {
                "name": "Alexa Fluor 488 goat anti-chicken IgY (H+L)",
                "source": {
                   "name": "Thermo Fisher",
@@ -233,13 +236,12 @@
                "expiration_date": null,
                "immunolabel_class": "Secondary",
                "fluorophore": "Alexa Fluor 488",
-               "degree_of_labeling": null,
-               "degree_of_labeling_unit": "Fluorophore per antibody",
-               "conjugation_protocol": null
-            },
-            "concentration": "4",
-            "concentration_unit": "ug/ml"
-         },
+               "mass": "4",
+               "mass_unit": "microgram",
+               "notes": null
+            }
+         ],
+         "sectioning": null,
          "notes": "Secondary dilution factor 1:500 - final concentration 4ug/ml"
       }
    ],
