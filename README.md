@@ -1,5 +1,9 @@
 
 # AIND Metadata Interface
+
+## **IMPORTANT:** This user guide has been updated and moved to [https://aind-data-access-api.readthedocs.io/en/latest/](https://aind-data-access-api.readthedocs.io/en/latest/)
+
+***
 AIND Metadata is stored in our AWS DocumentDB database. This user guide specifies how to connect to, query, and interact with the database.
 
 AIND metadata records describe the `metadata.nd.json` for a data asset.
