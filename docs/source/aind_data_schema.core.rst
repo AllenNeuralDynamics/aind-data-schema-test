@@ -1,11 +1,6 @@
 aind\_data\_schema.core package
 ===============================
 
-.. automodule:: aind_data_schema.core
-   :members:
-   :undoc-members:
-   :show-inheritance:
-
 Submodules
 ----------
 
@@ -85,6 +80,14 @@ aind\_data\_schema.core.subject module
 --------------------------------------
 
 .. automodule:: aind_data_schema.core.subject
+   :members:
+   :undoc-members:
+   :show-inheritance:
+
+Module contents
+---------------
+
+.. automodule:: aind_data_schema.core
    :members:
    :undoc-members:
    :show-inheritance:

@@ -2,15 +2,18 @@
 
 from datetime import datetime, timezone
 
+from aind_data_schema_models.organizations import Organization
+from aind_data_schema_models.pid_names import PIDName
+from aind_data_schema_models.registry import Registry
+from aind_data_schema_models.units import PowerValue
+
+from aind_data_schema.components import tile
+from aind_data_schema.components.coordinates import ImageAxis, Scale3dTransform, Translation3dTransform
+from aind_data_schema.components.devices import Calibration, Maintenance
 from aind_data_schema.core import acquisition
 from aind_data_schema.core.procedures import Reagent
-from aind_data_schema.imaging import tile
-from aind_data_schema.models.coordinates import ImageAxis, Scale3dTransform, Translation3dTransform
-from aind_data_schema.models.devices import Calibration, Maintenance
-from aind_data_schema.models.organizations import Organization
-from aind_data_schema.models.pid_names import PIDName
-from aind_data_schema.models.registry import Registry
-from aind_data_schema.models.units import PowerValue
+
+OUTPUT_PATH = "examples/"
 
 # If a timezone isn't specified, the timezone of the computer running this
 # script will be used as default
@@ -110,4 +113,6 @@ acq = acquisition.Acquisition(
     ],
 )
 
-acq.write_standard_file(prefix="exaspim")
+serialized = acq.model_dump_json()
+deserialized = acquisition.Acquisition.model_validate_json(serialized)
+deserialized.write_standard_file(prefix="exaspim", output_directory=OUTPUT_PATH)

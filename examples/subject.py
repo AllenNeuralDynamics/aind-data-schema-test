@@ -2,9 +2,12 @@
 
 from datetime import datetime, timezone
 
+from aind_data_schema_models.organizations import Organization
+from aind_data_schema_models.species import Species
+
 from aind_data_schema.core.subject import BreedingInfo, Housing, Sex, Subject
-from aind_data_schema.models.organizations import Organization
-from aind_data_schema.models.species import Species
+
+OUTPUT_PATH = "examples/"
 
 # If a timezone isn't specified, the timezone of the computer running this
 # script will be used as default
@@ -27,5 +30,6 @@ s = Subject(
     housing=Housing(home_cage_enrichment=["Running wheel"], cage_id="123"),
     background_strain="C57BL/6J",
 )
-
-s.write_standard_file()
+serialized = s.model_dump_json()
+deserialized = Subject.model_validate_json(serialized)
+deserialized.write_standard_file(output_directory=OUTPUT_PATH)

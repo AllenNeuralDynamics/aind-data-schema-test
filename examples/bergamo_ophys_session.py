@@ -2,6 +2,9 @@
 
 from datetime import datetime, timezone
 
+from aind_data_schema_models.modalities import Modality
+
+from aind_data_schema.components.stimulus import PhotoStimulation, PhotoStimulationGroup
 from aind_data_schema.core.session import (
     DetectorConfig,
     FieldOfView,
@@ -9,10 +12,10 @@ from aind_data_schema.core.session import (
     Session,
     StimulusEpoch,
     StimulusModality,
-    Stream
+    Stream,
 )
-from aind_data_schema.models.modalities import Modality
-from aind_data_schema.models.stimulus import PhotoStimulation, PhotoStimulationGroup
+
+OUTPUT_PATH = "examples/"
 
 # If a timezone isn't specified, the timezone of the computer running this
 # script will be used as default
@@ -104,4 +107,6 @@ s = Session(
     ],
 )
 
-s.write_standard_file(prefix="bergamo_ophys")
+serialized = s.model_dump_json()
+deserialized = Session.model_validate_json(serialized)
+deserialized.write_standard_file(prefix="bergamo_ophys", output_directory=OUTPUT_PATH)
