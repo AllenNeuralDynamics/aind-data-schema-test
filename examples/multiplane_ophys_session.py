@@ -2,9 +2,12 @@
 
 from datetime import datetime, timezone
 
+from aind_data_schema_models.modalities import Modality
+from aind_data_schema_models.units import PowerUnit, SizeUnit
+
 from aind_data_schema.core.session import FieldOfView, LaserConfig, Session, Stream
-from aind_data_schema.models.modalities import Modality
-from aind_data_schema.models.units import PowerUnit, SizeUnit
+
+OUTPUT_PATH = "examples/"
 
 # If a timezone isn't specified, the timezone of the computer running this
 # script will be used as default
@@ -199,4 +202,6 @@ s = Session(
         )
     ],
 )
-s.write_standard_file(prefix="multiplane_ophys")
+serialized = s.model_dump_json()
+deserialized = Session.model_validate_json(serialized)
+deserialized.write_standard_file(prefix="multiplane_ophys", output_directory=OUTPUT_PATH)

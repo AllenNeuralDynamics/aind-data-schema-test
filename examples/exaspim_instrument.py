@@ -1,12 +1,16 @@
 """ example ExaSPIM instrument """
+
 import datetime
 
+from aind_data_schema_models.organizations import Organization
+
+from aind_data_schema.components.devices import DAQChannel, DAQDevice, Detector, Filter, Laser
 from aind_data_schema.core import instrument
-from aind_data_schema.models.devices import DAQChannel, DAQDevice, Detector, Filter, Laser
-from aind_data_schema.models.organizations import Organization
+
+OUTPUT_PATH = "examples/"
 
 inst = instrument.Instrument(
-    instrument_id="exaSPIM1-1",
+    instrument_id="440_exaSPIM1-20231004",
     instrument_type="exaSPIM",
     modification_date=datetime.date(2023, 10, 4),
     manufacturer=Organization.CUSTOM,
@@ -157,7 +161,7 @@ inst = instrument.Instrument(
     ],
     additional_devices=[
         instrument.AdditionalImagingDevice(
-            type="Tunable lens",
+            imaging_device_type="Tunable lens",
             name="TL-1",
             manufacturer=Organization.OPTOTUNE,
             model="EL-16-40-TC-VIS-20D-C",
@@ -165,14 +169,14 @@ inst = instrument.Instrument(
         ),
         instrument.AdditionalImagingDevice(
             name="RM-1",
-            type="Rotation mount",
+            imaging_device_type="Rotation mount",
             manufacturer=Organization.THORLABS,
             model="K10CR1",
             serial_number="01",
         ),
         instrument.AdditionalImagingDevice(
             name="LC-1",
-            type="Laser combiner",
+            imaging_device_type="Laser combiner",
             manufacturer=Organization.OXXIUS,
             model="L6Cc",
             serial_number="L6CC-00513",
@@ -201,5 +205,6 @@ inst = instrument.Instrument(
     humidity_control=False,
     temperature_control=False,
 )
-
-inst.write_standard_file(prefix="exaspim")
+serialized = inst.model_dump_json()
+deserialized = instrument.Instrument.model_validate_json(serialized)
+deserialized.write_standard_file(prefix="exaspim", output_directory=OUTPUT_PATH)

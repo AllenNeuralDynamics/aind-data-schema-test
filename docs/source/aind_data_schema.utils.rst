@@ -1,11 +1,6 @@
 aind\_data\_schema.utils package
 ================================
 
-.. automodule:: aind_data_schema.utils
-   :members:
-   :undoc-members:
-   :show-inheritance:
-
 Submodules
 ----------
 
@@ -29,6 +24,14 @@ aind\_data\_schema.utils.schema\_version\_bump module
 -----------------------------------------------------
 
 .. automodule:: aind_data_schema.utils.schema_version_bump
+   :members:
+   :undoc-members:
+   :show-inheritance:
+
+Module contents
+---------------
+
+.. automodule:: aind_data_schema.utils
    :members:
    :undoc-members:
    :show-inheritance:
