@@ -5,6 +5,10 @@ on:
       - dev
 
 jobs:
+  tag:
+    uses: AllenNeuralDynamics/aind-github-actions/.github/workflows/tag.yml@allow-for-whitespace-in-name-step-of-tag-workflow
+    secrets:
+      SERVICE_TOKEN: ${{ secrets.SERVICE_TOKEN }} # required
   upload_schemas_dev:
     runs-on: ubuntu-latest
     permissions:
